@@ -24,14 +24,23 @@
 # They define the existence of relationship between Concepts of the domain.
 
 # TODO Add constraint:
-# - only <#BrittanyEnvironment> instances are allowed.
+# - only <#BrittanyEnvironment> instances are allowed in rdf:range.
 # - at least one environment is needed.
-<#composedByEnvironments>
+<#greenhouseContainsEnvironments>
     a rdf:Property ;
     rdf:domain <#BrittanyGreenhouse> ;
     rdf:range rdf:Alt ;
-    rdfs:label "Composed by Environments (Brittany)", "Composto da Ambienti (Brittany)"@it ;
+    rdfs:label "Greenhouse contains Environments (Brittany)", "Serra contiene Ambienti (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Greenhouse is composed by one or more Environment.", "Proprietà di composizione utilizzata per indicare che una Serra è composta da uno o più Ambienti."@it .
+
+# TODO Add constraint:
+# - only <#BrittanyPlant> instances are allowed in rdf:range.
+<#environmentsContainsPlants>
+    a rdf:Property ;
+    rdf:domain <#BrittanyEnvironment> ;
+    rdf:range rdf:Alt ;
+    rdfs:label "Environment contains Plants (Brittany)", "Ambiente contiene Piante (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Environments may contains Plants.", "Proprietà di composizione utilizzata per indicare che un Ambiente può contenere Piante."@it .
 
 # INDIVIDUALS
 # Elements of the set defined by Concepts.
