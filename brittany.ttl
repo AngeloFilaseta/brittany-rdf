@@ -10,6 +10,11 @@
     rdfs:comment "A greenhouse in which the \"Brittany\" software is used.", "Una serra in cui viene utilizzato il software \"Brittany\"."@it ;
     rdfs:seeAlso "https://github.com/Tale152/brittany" .
 
+<#BrittanyMonitorable>
+    a rdfs:Class ;
+    rdfs:label "Monitorable (Brittany)", "Monitorabile (Brittany)"@it ;
+    rdfs:comment "A space or area that can be monitored by an Edge device.", "Uno spazio o un'area che può essere monitorata da un dispositivo Edge"@it .
+
 <#BrittanyEnvironment>
     a rdfs:Class ;
     rdfs:label "Environment (Brittany)", "Ambiente (Brittany)"@it ;
