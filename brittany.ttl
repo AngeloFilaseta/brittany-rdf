@@ -15,6 +15,11 @@
     rdfs:label "Environment (Brittany)", "Ambiente (Brittany)"@it ;
     rdfs:comment "Section of a Greenhouse in which the \"Brittany\" software is used. An Environment contains Plants. A greenhouse is composed of at least one Environment.", "Sezione di una Serra in cui viene utilizzato il software \"Brittany\". Un ambiente contiene delle piante. Una serra è composta da almeno un Ambiente."@it .
 
+<#BrittanyPlant>
+    a rdfs:Class ;
+    rdfs:label "Plant (Brittany)", "Pianta (Brittany)"@it ;
+    rdfs:comment "Vegetal unit contained in an Environment in the Greenhouse", "Unità vegetale contenuta all’interno di un Ambiente della Serra."@it .
+
 # RELATIONSHIPS (PROPERTIES)
 # They define the existence of relationship between Concepts of the domain.
 
