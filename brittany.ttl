@@ -1,0 +1,8 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dbp:	<http://dbpedia.org/property/> .
+
+<#brittany>
+    rdfs:label "Brittany (project)", "Brittany (progetto)"@it ;
+    rdfs:comment "A software to simplify and automate the management process in a greenhouse system.", "Un software per semplificare ed automatizzare la gestione di un sistema di serre."@it ;
+    dbp:website "https://github.com/Tale152/brittany" .
