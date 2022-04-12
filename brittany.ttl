@@ -7,3 +7,8 @@
     rdfs:label "Greenhouse (Brittany)", "Serra (Brittany)"@it ;
     rdfs:comment "A greenhouse in which the \"Brittany\" software is used.", "Una serra in cui viene utilizzato il software \"Brittany\"."@it ;
     rdfs:seeAlso "https://github.com/Tale152/brittany" .
+
+<#BrittanyEnvironment>
+    a rdfs:Class ;
+    rdfs:label "Environment (Brittany)", "Ambiente (Brittany)"@it ;
+    rdfs:comment "Section of a Greenhouse in which the \"Brittany\" software is used. An Environment contains Plants. A greenhouse is composed of at least one Environment.", "Sezione di una Serra in cui viene utilizzato il software \"Brittany\". Un ambiente contiene delle piante. Una serra è composta da almeno un Ambiente."@it .
