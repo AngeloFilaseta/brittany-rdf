@@ -59,6 +59,18 @@
     rdfs:label "Monitor (Brittany)", "Monitor (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed in a Monitorable area.", "Proprietà che indica che un Edge è posizionato in un area Monitorabile."@it .
 
+<#monitorPlant>
+    rdfs:subPropertyOf <#monitor> ;
+    rdf:range <#BrittanyPlant> ;
+    rdfs:label "Monitor Plant (Brittany)", "Monitor Pianta (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge device is placed on a Plant.", "Proprietà che indica che un Edge è posizionato su una Pianta."@it .
+
+<#monitorEnvironment>
+    rdfs:subPropertyOf <#monitor> ;
+    rdf:range <#BrittanyEnvironment> ;
+    rdfs:label "Monitor Environment (Brittany)", "Monitor Ambiente (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge device is placed in an Environment.", "Proprietà che indica che un Edge è posizionato in un Ambiente."@it .
+
 # INDIVIDUALS
 # Elements of the set defined by Concepts.
 
