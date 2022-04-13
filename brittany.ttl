@@ -4,28 +4,28 @@
 # CONCEPTS (CLASSES)
 # They are abstractions of the domain.
 
-<#BrittanyGreenhouse>
+<#Greenhouse>
     a rdfs:Class ;
     rdfs:label "Greenhouse (Brittany)", "Serra (Brittany)"@it ;
     rdfs:comment "A greenhouse in which the \"Brittany\" software is used.", "Una serra in cui viene utilizzato il software \"Brittany\"."@it ;
     rdfs:seeAlso "https://github.com/Tale152/brittany" .
 
-<#BrittanyMonitorable>
+<#Monitorable>
     a rdfs:Class ;
     rdfs:label "Monitorable (Brittany)", "Monitorabile (Brittany)"@it ;
     rdfs:comment "A space or area that can be monitored by an Edge device.", "Uno spazio o un'area che può essere monitorata da un dispositivo Edge"@it .
 
-<#BrittanyEnvironment>
-    rdfs:subClassOf <#BrittanyMonitorable> ;
+<#Environment>
+    rdfs:subClassOf <#Monitorable> ;
     rdfs:label "Environment (Brittany)", "Ambiente (Brittany)"@it ;
     rdfs:comment "Section of a Greenhouse in which the \"Brittany\" software is used. An Environment contains Plants. A greenhouse is composed of at least one Environment.", "Sezione di una Serra in cui viene utilizzato il software \"Brittany\". Un ambiente contiene delle piante. Una serra è composta da almeno un Ambiente."@it .
 
-<#BrittanyPlant>
-    rdfs:subClassOf <#BrittanyMonitorable> ;
+<#Plant>
+    rdfs:subClassOf <#Monitorable> ;
     rdfs:label "Plant (Brittany)", "Pianta (Brittany)"@it ;
     rdfs:comment "Vegetal unit contained in an Environment in the Greenhouse", "Unità vegetale contenuta all’interno di un Ambiente della Serra."@it .
 
-<#BrittanyEdge>
+<#Edge>
     a rdfs:Class ;
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it .
@@ -34,11 +34,11 @@
 # They define the existence of relationship between Concepts of the domain.
 
 # TODO Add constraint:
-# - only <#BrittanyEnvironment> instances are allowed in rdf:range.
+# - only <#Environment> instances are allowed in rdf:range.
 # - at least one environment is needed.
 <#greenhouseContainsEnvironments>
     a rdf:Property ;
-    rdf:domain <#BrittanyGreenhouse> ;
+    rdf:domain <#Greenhouse> ;
     rdf:range rdf:Alt ;
     rdfs:label "Greenhouse contains Environments (Brittany)", "Serra contiene Ambienti (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Greenhouse is composed by one or more Environment.", "Proprietà di composizione utilizzata per indicare che una Serra è composta da uno o più Ambienti."@it .
@@ -47,27 +47,27 @@
 # - only <#BrittanyPlant> instances are allowed in rdf:range.
 <#environmentsContainsPlants>
     a rdf:Property ;
-    rdf:domain <#BrittanyEnvironment> ;
+    rdf:domain <#Environment> ;
     rdf:range rdf:Alt ;
     rdfs:label "Environment contains Plants (Brittany)", "Ambiente contiene Piante (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Environments may contains Plants.", "Proprietà di composizione utilizzata per indicare che un Ambiente può contenere Piante."@it .
 
 <#monitor>
     a rdf:Property ;
-    rdf:domain <#BrittanyEdge> ;
-    rdf:range <#BrittanyMonitorable> ;
+    rdf:domain <#Edge> ;
+    rdf:range <#Monitorable> ;
     rdfs:label "Monitor (Brittany)", "Monitor (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed in a Monitorable area.", "Proprietà che indica che un Edge è posizionato in un area Monitorabile."@it .
 
 <#monitorPlant>
     rdfs:subPropertyOf <#monitor> ;
-    rdf:range <#BrittanyPlant> ;
+    rdf:range <#Plant> ;
     rdfs:label "Monitor Plant (Brittany)", "Monitor Pianta (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed on a Plant.", "Proprietà che indica che un Edge è posizionato su una Pianta."@it .
 
 <#monitorEnvironment>
     rdfs:subPropertyOf <#monitor> ;
-    rdf:range <#BrittanyEnvironment> ;
+    rdf:range <#Environment> ;
     rdfs:label "Monitor Environment (Brittany)", "Monitor Ambiente (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed in an Environment.", "Proprietà che indica che un Edge è posizionato in un Ambiente."@it .
 
