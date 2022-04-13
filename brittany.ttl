@@ -35,6 +35,11 @@
     rdfs:label "Module (Brittany)", "Modulo (Brittany)"@it ;
     rdfs:comment "A logical component that can be added to an Edge and is made of OperationHandlers.", "Un componente logico che può essere aggiunto ad un Edge ed è composto da OperationHandlers."@it .
 
+<#OperationHandler>
+    a rdfs:Class ;
+    rdfs:label "Operation Handler (Brittany)", "Operation Handler (Brittany)"@it ;
+    rdfs:comment "An operation that uses some arguments for a computation and returns an result.", "Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato."@it .
+
 # RELATIONSHIPS (PROPERTIES)
 # They define the existence of relationship between Concepts of the domain.
 
