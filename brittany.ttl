@@ -51,6 +51,11 @@
     rdfs:label "Property Operation Handler (Brittany)", "Property Operation Handler (Brittany)"@it ;
     rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it .
 
+<#HwComponent>
+    a rdfs:Class ;
+    rdfs:label "Hardware Component (Brittany)", "Componente Hardware (Brittany)"@it ;
+    rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it .
+
 # RELATIONSHIPS (PROPERTIES)
 # They define the existence of relationship between Concepts of the domain.
 
