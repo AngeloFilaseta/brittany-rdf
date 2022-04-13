@@ -52,6 +52,13 @@
     rdfs:label "Environment contains Plants (Brittany)", "Ambiente contiene Piante (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Environments may contains Plants.", "Proprietà di composizione utilizzata per indicare che un Ambiente può contenere Piante."@it .
 
+<#monitor>
+    a rdf:Property ;
+    rdf:domain <#BrittanyEdge> ;
+    rdf:range <#BrittanyMonitorable> ;
+    rdfs:label "Monitor (Brittany)", "Monitor (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge device is placed in a Monitorable area.", "Proprietà che indica che un Edge è posizionato in un area Monitorabile."@it .
+
 # INDIVIDUALS
 # Elements of the set defined by Concepts.
 
