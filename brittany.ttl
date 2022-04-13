@@ -36,6 +36,11 @@
     rdfs:label "Module (Brittany)", "Modulo (Brittany)"@it ;
     rdfs:comment "A logical component that can be added to an Edge and is made of OperationHandlers.", "Un componente logico che può essere aggiunto ad un Edge ed è composto da OperationHandlers."@it .
 
+<#ComponentModule>
+    rdfs:subClassOf <#Module> ;
+    rdfs:label "Component Module (Brittany)", "Modulo di Componenti (Brittany)"@it ;
+    rdfs:comment "A Module that can interact with some Hardware Component.", "Un Modulo che può interagire con alcuni Componenti Hardware."@it .
+
 <#OperationHandler>
     a rdfs:Class ;
     rdfs:label "Operation Handler (Brittany)", "Operation Handler (Brittany)"@it ;
@@ -96,6 +101,16 @@
     rdf:range <#Environment> ;
     rdfs:label "Monitor Environment (Brittany)", "Monitor Ambiente (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed in an Environment.", "Proprietà che indica che un Edge è posizionato in un Ambiente."@it .
+
+# TODO Add constraint:
+# - only <#HwComponent> instances are allowed in rdf:range.
+# - at least one hwcomponent is needed.
+<#components>
+    a rdf:Property ;
+    rdf:domain <#ComponentModule> ;
+    rdf:range rdf:Bag ;
+    rdfs:label "Components in Module (Brittany)", "Componenti in Modulo (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Module acts on certain Hardware Components.", "Proprietà che indica che un Modulo agisce su certi Componenti Hardware."@it .
 
 # TODO Add constraint:
 # - only <#Module> instances are allowed in rdf:range.
