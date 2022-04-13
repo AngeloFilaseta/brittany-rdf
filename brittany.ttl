@@ -117,7 +117,27 @@
 
 <#angelo-greenhouse>
     a <#Greenhouse> ;
-    foaf:name "Angelo's Greenhouse", "La serra di Angelo"@it.
+    foaf:name "Angelo's Greenhouse", "La serra di Angelo"@it ;
+    <#environments> [
+        a rdf:Alt ;
+        rdf:_1 <#angelo-environment>
+    ].
+
+<#angelo-environment>
+    a <#Environment> ;
+    foaf:name "Angelo's Environment #1", "Ambiente di Angelo #1"@it ;
+    <#plants> [
+        a rdf:Alt ;
+        rdf:_1 <#angelo-basil>
+    ].
+
+<#angelo-basil>
+    a <#Plant> ;
+    foaf:name "Angelo's Basil", "Basilico di Angelo"@it .
+
+<angelo-edge>
+    a <#Edge> ;
+    foaf:name "Angelo's ESP8266", "ESP8266 di Angelo"@it .
 
 # FACTS
 # Two Individuals linked by a Relationship.
