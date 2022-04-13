@@ -40,6 +40,16 @@
     rdfs:label "Operation Handler (Brittany)", "Operation Handler (Brittany)"@it ;
     rdfs:comment "An operation that uses some arguments for a computation and returns an result.", "Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato."@it .
 
+<#ActionOperationHandler>
+    rdfs:subClassOf <#OperationHandler> ;
+    rdfs:label "Action Operation Handler (Brittany)", "Action Operation Handler (Brittany)"@it ;
+    rdfs:comment "An Operation Handler specifically used to execute an Action.", "Un Operation Handler specificatamente utilizzato per eseguire un Azione."@it .
+
+<#PropertyOperationHandler>
+    rdfs:subClassOf <#OperationHandler> ;
+    rdfs:label "Property Operation Handler (Brittany)", "Property Operation Handler (Brittany)"@it ;
+    rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it .
+
 # RELATIONSHIPS (PROPERTIES)
 # They define the existence of relationship between Concepts of the domain.
 
@@ -90,6 +100,16 @@
     rdf:range rdf:Alt ;
     rdfs:label "Module in Edge (Brittany)", "Moduli in Edge (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that an Edge is composed by one or more Modules.", "Proprietà di composizione utilizzata per indicare che un Edge è composto da uno o più Moduli."@it .
+
+# TODO Add constraint:
+# - only <#OperationHandler> instances are allowed in rdf:range.
+# - at least one operation handler is needed.
+<#handlers>
+    a rdf:Property ;
+    rdf:domain <#Module> ;
+    rdf:range rdf:Alt ;
+    rdfs:label "Operation Handlers in Module (Brittany)", "Operation Handlers in Modulo (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Module is composed by one or more Operation Handlers.", "Proprietà di composizione utilizzata per indicare che un Modulo è composto da uno o più Operation Handler."@it .
 
 # INDIVIDUALS
 # Elements of the set defined by Concepts.
