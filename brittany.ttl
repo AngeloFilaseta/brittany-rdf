@@ -48,6 +48,7 @@
 
 <#DigitalLightModule>
     rdfs:subClassOf <#ComponentModule> ;
+    <#moduleName> "digital-light" ;
     rdfs:label "Digital Light Module (Brittany)", "Modulo di Luce Digitale (Brittany)"@it ;
     rdfs:comment "A Module that can interact with some Digital Light Hardware.", "Un Modulo che può interagire con alcuni componenti di Luce Digitale."@it .
 
@@ -223,7 +224,6 @@
 
 <#digital-light-module>
     a <#DigitalLightModule> ;
-    <#moduleName> "digital-light" ;
     <#components> [
         a rdf:Bag ;
         rdf:_1 <#digital-light-right> ;
