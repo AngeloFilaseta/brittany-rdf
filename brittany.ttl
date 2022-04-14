@@ -190,5 +190,9 @@
 
 <angelo-edge>
     a <#Edge> ;
-    <#monitorPlant> <#angelo-basil>;
+    <#monitorPlant> <#angelo-basil> ;
     foaf:name "Angelo's ESP8266", "ESP8266 di Angelo"@it .
+
+<digital-light-module>
+    a <#DigitalLightModule> ;
+    <#moduleName> "digital-light" .
