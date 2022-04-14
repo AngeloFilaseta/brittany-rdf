@@ -34,6 +34,8 @@
 
 # ----- Modules -----
 
+# TODO Add constraint:
+# - Module MUST have a <#moduleName>
 <#Module>
     a rdfs:Class ;
     rdfs:label "Module (Brittany)", "Modulo (Brittany)"@it ;
@@ -43,6 +45,11 @@
     rdfs:subClassOf <#Module> ;
     rdfs:label "Component Module (Brittany)", "Modulo di Componenti (Brittany)"@it ;
     rdfs:comment "A Module that can interact with some Hardware Component.", "Un Modulo che può interagire con alcuni Componenti Hardware."@it .
+
+<#DigitalLightModule>
+    rdfs:subClassOf <#ComponentModule> ;
+    rdfs:label "Digital Light Module (Brittany)", "Modulo di Luce Digitale (Brittany)"@it ;
+    rdfs:comment "A Module that can interact with some Digital Light Hardware.", "Un Modulo che può interagire con alcuni componenti di Luce Digitale."@it .
 
 # ----- Handlers -----
 
@@ -133,6 +140,11 @@
     rdf:range rdf:Alt ;
     rdfs:label "Module in Edge (Brittany)", "Moduli in Edge (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that an Edge is composed by one or more Modules.", "Proprietà di composizione utilizzata per indicare che un Edge è composto da uno o più Moduli."@it .
+
+<#moduleName>
+    rdfs:subPropertyOf foaf:name ;
+    rdf:range <#ModuleName> ;
+    rdfs:label "Module Name (Brittany)", "Nome del Modulo (Brittany)"@it .
 
 # TODO Add constraint:
 # - only <#OperationHandler> instances are allowed in rdf:range.
