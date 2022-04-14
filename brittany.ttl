@@ -138,6 +138,15 @@
     rdfs:label "Operation Handlers in Module (Brittany)", "Operation Handlers in Modulo (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Module is composed by one or more Operation Handlers.", "Proprietà di composizione utilizzata per indicare che un Modulo è composto da uno o più Operation Handler."@it .
 
+# TODO Add constraint:
+# - only one TD allowed.
+<#hasThingDescriptor>
+    a rdf:Property ;
+    rdf:domain <#Edge> ;
+    rdf:range td:Thing ;
+    rdfs:label "Edge has Thing Descriptor (Brittany)", "Edge ha un Thing Descriptor (Brittany)"@it ;
+    rdfs:comment "Property used to link an Edge to its Thing Descriptor (W3).", "Proprietà utilizzata per collegare un Edge al suo Thing Descriptor (W3)."@it .
+
 # INDIVIDUALS
 # Elements of the set defined by Concepts.
 
