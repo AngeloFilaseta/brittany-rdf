@@ -73,6 +73,15 @@
     rdfs:label "Property Operation Handler (Brittany)", "Property Operation Handler (Brittany)"@it ;
     rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it .
 
+<IsOnDigitalLightHandler>
+    a <#PropertyOperationHandler> .
+
+<TurnOnDigitalLightHandler>
+    a <#ActionOperationHandler> .
+
+<TurnOffDigitalLightHandler>
+    a <#ActionOperationHandler> .
+
 # ----- ComponentsHw -----
 
 <#ComponentHw>
