@@ -94,7 +94,7 @@
 <#environments>
     a rdf:Property ;
     rdf:domain <#Greenhouse> ;
-    rdf:range rdf:Alt ;
+    rdf:range rdf:Bag ;
     rdfs:label "Greenhouse contains Environments (Brittany)", "Serra contiene Ambienti (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Greenhouse is composed by one or more Environment.", "Proprietà di composizione utilizzata per indicare che una Serra è composta da uno o più Ambienti."@it .
 
@@ -103,7 +103,7 @@
 <#plants>
     a rdf:Property ;
     rdf:domain <#Environment> ;
-    rdf:range rdf:Alt ;
+    rdf:range rdf:Bag ;
     rdfs:label "Environment contains Plants (Brittany)", "Ambiente contiene Piante (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Environments may contains Plants.", "Proprietà di composizione utilizzata per indicare che un Ambiente può contenere Piante."@it .
 
@@ -142,14 +142,20 @@
 <#modules>
     a rdf:Property ;
     rdf:domain <#Edge> ;
-    rdf:range rdf:Alt ;
+    rdf:range rdf:Bag ;
     rdfs:label "Module in Edge (Brittany)", "Moduli in Edge (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that an Edge is composed by one or more Modules.", "Proprietà di composizione utilizzata per indicare che un Edge è composto da uno o più Moduli."@it .
 
 <#moduleName>
     rdfs:subPropertyOf foaf:name ;
+    rdf:domain <#Module> ;
     rdf:range <#ModuleName> ;
     rdfs:label "Module Name (Brittany)", "Nome del Modulo (Brittany)"@it .
+
+<#componentName>
+    rdfs:subPropertyOf foaf:name;
+    rdf:domain <#ComponentHw> ;
+    rdfs:label "Component Name (Brittany)", "Nome del Componente (Brittany)"@it .
 
 # TODO Add constraint:
 # - only <#OperationHandler> instances are allowed in rdf:range.
@@ -157,7 +163,7 @@
 <#handlers>
     a rdf:Property ;
     rdf:domain <#Module> ;
-    rdf:range rdf:Alt ;
+    rdf:range rdf:Bag ;
     rdfs:label "Operation Handlers in Module (Brittany)", "Operation Handlers in Modulo (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Module is composed by one or more Operation Handlers.", "Proprietà di composizione utilizzata per indicare che un Modulo è composto da uno o più Operation Handler."@it .
 
@@ -177,7 +183,7 @@
     a <#Greenhouse> ;
     foaf:name "Angelo's Greenhouse", "La serra di Angelo"@it ;
     <#environments> [
-        a rdf:Alt ;
+        a rdf:Bag ;
         rdf:_1 <#angelo-environment>
     ].
 
@@ -185,7 +191,7 @@
     a <#Environment> ;
     foaf:name "Angelo's Environment #1", "Ambiente di Angelo #1"@it ;
     <#plants> [
-        a rdf:Alt ;
+        a rdf:Bag ;
         rdf:_1 <#angelo-basil>
     ].
 
@@ -193,11 +199,24 @@
     a <#Plant> ;
     foaf:name "Angelo's Basil", "Basilico di Angelo"@it .
 
-<angelo-edge>
+<#angelo-edge>
     a <#Edge> ;
     <#monitorPlant> <#angelo-basil> ;
     foaf:name "Angelo's ESP8266", "ESP8266 di Angelo"@it .
 
-<digital-light-module>
+<#digital-light-right>
+    a <#DigitalLightHw> ;
+    <#componentName> "digital-light-dx" .
+
+<#digital-light-left>
+    a <#DigitalLightHw> ;
+    <#componentName> "digital-light-sx" .
+
+<#digital-light-module>
     a <#DigitalLightModule> ;
-    <#moduleName> "digital-light" .
+    <#moduleName> "digital-light" ;
+    <#components> [
+        a rdf:Bag ;
+        rdf:_1 <#digital-light-right> ;
+        rdf:_2 <#digital-light-left>
+    ] .
