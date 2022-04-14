@@ -3,7 +3,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 
-# CONCEPTS (CLASSES)
+# ========================== CONCEPTS (CLASSES) ==========================
 # They are abstractions of the domain.
 
 <#Greenhouse>
@@ -32,6 +32,8 @@
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it .
 
+# ----- Modules -----
+
 <#Module>
     a rdfs:Class ;
     rdfs:label "Module (Brittany)", "Modulo (Brittany)"@it ;
@@ -41,6 +43,8 @@
     rdfs:subClassOf <#Module> ;
     rdfs:label "Component Module (Brittany)", "Modulo di Componenti (Brittany)"@it ;
     rdfs:comment "A Module that can interact with some Hardware Component.", "Un Modulo che può interagire con alcuni Componenti Hardware."@it .
+
+# ----- Handlers -----
 
 <#OperationHandler>
     a rdfs:Class ;
@@ -62,12 +66,14 @@
     rdfs:label "Property Operation Handler (Brittany)", "Property Operation Handler (Brittany)"@it ;
     rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it .
 
+# ----- HwComponents -----
+
 <#HwComponent>
     a rdfs:Class ;
     rdfs:label "Hardware Component (Brittany)", "Componente Hardware (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it .
 
-# RELATIONSHIPS (PROPERTIES)
+# ========================== RELATIONSHIPS (PROPERTIES) ==========================
 # They define the existence of relationship between Concepts of the domain.
 
 # TODO Add constraint:
@@ -147,7 +153,7 @@
     rdfs:label "Edge has Thing Descriptor (Brittany)", "Edge ha un Thing Descriptor (Brittany)"@it ;
     rdfs:comment "Property used to link an Edge to its Thing Descriptor (W3).", "Proprietà utilizzata per collegare un Edge al suo Thing Descriptor (W3)."@it .
 
-# INDIVIDUALS
+# ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
 
 <#angelo-greenhouse>
@@ -172,7 +178,5 @@
 
 <angelo-edge>
     a <#Edge> ;
+    <#monitorPlant> <#angelo-basil>;
     foaf:name "Angelo's ESP8266", "ESP8266 di Angelo"@it .
-
-# FACTS
-# Two Individuals linked by a Relationship.
