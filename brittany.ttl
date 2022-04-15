@@ -50,12 +50,13 @@
 
 <#DigitalLightModule>
     rdfs:subClassOf <#ComponentModule> ;
-    <#moduleName> "digital-light" ;
     rdfs:label "Digital Light Module (Brittany)", "Modulo di Luce Digitale (Brittany)"@it ;
     rdfs:comment "A Module that can interact with some Digital Light Hardware.", "Un Modulo che può interagire con alcuni componenti di Luce Digitale."@it .
 
 # ----- Handlers -----
 
+# TODO Add constraint:
+# - OperationHandler MUST have a <#handlerName>
 <#OperationHandler>
     a rdfs:Class ;
     rdfs:label "Operation Handler (Brittany)", "Operation Handler (Brittany)"@it ;
@@ -170,6 +171,11 @@
     rdf:range <#ModuleName> ;
     rdfs:label "Module Name (Brittany)", "Nome del Modulo (Brittany)"@it .
 
+<#handlerName>
+    rdfs:subPropertyOf foaf:name ;
+    rdf:domain <#OperationHandler> ;
+    rdfs:label "Operation Handler Name (Brittany)", "Nome dell'Operation Handler (Brittany)"@it .
+
 <#componentName>
     rdfs:subPropertyOf foaf:name;
     rdf:domain <#ComponentHw> ;
@@ -233,20 +239,38 @@
 <#angelo-edge>
     a <#Edge> ;
     <#monitorPlant> <#angelo-basil> ;
+    <#modules> [
+        a rdf:Bag ;
+        rdf:_1 <#digital-light-module>
+    ] ;
     foaf:name "Angelo's ESP8266", "ESP8266 di Angelo"@it .
-
-<#digital-light-right>
-    a <#DigitalLightHw> ;
-    <#componentName> "digital-light-dx" .
-
-<#digital-light-left>
-    a <#DigitalLightHw> ;
-    <#componentName> "digital-light-sx" .
 
 <#digital-light-module>
     a <#DigitalLightModule> ;
+    <#moduleName> "digital-light" ;
+    <#handlers> [
+        a rdf:Bag ;
+        rdf:_1 [
+            a <#IsOnDigitalLightHandler> ;
+            <#handlerName> "isOn"
+        ] ;
+        rdf:_2 [
+            a <#TurnOnDigitalLightHandler> ;
+            <#handlerName> "turnOn"
+        ] ;
+        rdf:_3 [
+            a <#TurnOffDigitalLightHandler> ;
+            <#handlerName> "turnOff"
+        ]
+    ] ;
     <#components> [
         a rdf:Bag ;
-        rdf:_1 <#digital-light-right> ;
-        rdf:_2 <#digital-light-left>
+        rdf:_1 [
+            a <#DigitalLightHw> ;
+            <#componentName> "digital-light-sx"
+        ] ;
+        rdf:_2 [
+            a <#DigitalLightHw> ;
+            <#componentName> "digital-light-dx"
+        ]
     ] .
