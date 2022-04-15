@@ -76,14 +76,20 @@
     rdfs:label "Property Operation Handler (Brittany)", "Property Operation Handler (Brittany)"@it ;
     rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it .
 
-<IsOnDigitalLightHandler>
-    a <#PropertyOperationHandler> .
+<#IsOnDigitalLightHandler>
+    a <#PropertyOperationHandler> ;
+    rdfs:label "IsOn Digital Light Handler (Brittany)" ;
+    rdfs:comment "An Operation Handler to check if the Digital Light is On.", "Un Operation Handler utilizzato per controllare se la Luce Digitale è accesa."@it .
 
-<TurnOnDigitalLightHandler>
-    a <#ActionOperationHandler> .
+<#TurnOnDigitalLightHandler>
+    a <#ActionOperationHandler> ;
+    rdfs:label "TurnOn Digital Light Handler (Brittany)" ;
+    rdfs:comment "An Operation Handler to turn on the Digital Light.", "Un Operation Handler utilizzato per accendere la Luce Digitale."@it .
 
-<TurnOffDigitalLightHandler>
-    a <#ActionOperationHandler> .
+<#TurnOffDigitalLightHandler>
+    a <#ActionOperationHandler> ;
+    rdfs:label "TurnOff Digital Light Handler (Brittany)" ;
+    rdfs:comment "An Operation Handler to turn off the Digital Light.", "Un Operation Handler utilizzato per spegnere la Luce Digitale."@it .
 
 # ----- ComponentsHw -----
 
