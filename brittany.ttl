@@ -165,6 +165,11 @@
     rdfs:label "Module in Edge (Brittany)", "Moduli in Edge (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that an Edge is composed by one or more Modules.", "Proprietà di composizione utilizzata per indicare che un Edge è composto da uno o più Moduli."@it .
 
+<#edgeName>
+    rdfs:subPropertyOf foaf:name ;
+    rdf:domain <#Edge> ;
+    rdfs:label "Edge Name (Brittany)", "Nome dell'Edge (Brittany)"@it .
+
 <#moduleName>
     rdfs:subPropertyOf foaf:name ;
     rdf:domain <#Module> ;
@@ -243,7 +248,7 @@
         a rdf:Bag ;
         rdf:_1 <#digital-light-module>
     ] ;
-    foaf:name "Angelo's ESP8266", "ESP8266 di Angelo"@it .
+    <#edgeName> "Angelo's ESP8266", "ESP8266 di Angelo"@it .
 
 <#digital-light-module>
     a <#DigitalLightModule> ;
