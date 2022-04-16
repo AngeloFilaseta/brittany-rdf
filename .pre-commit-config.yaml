@@ -10,13 +10,14 @@ repos:
   - id: check-merge-conflict # checks for files that contain merge conflict strings.
   - id: check-executables-have-shebangs # ensures that (non-binary) executables have a shebang.
   - id: check-symlinks # checks for symlinks which do not point to anything.
+  - id: check-json # checks json files for parseable syntax.
   - id: check-yaml # checks yaml files for parseable syntax.
   - id: detect-private-key # detects the presence of private keys.
   - id: end-of-file-fixer # ensures that a file is either empty, or ends with one newline.
+  - id: mixed-line-ending # replaces or checks mixed line ending.
   - id: trailing-whitespace # trims trailing whitespace.
 
-- repo: https://github.com/jguttman94/pre-commit-gradle
-  rev: v0.3.0
+- repo: https://github.com/IamTheFij/docker-pre-commit
+  rev: v2.1.0
   hooks:
-  - id: gradle-task # execute the gradle task "test".
-    args: ['test']
+  - id: docker-compose-check # checks that docker-compose files are valid.
