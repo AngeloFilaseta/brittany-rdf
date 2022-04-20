@@ -93,17 +93,20 @@
 <#IsOnDigitalLightHandler>
     rdfs:subClassOf <#DigitalLightHandler>, <#PropertyOperationHandler> ;
     rdfs:label "IsOn Digital Light Handler (Brittany)" ;
-    rdfs:comment "An Operation Handler to check if the Digital Light is On.", "Un Operation Handler utilizzato per controllare se la Luce Digitale è accesa."@it .
+    rdfs:comment "An Operation Handler to check if the Digital Light is On.", "Un Operation Handler utilizzato per controllare se la Luce Digitale è accesa."@it ;
+    dco:hasCommand dco:GetCommand.
 
 <#TurnOnDigitalLightHandler>
     rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> ;
     rdfs:label "TurnOn Digital Light Handler (Brittany)" ;
-    rdfs:comment "An Operation Handler to turn on the Digital Light.", "Un Operation Handler utilizzato per accendere la Luce Digitale."@it .
+    rdfs:comment "An Operation Handler to turn on the Digital Light.", "Un Operation Handler utilizzato per accendere la Luce Digitale."@it ;
+    dco:hasCommand dco:OnCommand .
 
 <#TurnOffDigitalLightHandler>
     rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> ;
     rdfs:label "TurnOff Digital Light Handler (Brittany)" ;
-    rdfs:comment "An Operation Handler to turn off the Digital Light.", "Un Operation Handler utilizzato per spegnere la Luce Digitale."@it .
+    rdfs:comment "An Operation Handler to turn off the Digital Light.", "Un Operation Handler utilizzato per spegnere la Luce Digitale."@it;
+    dco:hasCommand dco:OffCommand .
 
 # ----- ComponentsHw -----
 
