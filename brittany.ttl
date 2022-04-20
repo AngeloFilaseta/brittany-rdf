@@ -26,12 +26,12 @@
     rdfs:comment "A space or area that can be monitored by an Edge device.", "Uno spazio o un'area che può essere monitorata da un dispositivo Edge"@it .
 
 <#Environment>
-    rdfs:subClassOf <#Monitorable> ;
+    rdfs:subClassOf <#Monitorable> , dco:Space ;
     rdfs:label "Environment (Brittany)", "Ambiente (Brittany)"@it ;
     rdfs:comment "Section of a Greenhouse in which the \"Brittany\" software is used. An Environment contains Plants. A greenhouse is composed of at least one Environment.", "Sezione di una Serra in cui viene utilizzato il software \"Brittany\". Un ambiente contiene delle piante. Una serra è composta da almeno un Ambiente."@it .
 
 <#Plant>
-    rdfs:subClassOf <#Monitorable> ;
+    rdfs:subClassOf <#Monitorable> , dco:Space ;
     rdfs:label "Plant (Brittany)", "Pianta (Brittany)"@it ;
     rdfs:comment "Vegetal unit contained in an Environment in the Greenhouse", "Unità vegetale contenuta all’interno di un Ambiente della Serra."@it ;
     owl:sameAs dbo:Plant .
