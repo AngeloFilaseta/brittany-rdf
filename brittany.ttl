@@ -1,9 +1,11 @@
+@prefix dbo: <http://dbpedia.org/ontology/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix jsonschema: <https://www.w3.org/2019/wot/json-schema#> .
 @prefix m3: <http://sensormeasurement.appspot.com/m3#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix seas: <https://w3id.org/seas/> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -14,6 +16,7 @@
     a rdfs:Class ;
     rdfs:label "Greenhouse (Brittany)", "Serra (Brittany)"@it ;
     rdfs:comment "A greenhouse in which the \"Brittany\" software is used.", "Una serra in cui viene utilizzato il software \"Brittany\"."@it ;
+    owl:sameAs seas:Greenhouse ;
     rdfs:seeAlso "https://github.com/Tale152/brittany" .
 
 <#Monitorable>
@@ -29,7 +32,8 @@
 <#Plant>
     rdfs:subClassOf <#Monitorable> ;
     rdfs:label "Plant (Brittany)", "Pianta (Brittany)"@it ;
-    rdfs:comment "Vegetal unit contained in an Environment in the Greenhouse", "Unità vegetale contenuta all’interno di un Ambiente della Serra."@it .
+    rdfs:comment "Vegetal unit contained in an Environment in the Greenhouse", "Unità vegetale contenuta all’interno di un Ambiente della Serra."@it ;
+    owl:sameAs dbo:Plant .
 
 <#Edge>
     a rdfs:Class ;
