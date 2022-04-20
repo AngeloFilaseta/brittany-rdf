@@ -99,7 +99,8 @@
 <#ComponentHw>
     a rdfs:Class ;
     rdfs:label "Hardware Component (Brittany)", "Componente Hardware (Brittany)"@it ;
-    rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it .
+    rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it;
+    owl:sameAs m3:M2MDevice .
 
 <#DigitalLightHw>
     rdfs:subClassOf <#ComponentHw> ;
