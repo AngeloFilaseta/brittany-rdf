@@ -18,7 +18,7 @@
     a rdfs:Class ;
     rdfs:label "Greenhouse (Brittany)", "Serra (Brittany)"@it ;
     rdfs:comment "A greenhouse in which the \"Brittany\" software is used.", "Una serra in cui viene utilizzato il software \"Brittany\"."@it ;
-    owl:sameAs seas:Greenhouse ;
+    owl:equivalentClass seas:Greenhouse ;
     rdfs:seeAlso "https://github.com/Tale152/brittany" .
 
 <#Monitorable>
@@ -35,13 +35,13 @@
     rdfs:subClassOf <#Monitorable> , dco:Space ;
     rdfs:label "Plant (Brittany)", "Pianta (Brittany)"@it ;
     rdfs:comment "Vegetal unit contained in an Environment in the Greenhouse", "Unità vegetale contenuta all’interno di un Ambiente della Serra."@it ;
-    owl:sameAs dbo:Plant .
+    owl:equivalentClass dbo:Plant .
 
 <#Edge>
     a rdfs:Class ;
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it;
-    owl:sameAs dco:Device .
+    owl:equivalentClass dco:Device .
 
 # ----- Modules -----
 
@@ -115,13 +115,13 @@
     a rdfs:Class ;
     rdfs:label "Hardware Component (Brittany)", "Componente Hardware (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it ;
-    owl:sameAs m3:M2MDevice .
+    owl:equivalentClass m3:M2MDevice .
 
 <#DigitalLightHw>
     rdfs:subClassOf <#ComponentHw> ;
     rdfs:label "Digital Light (Brittany)", "Luce Digitale (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be turned on and off and emits light. It is not possible to regulate the intensity or the color of the light.", "Un Componente Hardware che può essere spento ed acceso ed emette luce. Non possono essere regolati i valori di intensità e colore della luce."@it ;
-    owl:sameAs m3:Lamp, dco:LightSwitch .
+    owl:equivalentClass m3:Lamp, dco:LightSwitch .
 
 # ========================== RELATIONSHIPS (PROPERTIES) ==========================
 # They define the existence of relationship between Concepts of the domain.
