@@ -117,7 +117,7 @@
     rdfs:subClassOf <#ComponentHw> ;
     rdfs:label "Digital Light (Brittany)", "Luce Digitale (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be turned on and off and emits light. It is not possible to regulate the intensity or the color of the light.", "Un Componente Hardware che può essere spento ed acceso ed emette luce. Non possono essere regolati i valori di intensità e colore della luce."@it ;
-    owl:sameAs m3:Lamp .
+    owl:sameAs m3:Lamp, dco:LightSwitch .
 
 # ========================== RELATIONSHIPS (PROPERTIES) ==========================
 # They define the existence of relationship between Concepts of the domain.
