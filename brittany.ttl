@@ -66,7 +66,7 @@
 # TODO Add constraint:
 # - OperationHandler MUST have a <#handlerName>
 <#OperationHandler>
-    a rdfs:Class ;
+    rdfs:subClassOf dco:Function ;
     rdfs:label "Operation Handler (Brittany)", "Operation Handler (Brittany)"@it ;
     rdfs:comment "An operation that uses some arguments for a computation and returns an result.", "Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato."@it .
 
@@ -76,27 +76,32 @@
     rdfs:comment "An Operation Handler that acts on certain Hardware Components.", "Un Operation Handler che agisce su Componenti Hardware."@it .
 
 <#ActionOperationHandler>
-    rdfs:subClassOf <#ComponentOperationHandler> ;
+    rdfs:subClassOf dco:ActuatingFunction ;
     rdfs:label "Action Operation Handler (Brittany)", "Action Operation Handler (Brittany)"@it ;
     rdfs:comment "An Operation Handler specifically used to execute an Action.", "Un Operation Handler specificatamente utilizzato per eseguire un Azione."@it .
 
 <#PropertyOperationHandler>
-    rdfs:subClassOf <#ComponentOperationHandler> ;
+    rdfs:subClassOf dco:SensingFunction ;
     rdfs:label "Property Operation Handler (Brittany)", "Property Operation Handler (Brittany)"@it ;
     rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it .
 
+<#DigitalLightHandler>
+    rdfs:subClassOf <#ComponentOperationHandler> ;
+    rdfs:label "Digital Light Operation Handler (Brittany)", "Operation Handler per Luce Digitale (Brittany)"@it ;
+    rdfs:comment "An Operation Handler that acts on Digital Lights.", "Un Operation Handler che agisce su Luci Digitali."@it .
+
 <#IsOnDigitalLightHandler>
-    rdfs:subClassOf <#PropertyOperationHandler> ;
+    rdfs:subClassOf <#DigitalLightHandler>, <#PropertyOperationHandler> ;
     rdfs:label "IsOn Digital Light Handler (Brittany)" ;
     rdfs:comment "An Operation Handler to check if the Digital Light is On.", "Un Operation Handler utilizzato per controllare se la Luce Digitale è accesa."@it .
 
 <#TurnOnDigitalLightHandler>
-    rdfs:subClassOf <#ActionOperationHandler> ;
+    rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> ;
     rdfs:label "TurnOn Digital Light Handler (Brittany)" ;
     rdfs:comment "An Operation Handler to turn on the Digital Light.", "Un Operation Handler utilizzato per accendere la Luce Digitale."@it .
 
 <#TurnOffDigitalLightHandler>
-    rdfs:subClassOf <#ActionOperationHandler> ;
+    rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> ;
     rdfs:label "TurnOff Digital Light Handler (Brittany)" ;
     rdfs:comment "An Operation Handler to turn off the Digital Light.", "Un Operation Handler utilizzato per spegnere la Luce Digitale."@it .
 
