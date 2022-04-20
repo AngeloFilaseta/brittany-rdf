@@ -1,4 +1,5 @@
 @prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dco: <https://w3id.org/dco#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix jsonschema: <https://www.w3.org/2019/wot/json-schema#> .
 @prefix m3: <http://sensormeasurement.appspot.com/m3#> .
@@ -38,7 +39,8 @@
 <#Edge>
     a rdfs:Class ;
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
-    rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it .
+    rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it;
+    owl:sameAs dco:Device .
 
 # ----- Modules -----
 
