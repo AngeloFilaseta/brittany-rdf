@@ -2,6 +2,7 @@
 @prefix dbr: <http://dbpedia.org/resource/> .
 @prefix dco: <https://w3id.org/dco#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix hctl: <https://www.w3.org/2019/wot/hypermedia#> .
 @prefix jsonschema: <https://www.w3.org/2019/wot/json-schema#> .
 @prefix m3: <http://sensormeasurement.appspot.com/m3#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -303,43 +304,43 @@
 
 <#turn-off-digital-light-sx>
     td:hasForm [
-            td:contentType "application/json" ;
-            td:href "td-mock-ip/turnOff?id=digital-light-sx"
-        ] ;
+        hctl:forContentType "application/json" ;
+        hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-sx"
+    ] ;
     td:hasOutputSchema [ td:type "string" ] .
 
 <#turn-off-digital-light-dx>
     td:hasForm [
-        td:contentType "application/json" ;
-        td:href "td-mock-ip/turnOff?id=digital-light-dx"
+        hctl:forContentType "application/json" ;
+        hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-dx"
     ] ;
     td:hasOutputSchema [ td:type "string" ] .
 
 <#turn-on-digital-light-sx>
     td:hasForm [
-            td:contentType "application/json" ;
-            td:href "td-mock-ip/turnOn?id=digital-light-sx"
-        ] ;
+        hctl:forContentType "application/json" ;
+        hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-sx"
+    ] ;
     td:hasOutputSchema [ td:type "string" ] .
 
 <#turn-on-digital-light-dx>
     td:hasForm [
-        td:contentType "application/json" ;
-        td:href "td-mock-ip/turnOn?id=digital-light-dx"
+        hctl:forContentType "application/json" ;
+        hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-dx"
     ] ;
     td:hasOutputSchema [ td:type "string" ] .
 
 <#is-on-digital-light-sx>
     td:hasForm [
-      td:contentType "application/json";
-      td:href "td-mock-ip/isOn?id=digital-light-sx"
+        hctl:forContentType "application/json";
+        hctl:hasTarget "td-mock-ip/isOn?id=digital-light-sx"
     ] ;
     td:type "boolean" .
 
 <#is-on-digital-light-dx>
     td:hasForm [
-      td:contentType "application/json";
-      td:href "td-mock-ip/isOn?id=digital-light-dx"
+        hctl:forContentType "application/json";
+        hctl:hasTarget "td-mock-ip/isOn?id=digital-light-dx"
     ] ;
     td:type "boolean" .
 
