@@ -9,6 +9,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix seas: <https://w3id.org/seas/> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix wotsec: <https://www.w3.org/2019/wot/security#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # ========================== CONCEPTS (CLASSES) ==========================
@@ -267,7 +268,8 @@
         a rdf:Bag ;
         rdf:_1 <#digital-light-module>
     ] ;
-    <#edgeName> "Angelo's ESP8266", "ESP8266 di Angelo"@it .
+    <#edgeName> "Angelo's ESP8266", "ESP8266 di Angelo"@it ;
+    <#hasThingDescriptor> <#td-mock-ip>.
 
 <#digital-light-module>
     a <#DigitalLightModule> ;
@@ -298,3 +300,51 @@
             <#componentName> "digital-light-dx"
         ]
     ] .
+
+<#turn-off-digital-light-sx>
+    td:hasForm [
+            td:contentType "application/json" ;
+            td:href "td-mock-ip/turnOff?id=digital-light-sx"
+        ] ;
+    td:hasOutputSchema [ td:type "string" ] .
+
+<#turn-off-digital-light-dx>
+    td:hasForm [
+        td:contentType "application/json" ;
+        td:href "td-mock-ip/turnOff?id=digital-light-dx"
+    ] ;
+    td:hasOutputSchema [ td:type "string" ] .
+
+<#turn-on-digital-light-sx>
+    td:hasForm [
+            td:contentType "application/json" ;
+            td:href "td-mock-ip/turnOn?id=digital-light-sx"
+        ] ;
+    td:hasOutputSchema [ td:type "string" ] .
+
+<#turn-on-digital-light-dx>
+    td:hasForm [
+        td:contentType "application/json" ;
+        td:href "td-mock-ip/turnOn?id=digital-light-dx"
+    ] ;
+    td:hasOutputSchema [ td:type "string" ] .
+
+<#is-on-digital-light-sx>
+    td:hasForm [
+      td:contentType "application/json";
+      td:href "td-mock-ip/isOn?id=digital-light-sx"
+    ] ;
+    td:type "boolean" .
+
+<#is-on-digital-light-dx>
+    td:hasForm [
+      td:contentType "application/json";
+      td:href "td-mock-ip/isOn?id=digital-light-dx"
+    ] ;
+    td:type "boolean" .
+
+<#td-mock-ip>
+    a td:Thing ;
+    td:title "Angelo's ESP8266 TD" ;
+    td:hasActionAffordance <#turn-off-digital-light-sx>, <#turn-off-digital-light-dx>, <#turn-on-digital-light-sx>, <#turn-on-digital-light-dx> ;
+    td:hasPropertyAffordance <#is-on-digital-light-sx>, <#is-on-digital-light-dx> .
