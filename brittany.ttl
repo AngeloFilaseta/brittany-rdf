@@ -210,7 +210,7 @@
 # TODO Add constraint:
 # - only <#OperationHandler> instances are allowed in rdf:range.
 # - at least one operation handler is needed.
-<#handlers>
+<#hasHandlers>
     a rdf:Property ;
     rdf:domain <#Module> ;
     rdf:range rdf:Bag ;
@@ -275,7 +275,7 @@
 <#digital-light-module>
     a <#DigitalLightModule> ;
     <#moduleName> "digital-light" ;
-    <#handlers> [
+    <#hasHandlers> [
         a rdf:Bag ;
         rdf:_1 [
             a <#IsOnDigitalLightHandler> ;
