@@ -169,7 +169,7 @@
 # TODO Add constraint:
 # - only <#ComponentHw> instances are allowed in rdf:range.
 # - at least one hwcomponent is needed.
-<#components>
+<#hasComponents>
     a rdf:Property ;
     rdf:domain <#ComponentModule> ;
     rdf:range rdf:Bag ;
@@ -293,7 +293,7 @@
             <#hasHandlerOutputType> "string"
         ]
     ] ;
-    <#components> [
+    <#hasComponents> [
         a rdf:Bag ;
         rdf:_1 [
             a <#DigitalLightHw> ;
