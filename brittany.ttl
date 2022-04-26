@@ -310,42 +310,42 @@
         hctl:forContentType "application/json" ;
         hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-sx"
     ] ;
-    td:hasOutputSchema [ td:type "string" ] .
+    td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
 <#turn-off-digital-light-dx>
     td:hasForm [
         hctl:forContentType "application/json" ;
         hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-dx"
     ] ;
-    td:hasOutputSchema [ td:type "string" ] .
+    td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
 <#turn-on-digital-light-sx>
     td:hasForm [
         hctl:forContentType "application/json" ;
         hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-sx"
     ] ;
-    td:hasOutputSchema [ td:type "string" ] .
+    td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
 <#turn-on-digital-light-dx>
     td:hasForm [
         hctl:forContentType "application/json" ;
         hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-dx"
     ] ;
-    td:hasOutputSchema [ td:type "string" ] .
+    td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
 <#is-on-digital-light-sx>
+    a jsonschema:BooleanSchema ;
     td:hasForm [
         hctl:forContentType "application/json";
         hctl:hasTarget "td-mock-ip/isOn?id=digital-light-sx"
-    ] ;
-    td:type "boolean" .
+    ] .
 
 <#is-on-digital-light-dx>
+    a jsonschema:BooleanSchema ;
     td:hasForm [
         hctl:forContentType "application/json";
         hctl:hasTarget "td-mock-ip/isOn?id=digital-light-dx"
-    ] ;
-    td:type "boolean" .
+    ] .
 
 <#nosec-configuration>
     a wotsec:NoSecurityScheme .
