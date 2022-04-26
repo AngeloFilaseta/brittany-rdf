@@ -131,7 +131,7 @@
 # TODO Add constraint:
 # - only <#Environment> instances are allowed in rdf:range.
 # - at least one environment is needed.
-<#environments>
+<#hasEnvironments>
     a rdf:Property ;
     rdf:domain <#Greenhouse> ;
     rdf:range rdf:Bag ;
@@ -245,7 +245,7 @@
 <#angelo-greenhouse>
     a <#Greenhouse> ;
     foaf:name "Angelo's Greenhouse", "La serra di Angelo"@it ;
-    <#environments> [
+    <#hasEnvironments> [
         a rdf:Bag ;
         rdf:_1 <#angelo-environment>
     ].
