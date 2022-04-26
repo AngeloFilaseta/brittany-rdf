@@ -179,7 +179,7 @@
 # TODO Add constraint:
 # - only <#Module> instances are allowed in rdf:range.
 # - at least one module is needed.
-<#modules>
+<#hasModules>
     a rdf:Property ;
     rdf:domain <#Edge> ;
     rdf:range rdf:Bag ;
@@ -265,7 +265,7 @@
 <#angelo-edge>
     a <#Edge> ;
     <#monitorPlant> <#angelo-basil> ;
-    <#modules> [
+    <#hasModules> [
         a rdf:Bag ;
         rdf:_1 <#digital-light-module>
     ] ;
