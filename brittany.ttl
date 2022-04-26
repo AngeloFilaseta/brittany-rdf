@@ -344,8 +344,13 @@
     ] ;
     td:type "boolean" .
 
+<#nosec-configuration>
+    a wotsec:NoSecurityScheme .
+
 <#td-mock-ip>
     a td:Thing ;
     td:title "Angelo's ESP8266 TD" ;
+    td:definesSecurityScheme <nosec-schema> ;
+    td:hasSecurityConfiguration "nosec-configuration" ;
     td:hasActionAffordance <#turn-off-digital-light-sx>, <#turn-off-digital-light-dx>, <#turn-on-digital-light-sx>, <#turn-on-digital-light-dx> ;
     td:hasPropertyAffordance <#is-on-digital-light-sx>, <#is-on-digital-light-dx> .
