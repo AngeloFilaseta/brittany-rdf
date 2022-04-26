@@ -279,15 +279,18 @@
         a rdf:Bag ;
         rdf:_1 [
             a <#IsOnDigitalLightHandler> ;
-            <#handlerName> "isOn"
+            <#handlerName> "isOn" ;
+            <#hasHandlerOutputType> "boolean"
         ] ;
         rdf:_2 [
             a <#TurnOnDigitalLightHandler> ;
-            <#handlerName> "turnOn"
+            <#handlerName> "turnOn" ;
+            <#hasHandlerOutputType> "string"
         ] ;
         rdf:_3 [
             a <#TurnOffDigitalLightHandler> ;
-            <#handlerName> "turnOff"
+            <#handlerName> "turnOff" ;
+            <#hasHandlerOutputType> "string"
         ]
     ] ;
     <#components> [
