@@ -140,7 +140,7 @@
 
 # TODO Add constraint:
 # - only <#BrittanyPlant> instances are allowed in rdf:range.
-<#plants>
+<#hasPlants>
     a rdf:Property ;
     rdf:domain <#Environment> ;
     rdf:range rdf:Bag ;
@@ -253,7 +253,7 @@
 <#angelo-environment>
     a <#Environment> ;
     foaf:name "Angelo's Environment #1", "Ambiente di Angelo #1"@it ;
-    <#plants> [
+    <#hasPlants> [
         a rdf:Bag ;
         rdf:_1 <#angelo-basil>
     ].
