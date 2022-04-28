@@ -20,8 +20,7 @@
     a rdfs:Class ;
     rdfs:label "Greenhouse (Brittany)", "Serra (Brittany)"@it ;
     rdfs:comment "A greenhouse in which the \"Brittany\" software is used.", "Una serra in cui viene utilizzato il software \"Brittany\"."@it ;
-    owl:equivalentClass seas:Greenhouse ;
-    rdfs:seeAlso "https://github.com/Tale152/brittany" .
+    owl:equivalentClass seas:Greenhouse .
 
 <#Monitorable>
     a rdfs:Class ;
