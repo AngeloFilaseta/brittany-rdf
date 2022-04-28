@@ -119,8 +119,20 @@
     rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it ;
     owl:equivalentClass m3:M2MDevice .
 
-<#DigitalLightHw>
+<#SensorHw>
     rdfs:subClassOf <#ComponentHw> ;
+    rdfs:label "Sensor (Brittany)", "Sensore (Brittany)"@it ;
+    rdfs:comment "A Hardware Component that collects data from the surrounding.", "Un Componente Hardware che può colleziona dati dall'area circostante."@it ;
+    owl:equivalentClass m3:Sensor, dco:Sensor .
+
+<#ActuatorHw>
+    rdfs:subClassOf <#ComponentHw> ;
+    rdfs:label "Actuator (Brittany)", "Attuatore (Brittany)"@it ;
+    rdfs:comment "A Hardware Component that acts on the surrounding.", "Un Componente Hardware che agisce sull'area circostante."@it ;
+    owl:equivalentClass m3:Actuator, dco:Actuator .
+
+<#DigitalLightHw>
+    rdfs:subClassOf <#ActuatorHw> ;
     rdfs:label "Digital Light (Brittany)", "Luce Digitale (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be turned on and off and emits light. It is not possible to regulate the intensity or the color of the light.", "Un Componente Hardware che può essere spento ed acceso ed emette luce. Non possono essere regolati i valori di intensità e colore della luce."@it ;
     owl:equivalentClass m3:Lamp, dco:LightSwitch .
