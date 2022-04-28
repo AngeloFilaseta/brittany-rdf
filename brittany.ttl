@@ -79,12 +79,12 @@
     rdfs:comment "An Operation Handler that acts on certain Hardware Components.", "Un Operation Handler che agisce su Componenti Hardware."@it .
 
 <#ActionOperationHandler>
-    rdfs:subClassOf dco:ActuatingFunction ;
+    rdfs:subClassOf <#OperationHandler>, dco:ActuatingFunction ;
     rdfs:label "Action Operation Handler (Brittany)", "Action Operation Handler (Brittany)"@it ;
     rdfs:comment "An Operation Handler specifically used to execute an Action.", "Un Operation Handler specificatamente utilizzato per eseguire un Azione."@it .
 
 <#PropertyOperationHandler>
-    rdfs:subClassOf dco:SensingFunction ;
+    rdfs:subClassOf <#OperationHandler>, dco:SensingFunction ;
     rdfs:label "Property Operation Handler (Brittany)", "Property Operation Handler (Brittany)"@it ;
     rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it .
 
