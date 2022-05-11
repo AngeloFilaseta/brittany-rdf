@@ -17,14 +17,14 @@
 # They are abstractions of the domain.
 
 <#Greenhouse>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:label "Greenhouse (Brittany)", "Serra (Brittany)"@it ;
     rdfs:comment "A greenhouse in which the \"Brittany\" software is used.", "Una serra in cui viene utilizzato il software \"Brittany\"."@it ;
     owl:equivalentClass seas:Greenhouse ;
     rdfs:seeAlso "https://github.com/Tale152/brittany" .
 
 <#Monitorable>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:label "Monitorable (Brittany)", "Monitorabile (Brittany)"@it ;
     rdfs:comment "A space or area that can be monitored by an Edge device.", "Uno spazio o un'area che può essere monitorata da un dispositivo Edge"@it .
 
@@ -40,7 +40,7 @@
     owl:equivalentClass dbo:Plant .
 
 <#Edge>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it;
     owl:equivalentClass dco:Device .
@@ -50,7 +50,7 @@
 # TODO Add constraint:
 # - Module MUST have a foaf:name
 <#Module>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:label "Module (Brittany)", "Modulo (Brittany)"@it ;
     rdfs:comment "A logical component that can be added to an Edge and is made of OperationHandlers.", "Un componente logico che può essere aggiunto ad un Edge ed è composto da OperationHandlers."@it .
 
@@ -119,7 +119,7 @@
 # TODO Add constraint:
 # - ComponentHw MUST have a foaf:name
 <#ComponentHw>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:label "Hardware Component (Brittany)", "Componente Hardware (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it ;
     owl:equivalentClass m3:M2MDevice .
