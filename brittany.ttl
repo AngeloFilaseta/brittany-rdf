@@ -32,7 +32,8 @@
 <#Monitorable>
     a owl:Class ;
     rdfs:label "Monitorable (Brittany)", "Monitorabile (Brittany)"@it ;
-    rdfs:comment "A space or area that can be monitored by an Edge device.", "Uno spazio o un'area che può essere monitorata da un dispositivo Edge"@it .
+    rdfs:comment "A space or area that can be monitored by an Edge device.", "Uno spazio o un'area che può essere monitorata da un dispositivo Edge"@it ;
+    owl:disjointWith <#Edge>, <#Module>, <#OperationHandler>, <#ComponentHw> .
 
 <#Environment>
     rdfs:subClassOf <#Monitorable> , dco:Space ;
@@ -49,7 +50,8 @@
     a owl:Class ;
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it;
-    owl:equivalentClass dco:Device .
+    owl:equivalentClass dco:Device;
+    owl:disjointWith <#Module>, <#OperationHandler>, <#ComponentHw> .
 
 # ----- Modules -----
 
@@ -58,7 +60,8 @@
 <#Module>
     a owl:Class ;
     rdfs:label "Module (Brittany)", "Modulo (Brittany)"@it ;
-    rdfs:comment "A logical component that can be added to an Edge and is made of OperationHandlers.", "Un componente logico che può essere aggiunto ad un Edge ed è composto da OperationHandlers."@it .
+    rdfs:comment "A logical component that can be added to an Edge and is made of OperationHandlers.", "Un componente logico che può essere aggiunto ad un Edge ed è composto da OperationHandlers."@it ;
+    owl:disjointWith <#OperationHandler>, <#ComponentHw> .
 
 <#ComponentModule>
     rdfs:subClassOf <#Module> ;
@@ -78,7 +81,8 @@
     a owl:Class ;
     rdfs:label "Operation Handler (Brittany)", "Operation Handler (Brittany)"@it ;
     rdfs:comment "An operation that uses some arguments for a computation and returns an result.", "Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato."@it ;
-    owl:equivalentClass dco:Function .
+    owl:equivalentClass dco:Function ;
+    owl:disjointWith <#ComponentHw> .
 
 <#ComponentOperationHandler>
     rdfs:subClassOf <#OperationHandler> ;
