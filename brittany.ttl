@@ -13,6 +13,12 @@
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<#BrittanyRDF>
+    a owl:Ontology ;
+    rdfs:label "Brittany RDF";
+    rdfs:comment "An ontology used by Brittany, a software used to simplify and automatize the management of greenhouses.", "Un ontologia utilizzata da Brittany, un software per semplificare ed automatizzare la gestione di un sistema di serre."@it ;
+    rdfs:seeAlso "https://github.com/Tale152/brittany" .
+
 # ========================== CONCEPTS (CLASSES) ==========================
 # They are abstractions of the domain.
 
@@ -21,7 +27,7 @@
     rdfs:label "Greenhouse (Brittany)", "Serra (Brittany)"@it ;
     rdfs:comment "A greenhouse in which the \"Brittany\" software is used.", "Una serra in cui viene utilizzato il software \"Brittany\"."@it ;
     owl:equivalentClass seas:Greenhouse ;
-    rdfs:seeAlso "https://github.com/Tale152/brittany" .
+    owl:disjointWith <#Monitorable>, <#Edge>, <#Module>, <#OperationHandler>, <#ComponentHw> .
 
 <#Monitorable>
     a owl:Class ;
