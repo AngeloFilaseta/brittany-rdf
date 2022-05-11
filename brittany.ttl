@@ -67,7 +67,7 @@
 # ----- Handlers -----
 
 # TODO Add constraint:
-# - OperationHandler MUST have a <#handlerName>
+# - OperationHandler MUST have a foaf:name
 <#OperationHandler>
     rdfs:subClassOf dco:Function ;
     rdfs:label "Operation Handler (Brittany)", "Operation Handler (Brittany)"@it ;
@@ -186,11 +186,6 @@
     rdfs:label "Module in Edge (Brittany)", "Moduli in Edge (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that an Edge is composed by one or more Modules.", "Proprietà di composizione utilizzata per indicare che un Edge è composto da uno o più Moduli."@it .
 
-<#handlerName>
-    rdfs:subPropertyOf foaf:name ;
-    rdf:domain <#OperationHandler> ;
-    rdfs:label "Operation Handler Name (Brittany)", "Nome dell'Operation Handler (Brittany)"@it .
-
 <#componentName>
     rdfs:subPropertyOf foaf:name;
     rdf:domain <#ComponentHw> ;
@@ -268,17 +263,17 @@
         a rdf:Bag ;
         rdf:_1 [
             a <#IsOnDigitalLightHandler> ;
-            <#handlerName> "isOn" ;
+            foaf:name "isOn" ;
             <#hasHandlerOutputType> "boolean"
         ] ;
         rdf:_2 [
             a <#TurnOnDigitalLightHandler> ;
-            <#handlerName> "turnOn" ;
+            foaf:name "turnOn" ;
             <#hasHandlerOutputType> "string"
         ] ;
         rdf:_3 [
             a <#TurnOffDigitalLightHandler> ;
-            <#handlerName> "turnOff" ;
+            foaf:name "turnOff" ;
             <#hasHandlerOutputType> "string"
         ]
     ] ;
