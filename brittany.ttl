@@ -48,7 +48,7 @@
 # ----- Modules -----
 
 # TODO Add constraint:
-# - Module MUST have a <#moduleName>
+# - Module MUST have a foaf:name
 <#Module>
     a rdfs:Class ;
     rdfs:label "Module (Brittany)", "Modulo (Brittany)"@it ;
@@ -191,12 +191,6 @@
     rdf:domain <#Edge> ;
     rdfs:label "Edge Name (Brittany)", "Nome dell'Edge (Brittany)"@it .
 
-<#moduleName>
-    rdfs:subPropertyOf foaf:name ;
-    rdf:domain <#Module> ;
-    rdf:range <#ModuleName> ;
-    rdfs:label "Module Name (Brittany)", "Nome del Modulo (Brittany)"@it .
-
 <#handlerName>
     rdfs:subPropertyOf foaf:name ;
     rdf:domain <#OperationHandler> ;
@@ -274,7 +268,7 @@
 
 <#digital-light-module>
     a <#DigitalLightModule> ;
-    <#moduleName> "digital-light" ;
+    foaf:name "digital-light" ;
     <#hasHandlers> [
         a rdf:Bag ;
         rdf:_1 [
