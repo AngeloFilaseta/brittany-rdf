@@ -69,9 +69,10 @@
 # TODO Add constraint:
 # - OperationHandler MUST have a foaf:name
 <#OperationHandler>
-    rdfs:subClassOf dco:Function ;
+    a owl:Class ;
     rdfs:label "Operation Handler (Brittany)", "Operation Handler (Brittany)"@it ;
-    rdfs:comment "An operation that uses some arguments for a computation and returns an result.", "Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato."@it .
+    rdfs:comment "An operation that uses some arguments for a computation and returns an result.", "Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato."@it ;
+    owl:equivalentClass dco:Function .
 
 <#ComponentOperationHandler>
     rdfs:subClassOf <#OperationHandler> ;
@@ -79,14 +80,16 @@
     rdfs:comment "An Operation Handler that acts on certain Hardware Components.", "Un Operation Handler che agisce su Componenti Hardware."@it .
 
 <#ActionOperationHandler>
-    rdfs:subClassOf dco:ActuatingFunction ;
+    rdfs:subClassOf <#OperationHandler> ;
     rdfs:label "Action Operation Handler (Brittany)", "Action Operation Handler (Brittany)"@it ;
-    rdfs:comment "An Operation Handler specifically used to execute an Action.", "Un Operation Handler specificatamente utilizzato per eseguire un Azione."@it .
+    rdfs:comment "An Operation Handler specifically used to execute an Action.", "Un Operation Handler specificatamente utilizzato per eseguire un Azione."@it ;
+    owl:equivalentClass dco:ActuatingFunction .
 
 <#PropertyOperationHandler>
-    rdfs:subClassOf dco:SensingFunction ;
+    rdfs:subClassOf <#OperationHandler> ;
     rdfs:label "Property Operation Handler (Brittany)", "Property Operation Handler (Brittany)"@it ;
-    rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it .
+    rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it ;
+    owl:equivalentClass dco:SensingFunction .
 
 <#DigitalLightHandler>
     rdfs:subClassOf <#ComponentOperationHandler> ;
@@ -113,6 +116,8 @@
 
 # ----- ComponentsHw -----
 
+# TODO Add constraint:
+# - ComponentHw MUST have a foaf:name
 <#ComponentHw>
     a rdfs:Class ;
     rdfs:label "Hardware Component (Brittany)", "Componente Hardware (Brittany)"@it ;
@@ -185,11 +190,6 @@
     rdf:range rdf:Bag ;
     rdfs:label "Module in Edge (Brittany)", "Moduli in Edge (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that an Edge is composed by one or more Modules.", "Proprietà di composizione utilizzata per indicare che un Edge è composto da uno o più Moduli."@it .
-
-<#componentName>
-    rdfs:subPropertyOf foaf:name;
-    rdf:domain <#ComponentHw> ;
-    rdfs:label "Component Name (Brittany)", "Nome del Componente (Brittany)"@it .
 
 # TODO Add constraint:
 # - only <#OperationHandler> instances are allowed in rdf:range.
@@ -281,11 +281,11 @@
         a rdf:Bag ;
         rdf:_1 [
             a <#DigitalLightHw> ;
-            <#componentName> "digital-light-sx"
+            foaf:name "digital-light-sx"
         ] ;
         rdf:_2 [
             a <#DigitalLightHw> ;
-            <#componentName> "digital-light-dx"
+            foaf:name "digital-light-dx"
         ]
     ] .
 
