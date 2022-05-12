@@ -214,14 +214,24 @@
     rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Hardware Component.", "Proprietà che indica che un Modulo agisce su un Componente Hardware."@it .
 
+<#isComponentHwIn>
+    owl:inverseOf <#hasComponentHw> ;
+    rdfs:label "Hardware Component is in Component Module (Brittany)", "Componente Hardware è in Modulo (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Hardware Component is in a Module.", "Proprietà che indica che un Componente Hardware è in un Modulo."@it .
+
 # TODO Add constraint:
 # - at least one module is needed.
 <#hasModule>
     a owl:ObjectProperty ;
     rdf:domain <#Edge> ;
     rdf:range <#Module> ;
-    rdfs:label "Module in Edge (Brittany)", "Modulo in Edge (Brittany)"@it ;
+    rdfs:label "Edge contains Module (Brittany)", "Edge contiene Modulo (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that an Edge contains a Module.", "Proprietà di composizione utilizzata per indicare che un Edge contiene un Modulo."@it .
+
+<#isModuleIn>
+    owl:inverseOf <#hasModule> ;
+    rdfs:label "Module is in Edge (Brittany)", "Modulo è in Edge (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Module is in an Edge.", "Proprietà di composizione utilizzata per indicare che un Modulo è in un Edge."@it .
 
 # TODO Add constraint:
 # - at least one operation handler is needed.
@@ -229,21 +239,35 @@
     a owl:ObjectProperty ;
     rdf:domain <#Module> ;
     rdf:range <#OperationHandler> ;
-    rdfs:label "Operation Handler in Module (Brittany)", "Operation Handler in Modulo (Brittany)"@it ;
+    rdfs:label "Module contains Operation Handler (Brittany)", "Modulo contiene Operation Handler (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Module contains an Operation Handler.", "Proprietà di composizione utilizzata per indicare che un Modulo contiene un Operation Handler."@it .
+
+<#isHandlerIn>
+    owl:inverseOf <#hasHandler> ;
+    rdfs:label "Operation Handler is in Module (Brittany)", "Operation Handler è in Modulo (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Operation Handler is in a Module.", "Proprietà di composizione utilizzata per indicare che un Operation Handler è in un Modulo."@it .
 
 <#hasHandlerOutputType>
     a owl:DatatypeProperty ;
     rdf:domain <#OperationHandler> ;
     rdf:range xsd:string ; # One of ["boolean", "integer", "number", "string", "object", "array", "null"]
-    rdfs:label "Operation Handler Output Type (Brittany)", "Output Type dell'Operation Handler (Brittany)"@it .
+    rdfs:label "Operation Handler has Output Type (Brittany)", "Operation Handler ha Tipo di Output (Brittany)"@it .
+
+<#isOutputTypeOfHandler>
+    owl:inverseOf <#hasHandlerOutputType> ;
+    rdfs:label "Output Type of Handler (Brittany)", "Tipo di Output dell'Operation Handler (Brittany)"@it .
 
 <#hasHandlerInputSchema>
     a owl:ObjectProperty ;
     rdf:domain <#OperationHandler> ;
     rdf:range jsonschema:DataSchema ;
-    rdfs:label "Operation Handler Input Schema (Brittany)", "Input Schema dell'Operation Handler (Brittany)"@it ;
+    rdfs:label "Operation Handler has Input Schema (Brittany)", "Operation Handler ha Input Schema(Brittany)"@it ;
     rdfs:seeAlso <https://www.w3.org/TR/wot-thing-description/#dataschema>.
+
+<#isInputSchemaOfHandler>
+    owl:inverseOf <#hasHandlerInputSchema> ;
+    rdfs:label "Input Schema of Operation Handler (Brittany)", "Input Schema dell'Operation Handler (Brittany)"@it .
+
 
 # TODO Add constraint:
 # - only one TD allowed.
