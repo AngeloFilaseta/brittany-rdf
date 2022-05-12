@@ -201,14 +201,13 @@
     rdfs:comment "Composition property used to indicate that an Edge contains a Module.", "Proprietà di composizione utilizzata per indicare che un Edge contiene un Modulo."@it .
 
 # TODO Add constraint:
-# - only <#OperationHandler> instances are allowed in rdf:range.
 # - at least one operation handler is needed.
-<#hasHandlers>
+<#hasHandler>
     a owl:ObjectProperty ;
     rdf:domain <#Module> ;
-    rdf:range rdf:Bag ;
-    rdfs:label "Operation Handlers in Module (Brittany)", "Operation Handlers in Modulo (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that a Module is composed by one or more Operation Handlers.", "Proprietà di composizione utilizzata per indicare che un Modulo è composto da uno o più Operation Handler."@it .
+    rdf:range <#OperationHandler> ;
+    rdfs:label "Operation Handler in Module (Brittany)", "Operation Handler in Modulo (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Module contains an Operation Handler.", "Proprietà di composizione utilizzata per indicare che un Modulo contiene un Operation Handler."@it .
 
 <#hasHandlerOutputType>
     a owl:DatatypeProperty ;
@@ -263,23 +262,20 @@ dco:Device owl:equivalentClass m3:M2MDevice .
 <#digital-light-module>
     a <#DigitalLightModule> ;
     foaf:name "digital-light" ;
-    <#hasHandlers> [
-        a rdf:Bag ;
-        rdf:_1 [
-            a <#IsOnDigitalLightHandler> ;
-            foaf:name "isOn" ;
-            <#hasHandlerOutputType> "boolean"
-        ] ;
-        rdf:_2 [
-            a <#TurnOnDigitalLightHandler> ;
-            foaf:name "turnOn" ;
-            <#hasHandlerOutputType> "string"
-        ] ;
-        rdf:_3 [
-            a <#TurnOffDigitalLightHandler> ;
-            foaf:name "turnOff" ;
-            <#hasHandlerOutputType> "string"
-        ]
+    <#hasHandler> [
+        a <#IsOnDigitalLightHandler> ;
+        foaf:name "isOn" ;
+        <#hasHandlerOutputType> "boolean"
+    ] ;
+    <#hasHandler> [
+        a <#TurnOnDigitalLightHandler> ;
+        foaf:name "turnOn" ;
+        <#hasHandlerOutputType> "string"
+    ] ;
+    <#hasHandler> [
+        a <#TurnOffDigitalLightHandler> ;
+        foaf:name "turnOff" ;
+        <#hasHandlerOutputType> "string"
     ] ;
     <#hasComponentHw> [
         a <#DigitalLightHw> ;
