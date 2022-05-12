@@ -269,8 +269,20 @@
 <#hasHandlerOutputType>
     a owl:DatatypeProperty ;
     rdf:domain <#OperationHandler> ;
-    rdf:range xsd:string ; # One of ["boolean", "integer", "number", "string", "object", "array", "null"]
+    rdf:range [ a owl:Class ;
+                owl:oneOf  (
+                    "boolean"^^xsd:string
+                    "integer"^^xsd:string
+                    "number"^^xsd:string
+                    "string"^^xsd:string
+                    "object"^^xsd:string
+                    "array"^^xsd:string
+                    "null"^^xsd:string
+                ) ] ;
     rdfs:label "Operation Handler has Output Type (Brittany)", "Operation Handler ha Tipo di Output (Brittany)"@it .
+
+
+
 
 <#isOutputTypeOfHandler>
     owl:inverseOf <#hasHandlerOutputType> ;
@@ -302,6 +314,17 @@
 # ========================== ADDITIONAL ONTOLOGY RULES ==========================
 
 dco:Device owl:equivalentClass m3:M2MDevice .
+
+[] a owl:AllDifferent;
+    owl:distinctMembers (
+        "boolean"^^xsd:string
+        "integer"^^xsd:string
+        "number"^^xsd:string
+        "string"^^xsd:string
+        "object"^^xsd:string
+        "array"^^xsd:string
+        "null"^^xsd:string
+    ).
 
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
