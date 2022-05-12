@@ -24,6 +24,12 @@
 
 <#Greenhouse>
     a owl:Class ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty <#hasEnvironment> ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass <#Environment>
+    ] ;
     rdfs:label "Greenhouse (Brittany)", "Serra (Brittany)"@it ;
     rdfs:comment "A greenhouse in which the \"Brittany\" software is used.", "Una serra in cui viene utilizzato il software \"Brittany\"."@it ;
     owl:equivalentClass seas:Greenhouse ;
