@@ -192,14 +192,13 @@
     rdfs:comment "Property that indicates that a Module acts on a Hardware Component.", "Proprietà che indica che un Modulo agisce su un Componente Hardware."@it .
 
 # TODO Add constraint:
-# - only <#Module> instances are allowed in rdf:range.
 # - at least one module is needed.
-<#hasModules>
+<#hasModule>
     a owl:ObjectProperty ;
     rdf:domain <#Edge> ;
-    rdf:range rdf:Bag ;
-    rdfs:label "Module in Edge (Brittany)", "Moduli in Edge (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that an Edge is composed by one or more Modules.", "Proprietà di composizione utilizzata per indicare che un Edge è composto da uno o più Moduli."@it .
+    rdf:range <#Module> ;
+    rdfs:label "Module in Edge (Brittany)", "Modulo in Edge (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Edge contains a Module.", "Proprietà di composizione utilizzata per indicare che un Edge contiene un Modulo."@it .
 
 # TODO Add constraint:
 # - only <#OperationHandler> instances are allowed in rdf:range.
@@ -258,10 +257,7 @@ dco:Device owl:equivalentClass m3:M2MDevice .
     a <#Edge> ;
     foaf:name "Angelo's ESP8266", "ESP8266 di Angelo"@it ;
     <#monitorPlant> <#angelo-basil> ;
-    <#hasModules> [
-        a rdf:Bag ;
-        rdf:_1 <#digital-light-module>
-    ] ;
+    <#hasModule> <#digital-light-module> ;
     <#hasThingDescriptor> <#td-mock-ip>.
 
 <#digital-light-module>
