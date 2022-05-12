@@ -183,14 +183,13 @@
     rdfs:comment "Property that indicates that an Edge device is placed in an Environment.", "Proprietà che indica che un Edge è posizionato in un Ambiente."@it .
 
 # TODO Add constraint:
-# - only <#ComponentHw> instances are allowed in rdf:range.
 # - at least one hwcomponent is needed.
-<#hasComponents>
+<#hasComponentHw>
     a owl:ObjectProperty ;
     rdf:domain <#ComponentModule> ;
-    rdf:range rdf:Bag ;
-    rdfs:label "Components in Module (Brittany)", "Componenti in Modulo (Brittany)"@it ;
-    rdfs:comment "Property that indicates that a Module acts on certain Hardware Components.", "Proprietà che indica che un Modulo agisce su certi Componenti Hardware."@it .
+    rdf:range <#ComponentHw> ;
+    rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Module acts on a Hardware Component.", "Proprietà che indica che un Modulo agisce su un Componente Hardware."@it .
 
 # TODO Add constraint:
 # - only <#Module> instances are allowed in rdf:range.
@@ -286,16 +285,13 @@ dco:Device owl:equivalentClass m3:M2MDevice .
             <#hasHandlerOutputType> "string"
         ]
     ] ;
-    <#hasComponents> [
-        a rdf:Bag ;
-        rdf:_1 [
-            a <#DigitalLightHw> ;
-            foaf:name "digital-light-sx"
-        ] ;
-        rdf:_2 [
-            a <#DigitalLightHw> ;
-            foaf:name "digital-light-dx"
-        ]
+    <#hasComponentHw> [
+        a <#DigitalLightHw> ;
+        foaf:name "digital-light-sx"
+    ] ;
+    <#hasComponentHw> [
+        a <#DigitalLightHw> ;
+        foaf:name "digital-light-dx"
     ] .
 
 <#turn-off-digital-light-sx>
