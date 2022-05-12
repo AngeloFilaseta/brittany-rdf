@@ -54,7 +54,12 @@
 
 <#Edge>
     a owl:Class ;
-    rdfs:subClassOf dco:Device ;
+    rdfs:subClassOf dco:Device , [
+        a owl:Restriction ;
+        owl:onProperty <#hasModule> ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass <#Module>
+    ] ;
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it;
     owl:disjointWith <#Module>, <#OperationHandler>, <#ComponentHw> .
@@ -226,8 +231,6 @@
     rdfs:label "Hardware Component is in Component Module (Brittany)", "Componente Hardware è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Hardware Component is in a Module.", "Proprietà che indica che un Componente Hardware è in un Modulo."@it .
 
-# TODO Add constraint:
-# - at least one module is needed.
 <#hasModule>
     a owl:ObjectProperty ;
     rdf:domain <#Edge> ;
