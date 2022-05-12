@@ -48,15 +48,11 @@
 
 <#Edge>
     a owl:Class ;
-    rdfs:subClassOf [
-        a owl:Restriction ;
-        owl:onProperty <#hasThingDescriptor> ;
-        owl:cardinality "1"^^xsd:nonNegativeInteger
-    ] ;
+    rdfs:subClassOf dco:Device ;
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it;
-    owl:equivalentClass dco:Device;
     owl:disjointWith <#Module>, <#OperationHandler>, <#ComponentHw> .
+
 
 # ----- Modules -----
 
@@ -135,9 +131,9 @@
 # - ComponentHw MUST have a foaf:name
 <#ComponentHw>
     a owl:Class ;
+    rdfs:subClassOf dco:Device ;
     rdfs:label "Hardware Component (Brittany)", "Componente Hardware (Brittany)"@it ;
-    rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it ;
-    owl:equivalentClass m3:M2MDevice .
+    rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it .
 
 <#DigitalLightHw>
     rdfs:subClassOf <#ComponentHw> ;
@@ -237,6 +233,10 @@
     rdf:range td:Thing ;
     rdfs:label "Edge has Thing Descriptor (Brittany)", "Edge ha un Thing Descriptor (Brittany)"@it ;
     rdfs:comment "Property used to link an Edge to its Thing Descriptor (W3).", "Proprietà utilizzata per collegare un Edge al suo Thing Descriptor (W3)."@it .
+
+# ========================== ADDITIONAL ONTOLOGY RULES ==========================
+
+dco:Device owl:equivalentClass m3:M2MDevice .
 
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
