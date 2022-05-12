@@ -178,6 +178,11 @@
     rdfs:label "Monitor (Brittany)", "Monitor (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed in a Monitorable area.", "Proprietà che indica che un Edge è posizionato in un area Monitorabile."@it .
 
+<#isMonitored>
+    owl:inverseOf <#monitor> ;
+    rdfs:label "Is monitored (Brittany)", "È monitorato (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Monitorable area is monitored by an Edge device.", "Proprietà che indica che un area Monitorabile è monitorata da un Edge."@it .
+
 <#monitorPlant>
     rdfs:subPropertyOf <#monitor> ;
     rdf:range <#Plant> ;
