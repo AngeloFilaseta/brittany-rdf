@@ -173,8 +173,8 @@
 
 <#hasEnvironment>
     a owl:ObjectProperty ;
-    rdf:domain <#Greenhouse> ;
-    rdf:range <#Environment> ;
+    rdfs:domain <#Greenhouse> ;
+    rdfs:range <#Environment> ;
     rdfs:label "Greenhouse contains Environment (Brittany)", "Serra contiene Ambiente (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Greenhouse contains an Enviromnment.", "Proprietà di composizione utilizzata per indicare che una Serra contiene un Ambiente."@it .
 
@@ -185,8 +185,8 @@
 
 <#hasPlant>
     a owl:ObjectProperty ;
-    rdf:domain <#Environment> ;
-    rdf:range <#Plant> ;
+    rdfs:domain <#Environment> ;
+    rdfs:range <#Plant> ;
     rdfs:label "Environment contains Plant (Brittany)", "Ambiente contiene Pianta (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Environment contains a Plant.", "Proprietà di composizione utilizzata per indicare che un Ambiente contiene una Pianta."@it .
 
@@ -198,8 +198,8 @@
 <#monitor>
     a owl:ObjectProperty ;
     rdfs:subPropertyOf dco:hasDevice ;
-    rdf:domain <#Edge> ;
-    rdf:range <#Monitorable> ;
+    rdfs:domain <#Edge> ;
+    rdfs:range <#Monitorable> ;
     rdfs:label "Monitor (Brittany)", "Monitor (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed in a Monitorable area.", "Proprietà che indica che un Edge è posizionato in un area Monitorabile."@it .
 
@@ -210,7 +210,7 @@
 
 <#monitorPlant>
     rdfs:subPropertyOf <#monitor> ;
-    rdf:range <#Plant> ;
+    rdfs:range <#Plant> ;
     rdfs:label "Monitor Plant (Brittany)", "Monitor Pianta (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed on a Plant.", "Proprietà che indica che un Edge è posizionato su una Pianta."@it .
 
@@ -221,7 +221,7 @@
 
 <#monitorEnvironment>
     rdfs:subPropertyOf <#monitor> ;
-    rdf:range <#Environment> ;
+    rdfs:range <#Environment> ;
     rdfs:label "Monitor Environment (Brittany)", "Monitor Ambiente (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed in an Environment.", "Proprietà che indica che un Edge è posizionato in un Ambiente."@it .
 
@@ -232,8 +232,8 @@
 
 <#hasComponentHw>
     a owl:ObjectProperty ;
-    rdf:domain <#ComponentModule> ;
-    rdf:range <#ComponentHw> ;
+    rdfs:domain <#ComponentModule> ;
+    rdfs:range <#ComponentHw> ;
     rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Hardware Component.", "Proprietà che indica che un Modulo agisce su un Componente Hardware."@it .
 
@@ -244,8 +244,8 @@
 
 <#hasModule>
     a owl:ObjectProperty ;
-    rdf:domain <#Edge> ;
-    rdf:range <#Module> ;
+    rdfs:domain <#Edge> ;
+    rdfs:range <#Module> ;
     rdfs:label "Edge contains Module (Brittany)", "Edge contiene Modulo (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that an Edge contains a Module.", "Proprietà di composizione utilizzata per indicare che un Edge contiene un Modulo."@it .
 
@@ -256,8 +256,8 @@
 
 <#hasHandler>
     a owl:ObjectProperty ;
-    rdf:domain <#Module> ;
-    rdf:range <#OperationHandler> ;
+    rdfs:domain <#Module> ;
+    rdfs:range <#OperationHandler> ;
     rdfs:label "Module contains Operation Handler (Brittany)", "Modulo contiene Operation Handler (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Module contains an Operation Handler.", "Proprietà di composizione utilizzata per indicare che un Modulo contiene un Operation Handler."@it .
 
@@ -268,8 +268,8 @@
 
 <#hasHandlerOutputType>
     a owl:DatatypeProperty ;
-    rdf:domain <#OperationHandler> ;
-    rdf:range [ a owl:Class ;
+    rdfs:domain <#OperationHandler> ;
+    rdfs:range [ a owl:Class ;
                 owl:oneOf  (
                     "boolean"^^xsd:string
                     "integer"^^xsd:string
@@ -281,17 +281,14 @@
                 ) ] ;
     rdfs:label "Operation Handler has Output Type (Brittany)", "Operation Handler ha Tipo di Output (Brittany)"@it .
 
-
-
-
 <#isOutputTypeOfHandler>
     owl:inverseOf <#hasHandlerOutputType> ;
     rdfs:label "Output Type of Handler (Brittany)", "Tipo di Output dell'Operation Handler (Brittany)"@it .
 
 <#hasHandlerInputSchema>
     a owl:ObjectProperty ;
-    rdf:domain <#OperationHandler> ;
-    rdf:range jsonschema:DataSchema ;
+    rdfs:domain <#OperationHandler> ;
+    rdfs:range jsonschema:DataSchema ;
     rdfs:label "Operation Handler has Input Schema (Brittany)", "Operation Handler ha Input Schema(Brittany)"@it ;
     rdfs:seeAlso <https://www.w3.org/TR/wot-thing-description/#dataschema>.
 
@@ -301,8 +298,8 @@
 
 <#hasThingDescriptor>
     a owl:ObjectProperty ;
-    rdf:domain <#Edge> ;
-    rdf:range td:Thing ;
+    rdfs:domain <#Edge> ;
+    rdfs:range td:Thing ;
     rdfs:label "Edge has Thing Descriptor (Brittany)", "Edge ha un Thing Descriptor (Brittany)"@it ;
     rdfs:comment "Property used to link an Edge to its Thing Descriptor (W3).", "Proprietà utilizzata per collegare un Edge al suo Thing Descriptor (W3)."@it .
 
