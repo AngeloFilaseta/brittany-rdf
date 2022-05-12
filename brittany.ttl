@@ -71,6 +71,12 @@
 # - Module MUST have a foaf:name
 <#Module>
     a owl:Class ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty <#hasHandler> ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass <#OperationHandler>
+    ] ;
     rdfs:label "Module (Brittany)", "Modulo (Brittany)"@it ;
     rdfs:comment "A logical component that can be added to an Edge and is made of OperationHandlers.", "Un componente logico che può essere aggiunto ad un Edge ed è composto da OperationHandlers."@it ;
     owl:disjointWith <#OperationHandler>, <#ComponentHw> .
@@ -243,8 +249,6 @@
     rdfs:label "Module is in Edge (Brittany)", "Modulo è in Edge (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Module is in an Edge.", "Proprietà di composizione utilizzata per indicare che un Modulo è in un Edge."@it .
 
-# TODO Add constraint:
-# - at least one operation handler is needed.
 <#hasHandler>
     a owl:ObjectProperty ;
     rdf:domain <#Module> ;
