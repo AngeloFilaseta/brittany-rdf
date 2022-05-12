@@ -150,8 +150,6 @@
 # ========================== RELATIONSHIPS (PROPERTIES) ==========================
 # They define the existence of relationship between Concepts of the domain.
 
-# TODO Add constraint:
-# - at least one environment is needed.
 <#hasEnvironment>
     a owl:ObjectProperty ;
     rdf:domain <#Greenhouse> ;
