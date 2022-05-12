@@ -71,7 +71,12 @@
     owl:disjointWith <#OperationHandler>, <#ComponentHw> .
 
 <#ComponentModule>
-    rdfs:subClassOf <#Module> ;
+    rdfs:subClassOf <#Module> , [
+        a owl:Restriction ;
+        owl:onProperty <#hasComponentHw> ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass <#ComponentHw>
+    ];
     rdfs:label "Component Module (Brittany)", "Modulo di Componenti (Brittany)"@it ;
     rdfs:comment "A Module that can interact with some Hardware Component.", "Un Modulo che può interagire con alcuni Componenti Hardware."@it .
 
@@ -209,8 +214,6 @@
     rdfs:label "Environment monitored (Brittany)", "Ambiente monitorato (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Environment is monitored by an Edge device.", "Proprietà che indica che un Ambiente è monitorato da un Edge."@it .
 
-# TODO Add constraint:
-# - at least one hwcomponent is needed.
 <#hasComponentHw>
     a owl:ObjectProperty ;
     rdf:domain <#ComponentModule> ;
