@@ -59,6 +59,11 @@
         owl:onProperty <#hasModule> ;
         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
         owl:onClass <#Module>
+    ], [
+        a owl:Restriction ;
+        owl:onProperty <#hasThingDescriptor> ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass td:Thing
     ] ;
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it;
@@ -282,8 +287,6 @@
     owl:inverseOf <#hasHandlerInputSchema> ;
     rdfs:label "Input Schema of Operation Handler (Brittany)", "Input Schema dell'Operation Handler (Brittany)"@it .
 
-# TODO Add constraint:
-# - only one TD allowed.
 <#hasThingDescriptor>
     a owl:ObjectProperty ;
     rdf:domain <#Edge> ;
