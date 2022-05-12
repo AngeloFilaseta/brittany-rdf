@@ -268,7 +268,6 @@
     owl:inverseOf <#hasHandlerInputSchema> ;
     rdfs:label "Input Schema of Operation Handler (Brittany)", "Input Schema dell'Operation Handler (Brittany)"@it .
 
-
 # TODO Add constraint:
 # - only one TD allowed.
 <#hasThingDescriptor>
@@ -277,6 +276,11 @@
     rdf:range td:Thing ;
     rdfs:label "Edge has Thing Descriptor (Brittany)", "Edge ha un Thing Descriptor (Brittany)"@it ;
     rdfs:comment "Property used to link an Edge to its Thing Descriptor (W3).", "Proprietà utilizzata per collegare un Edge al suo Thing Descriptor (W3)."@it .
+
+<#isThingDescriptorOf>
+    owl:inverseOf <#hasThingDescriptor> ;
+    rdfs:label "Thing Descriptor of Edge (Brittany)", "Thing Descriptor dell'Edge (Brittany)"@it ;
+    rdfs:comment "Property used to link a Thing Descriptor to an Edge (W3).", "Proprietà utilizzata per collegare un Thing Descriptor ad un Edge (W3)."@it .
 
 # ========================== ADDITIONAL ONTOLOGY RULES ==========================
 
