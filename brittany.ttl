@@ -157,14 +157,14 @@
 # TODO Add constraint:
 # - only <#BrittanyPlant> instances are allowed in rdf:range.
 <#hasPlants>
-    rdfs:subClassOf dco:hasPlace ;
+    rdfs:subPropertyOf dco:hasPlace ;
     rdf:domain <#Environment> ;
     rdf:range rdf:Bag ;
     rdfs:label "Environment contains Plants (Brittany)", "Ambiente contiene Piante (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Environments may contains Plants.", "Proprietà di composizione utilizzata per indicare che un Ambiente può contenere Piante."@it .
 
 <#monitor>
-    rdfs:subClassOf dco:hasDevice ;
+    rdfs:subPropertyOf dco:hasDevice ;
     rdf:domain <#Edge> ;
     rdf:range <#Monitorable> ;
     rdfs:label "Monitor (Brittany)", "Monitor (Brittany)"@it ;
