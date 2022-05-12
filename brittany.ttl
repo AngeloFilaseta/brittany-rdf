@@ -189,11 +189,21 @@
     rdfs:label "Monitor Plant (Brittany)", "Monitor Pianta (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed on a Plant.", "Proprietà che indica che un Edge è posizionato su una Pianta."@it .
 
+<#isPlantMonitored>
+    owl:inverseOf <#monitorPlant> ;
+    rdfs:label "Plant monitored (Brittany)", "Pianta monitorata (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Plant is monitored by an Edge device.", "Proprietà che indica che una Pianta è monitorata da un Edge."@it .
+
 <#monitorEnvironment>
     rdfs:subPropertyOf <#monitor> ;
     rdf:range <#Environment> ;
     rdfs:label "Monitor Environment (Brittany)", "Monitor Ambiente (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed in an Environment.", "Proprietà che indica che un Edge è posizionato in un Ambiente."@it .
+
+<#isEnvironmentMonitored>
+    owl:inverseOf <#monitorEnvironment> ;
+    rdfs:label "Environment monitored (Brittany)", "Ambiente monitorato (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Environment is monitored by an Edge device.", "Proprietà che indica che un Ambiente è monitorato da un Edge."@it .
 
 # TODO Add constraint:
 # - at least one hwcomponent is needed.
