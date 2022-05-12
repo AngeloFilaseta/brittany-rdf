@@ -154,15 +154,13 @@
     rdfs:label "Greenhouse contains Environment (Brittany)", "Serra contiene Ambiente (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Greenhouse contains an Enviromnment.", "Proprietà di composizione utilizzata per indicare che una Serra contiene un Ambiente."@it .
 
-# TODO Add constraint:
-# - only <#BrittanyPlant> instances are allowed in rdf:range.
-<#hasPlants>
+<#hasPlant>
     a owl:ObjectProperty ;
     rdfs:subPropertyOf dco:hasPlace ;
     rdf:domain <#Environment> ;
-    rdf:range rdf:Bag ;
-    rdfs:label "Environment contains Plants (Brittany)", "Ambiente contiene Piante (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that a Environments may contains Plants.", "Proprietà di composizione utilizzata per indicare che un Ambiente può contenere Piante."@it .
+    rdf:range <#Plant> ;
+    rdfs:label "Environment contains Plant (Brittany)", "Ambiente contiene Pianta (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Environment contains a Plant.", "Proprietà di composizione utilizzata per indicare che un Ambiente contiene una Pianta."@it .
 
 <#monitor>
     a owl:ObjectProperty ;
@@ -251,10 +249,7 @@ dco:Device owl:equivalentClass m3:M2MDevice .
 <#angelo-environment>
     a <#Environment> ;
     foaf:name "Angelo's Environment #1", "Ambiente di Angelo #1"@it ;
-    <#hasPlants> [
-        a rdf:Bag ;
-        rdf:_1 <#angelo-basil>
-    ].
+    <#hasPlant> <#angelo-basil> .
 
 <#angelo-basil>
     a dbr:Basil ;
