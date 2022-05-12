@@ -148,19 +148,27 @@
 # - at least one environment is needed.
 <#hasEnvironment>
     a owl:ObjectProperty ;
-    rdfs:subPropertyOf dco:hasPlace ;
     rdf:domain <#Greenhouse> ;
     rdf:range <#Environment> ;
     rdfs:label "Greenhouse contains Environment (Brittany)", "Serra contiene Ambiente (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Greenhouse contains an Enviromnment.", "Proprietà di composizione utilizzata per indicare che una Serra contiene un Ambiente."@it .
 
+<#isEnvironmentOf>
+    owl:inverseOf <#hasEnvironment> ;
+    rdfs:label "Environment is in Greenhouse (Brittany)", "Ambiente è in Serra (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Environment is in a Greenhouse.", "Proprietà di composizione utilizzata per indicare che un Ambiente è in una Serra."@it .
+
 <#hasPlant>
     a owl:ObjectProperty ;
-    rdfs:subPropertyOf dco:hasPlace ;
     rdf:domain <#Environment> ;
     rdf:range <#Plant> ;
     rdfs:label "Environment contains Plant (Brittany)", "Ambiente contiene Pianta (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Environment contains a Plant.", "Proprietà di composizione utilizzata per indicare che un Ambiente contiene una Pianta."@it .
+
+<#isPlantIn>
+    owl:inverseOf <#hasPlant>;
+    rdfs:label "Plant is in Environment (Brittany)", "Pianta è in Ambiente"@it ;
+    rdfs:comment "Composition property used to indicate that a Plat is in an Environemnt.", "Proprietà di composizione utilizzata per indicare che una Pianta è in un Ambiente."@it .
 
 <#monitor>
     a owl:ObjectProperty ;
