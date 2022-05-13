@@ -233,6 +233,7 @@
 
 <#hasComponentHw>
     a owl:ObjectProperty ;
+    owl:propertyChainAxiom ( <#hasHandler> <#handleComponentHw> ) ;
     rdfs:domain <#ComponentModule> ;
     rdfs:range <#ComponentHw> ;
     rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
