@@ -267,12 +267,17 @@
     rdfs:label "Operation Handler is in Module (Brittany)", "Operation Handler è in Modulo (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that an Operation Handler is in a Module.", "Proprietà di composizione utilizzata per indicare che un Operation Handler è in un Modulo."@it .
 
-<#actsOnComponentHw>
+<#handleComponentHw>
     a owl:ObjectProperty ;
     rdfs:domain <#ComponentOperationHandler> ;
     rdfs:range <#ComponentHw> ;
-    rdfs:label "Operation Handler acts on Hardware Component (Brittany)", "Operation Handler agisce su Component Hardware"@it ;
+    rdfs:label "Operation Handler handle Hardware Component (Brittany)", "Operation Handler gestisce Componente Hardware"@it ;
     rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Hardware Component.", "Proprietà utilizzata per indicare che un Ooperation Handler Componente agisce su uno specifico Componente Hardware" .
+
+<#isHandledComponentHw>
+    owl:inverseOf <#handleComponentHw> ;
+    rdfs:label "Hardware Component is handled by Operation Handler (Brittany)", "Componente Hardware è gestito da Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that a Hardware Component is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che un Componente Hardware è gestito da un Operation Handler."@it .
 
 <#hasHandlerOutputType>
     a owl:DatatypeProperty ;
