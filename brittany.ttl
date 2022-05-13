@@ -16,15 +16,21 @@
 <#BrittanyRDF>
     a owl:Ontology ;
     rdfs:label "Brittany RDF";
-    rdfs:comment "An ontology used by Brittany, a software used to simplify and automatize the management of greenhouses.", "Un ontologia utilizzata da Brittany, un software per semplificare ed automatizzare la gestione di un sistema di serre."@it ;
+    rdfs:comment "An ontology used by Brittany, a software used to simplify and automatize the management of greenhouses.", "Un'ontologia utilizzata da Brittany, un software per semplificare ed automatizzare la gestione di un sistema di serre."@it ;
     rdfs:seeAlso "https://github.com/Tale152/brittany" .
 
 # ========================== CONCEPTS (CLASSES) ==========================
 # They are abstractions of the domain.
 
+<#NameRestriction>
+    a owl:Restriction ;
+    owl:onProperty foaf:name ;
+    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onDataRange xsd:string .
+
 <#Greenhouse>
     a owl:Class ;
-    rdfs:subClassOf [
+    rdfs:subClassOf dbo:Building, <#NameRestriction>, [
         a owl:Restriction ;
         owl:onProperty <#hasEnvironment> ;
         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
@@ -311,6 +317,9 @@
 # ========================== ADDITIONAL ONTOLOGY RULES ==========================
 
 dco:Device owl:equivalentClass m3:M2MDevice .
+
+foaf:name a owl:DatatypeProperty .
+
 
 [] a owl:AllDifferent;
     owl:distinctMembers (
