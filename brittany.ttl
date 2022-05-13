@@ -361,34 +361,40 @@ foaf:name a owl:DatatypeProperty .
     foaf:name "Angelo's ESP8266", "ESP8266 di Angelo"@it ;
     <#monitorPlant> <#angelo-basil> ;
     <#hasModule> <#digital-light-module> ;
-    <#hasThingDescriptor> <#td-mock-ip>.
+    <#hasThingDescriptor> <#td-mock-ip> .
 
 <#digital-light-module>
     a <#DigitalLightModule> ;
     foaf:name "digital-light" ;
-    <#hasHandler> [
-        a <#IsOnDigitalLightHandler> ;
-        foaf:name "isOn" ;
-        <#hasHandlerOutputType> "boolean"
-    ] ;
-    <#hasHandler> [
-        a <#TurnOnDigitalLightHandler> ;
-        foaf:name "turnOn" ;
-        <#hasHandlerOutputType> "string"
-    ] ;
-    <#hasHandler> [
-        a <#TurnOffDigitalLightHandler> ;
-        foaf:name "turnOff" ;
-        <#hasHandlerOutputType> "string"
-    ] ;
-    <#hasComponentHw> [
-        a <#DigitalLightHw> ;
-        foaf:name "digital-light-sx"
-    ] ;
-    <#hasComponentHw> [
-        a <#DigitalLightHw> ;
-        foaf:name "digital-light-dx"
-    ] .
+    <#hasHandler> <#is-on-digital-light-handler> ;
+    <#hasHandler> <#turn-on-digital-light-handler> ;
+    <#hasHandler> <#turn-off-digital-light-handler> .
+
+<#is-on-digital-light-handler>
+    a <#IsOnDigitalLightHandler> ;
+    foaf:name "isOn" ;
+    <#hasHandlerOutputType> "boolean" ;
+    <#handleComponentHw> <#digital-light-sx>, <#digital-light-dx> .
+
+<#turn-off-digital-light-handler>
+    a <#TurnOffDigitalLightHandler> ;
+    foaf:name "turnOff" ;
+    <#hasHandlerOutputType> "string" ;
+    <#handleComponentHw> <#digital-light-sx>, <#digital-light-dx> .
+
+<#turn-on-digital-light-handler>
+    a <#TurnOnDigitalLightHandler> ;
+    foaf:name "turnOn" ;
+    <#hasHandlerOutputType> "string" ;
+    <#handleComponentHw> <#digital-light-sx>, <#digital-light-dx> .
+
+<#digital-light-dx>
+    a <#DigitalLightHw> ;
+    foaf:name "digital-light-dx" .
+
+<#digital-light-sx>
+    a <#DigitalLightHw> ;
+    foaf:name "digital-light-sx" .
 
 <#turn-off-digital-light-sx>
     td:hasForm [
