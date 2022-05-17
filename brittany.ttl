@@ -365,21 +365,8 @@
 <#hasHandlerOutputType>
     a owl:DatatypeProperty ;
     rdfs:domain <#OperationHandler> ;
-    rdfs:range [ a owl:Class ;
-                owl:oneOf  (
-                    "boolean"^^xsd:string
-                    "integer"^^xsd:string
-                    "number"^^xsd:string
-                    "string"^^xsd:string
-                    "object"^^xsd:string
-                    "array"^^xsd:string
-                    "null"^^xsd:string
-                ) ] ;
+    rdfs:range xsd:string ;
     rdfs:label "Operation Handler has Output Type (Brittany)", "Operation Handler ha Tipo di Output (Brittany)"@it .
-
-<#isOutputTypeOfHandler>
-    owl:inverseOf <#hasHandlerOutputType> ;
-    rdfs:label "Output Type of Handler (Brittany)", "Tipo di Output dell'Operation Handler (Brittany)"@it .
 
 <#hasHandlerInputSchema>
     a owl:ObjectProperty ;
