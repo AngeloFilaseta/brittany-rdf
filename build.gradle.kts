@@ -5,6 +5,8 @@
  * Learn more about Gradle by exploring our samples at https://docs.gradle.org/7.4.1/samples
  */
 
+import java.io.ByteArrayOutputStream
+
 tasks.register<Exec>("test"){
     commandLine("turtle", "--validate", "brittany.ttl")
 }
@@ -12,7 +14,20 @@ tasks.register<Exec>("test"){
 tasks.register<Exec>("query"){
     val arg: String by project
     if (project.hasProperty("arg")) {
-        commandLine("arq", "--data", "brittany.ttl", "--query", "query/" + arg + ".rq")
+        val inferredFileName = "brittany-inferred.xml"
+        val inferredFile = File(inferredFileName)
+        val outputText: String = ByteArrayOutputStream().use { outputStream ->
+            project.exec {
+                commandLine("pellet", "extract", "brittany.ttl")
+                standardOutput = outputStream
+            }
+            outputStream.toString()
+        }
+        inferredFile.writeText(outputText)
+        commandLine("arq", "--data", inferredFileName, "--query", "query/" + arg + ".rq")
+        doLast {
+            inferredFile.delete()
+        }
     } else {
         println("No query specified. Use the 'arg' property to specify a query.")
     }
