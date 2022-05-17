@@ -326,6 +326,40 @@
     rdfs:label "Hardware Component is handled by Operation Handler (Brittany)", "Componente Hardware è gestito da Operation Handler (Brittany)"@it ;
     rdfs:comment "Property used to indicate that a Hardware Component is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che un Componente Hardware è gestito da un Operation Handler."@it .
 
+<#hasInteractionAffordanceOfHandler>
+    a owl:ObjectProperty ;
+    rdfs:domain <#OperationHandler> ;
+    rdfs:range <#InteractionAffordance> ;
+    rdfs:label "Operation Handler has Interaction Affordance (Brittany)", "Operation Handler ha Interaction Affordance (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Operation Handler has an Interaction Affordance.", "Proprietà utilizzata per indicare che un Operation Handler ha un Interaction Affordance."@it .
+
+<#isHandlerOfInteractionAffordance>
+    owl:inverseOf <#hasInteractionAffordanceOfHandler> ;
+    rdfs:label "Interaction Affordance is linked to an Operation Handler (Brittany)", "Interazione Affordance è collegata a un Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Interaction Affordance is linked to an Operation Handler.", "Proprietà utilizzata per indicare che un Interaction Affordance è collegata da un Operation Handler."@it .
+
+<#hasPropertyAffordanceOfHandler>
+    rdfs:subPropertyOf <#hasInteractionAffordanceOfHandler> ;
+    rdfs:range td:PropertyAffordance ;
+    rdfs:label "Operation Handler has Property Affordance (Brittany)", "Operation Handler ha Property Affordance (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Operation Handler has an Property Affordance.", "Proprietà utilizzata per indicare che un Operation Handler ha un Property Affordance."@it .
+
+<#isHandlerOfPropertyAffordance>
+    owl:inverseOf <#hasPropertyAffordanceOfHandler> ;
+    rdfs:label "Property Affordance is linked to an Operation Handler (Brittany)", "Property Affordance è collegata a un Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Property Affordance is linked to an Operation Handler.", "Proprietà utilizzata per indicare che un Property Affordance è collegata da un Operation Handler."@it .
+
+<#hasActionAffordanceOfHandler>
+    rdfs:subPropertyOf <#hasInteractionAffordanceOfHandler> ;
+    rdfs:rage td:ActionAffordance ;
+    rdfs:label "Operation Handler has Action Affordance (Brittany)", "Operation Handler ha Action Affordance (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Operation Handler has an Action Affordance.", "Proprietà utilizzata per indicare che un Operation Handler ha un Action Affordance."@it .
+
+<#isHandlerOfActionAffordance>
+    owl:inverseOf <#hasActionAffordanceOfHandler> ;
+    rdfs:label "Action Affordance is linked to an Operation Handler (Brittany)", "Action Affordance è collegata a un Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Action Affordance is linked to an Operation Handler.", "Proprietà utilizzata per indicare che un Action Affordance è collegata da un Operation Handler."@it .
+
 <#hasHandlerOutputType>
     a owl:DatatypeProperty ;
     rdfs:domain <#OperationHandler> ;
