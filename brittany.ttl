@@ -1,3 +1,4 @@
+@base <https://brittany-persistence-service.herokuapp.com/> .
 @prefix dbo: <http://dbpedia.org/ontology/> .
 @prefix dbr: <http://dbpedia.org/resource/> .
 @prefix dco: <https://w3id.org/dco#> .
@@ -74,7 +75,6 @@
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it;
     owl:disjointWith <#Module>, <#OperationHandler>, <#ComponentHw> .
-
 
 # ----- Modules -----
 
@@ -233,7 +233,6 @@
 
 <#hasComponentHw>
     a owl:ObjectProperty ;
-    owl:propertyChainAxiom ( <#hasHandler> <#handleComponentHw> ) ;
     rdfs:domain <#ComponentModule> ;
     rdfs:range <#ComponentHw> ;
     rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
@@ -328,33 +327,40 @@ dco:Device owl:equivalentClass m3:M2MDevice .
 
 foaf:name a owl:DatatypeProperty .
 
-[] a owl:AllDifferent;
-    owl:distinctMembers (
-        "boolean"^^xsd:string
-        "integer"^^xsd:string
-        "number"^^xsd:string
-        "string"^^xsd:string
-        "object"^^xsd:string
-        "array"^^xsd:string
-        "null"^^xsd:string
-    ).
-
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
+
+<#angelo-filaseta>
+    a foaf:Person ;
+    foaf:firstName "Angelo" ;
+    foaf:lastName "Filaseta" ;
+    foaf:knows <#giorgia-savo> .
 
 <#angelo-greenhouse>
     a <#Greenhouse> ;
     foaf:name "Angelo's Greenhouse", "La serra di Angelo"@it ;
-    <#hasEnvironment> <#angelo-environment> .
+    dbo:owner <#angelo-filaseta> ;
+    <#hasEnvironment> <#angelo-environment-one>, <#angelo-environment-two> .
 
-<#angelo-environment>
+<#angelo-environment-one>
     a <#Environment> ;
     foaf:name "Angelo's Environment #1", "Ambiente di Angelo #1"@it ;
-    <#hasPlant> <#angelo-basil> .
+    <#hasPlant> <#angelo-basil>, <#angelo-tomato>, <#angelo-parsley> .
 
-<#angelo-basil>
-    a dbr:Basil ;
-    foaf:name "Angelo's Basil", "Basilico di Angelo"@it .
+<#angelo-environment-two>
+    a <#Environment> ;
+    foaf:name "Angelo's Environment #2", "Ambiente di Angelo #2"@it ;
+    <#hasPlant> <#angelo-onion>, <#angelo-lettuce> .
+
+<#angelo-basil> a dbr:Basil .
+
+<#angelo-tomato> a dbr:Tomato .
+
+<#angelo-parsley> a dbr:Parsley .
+
+<#angelo-onion> a dbr:Onion .
+
+<#angelo-lettuce> a dbr:Lettuce .
 
 <#angelo-edge>
     a <#Edge> ;
@@ -449,3 +455,24 @@ foaf:name a owl:DatatypeProperty .
     td:hasSecurityConfiguration <#no-sec> ;
     td:hasActionAffordance <#turn-off-digital-light-sx>, <#turn-off-digital-light-dx>, <#turn-on-digital-light-sx>, <#turn-on-digital-light-dx> ;
     td:hasPropertyAffordance <#is-on-digital-light-sx>, <#is-on-digital-light-dx> .
+
+<#giorgia-savo>
+    a foaf:Person ;
+    foaf:firstName "Giorgia" ;
+    foaf:lastName "Savo" ;
+    foaf:knows <#angelo-filaseta> .
+
+<#giorgia-greenhouse>
+    a <#Greenhouse> ;
+    foaf:name "Giorgia's Greenhouse", "La serra di Giorgia"@it ;
+    dbo:owner <#giorgia-savo> ;
+    <#hasEnvironment> <#giorgia-environment> .
+
+<#giorgia-environment>
+    a <#Environment> ;
+    foaf:name "Giorgia's Environment", "Ambiente di Giorgia"@it ;
+    <#hasPlant> <#giorgia-cucumber>, <#giorgia-potato> .
+
+<#giorgia-cucumber> a dbr:Cucumber .
+
+<#giorgia-potato> a dbr:Potato .
