@@ -1,0 +1,9 @@
+PREFIX : <https://brittany-persistence-service.herokuapp.com/#>
+
+SELECT DISTINCT ?greenhouse (COUNT(?plant) as ?plant_count)
+
+WHERE {
+    ?greenhouse :hasGreenhousePlant ?plant .
+}
+
+GROUP BY ?greenhouse

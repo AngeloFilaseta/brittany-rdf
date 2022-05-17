@@ -1,11 +1,10 @@
 PREFIX : <https://brittany-persistence-service.herokuapp.com/#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT DISTINCT ?greenhouse ?environment ?plant
 
 WHERE {
     ?greenhouse :hasEnvironment ?environment .
-    ?environment :hasPlant ?plant .
+    ?environment :hasEnvironmentPlant ?plant .
 }
 
 ORDER BY ?greenhouse ?environment ?plant
