@@ -184,6 +184,15 @@
     rdfs:label "Brittany Thing Descriptor (Brittany)", "Descrittore di Oggetto (Brittany)"@it ;
     rdfs:comment "A Thing Descriptor for the Brittany platform.", "Un Descrittore di Oggetto per la piattaforma Brittany."@it .
 
+<#BrittanyForm>
+    rdfs:subClassOf td:Form , [
+        a owl:Restriction ;
+        owl:onProperty hctl:forContentType ;
+        owl:hasValue "application/json"
+    ] ;
+    rdfs:label "Brittany Form (Brittany)", "Form (Brittany)"@it ;
+    rdfs:comment "A Form for the Brittany platform.", "Un Form per la piattaforma Brittany."@it .
+
 # ========================== RELATIONSHIPS (PROPERTIES) ==========================
 # They define the existence of relationship between Concepts of the domain.
 
@@ -414,9 +423,7 @@ foaf:name a owl:DatatypeProperty .
 <#digital-light-module>
     a <#DigitalLightModule> ;
     foaf:name "digital-light" ;
-    <#hasHandler> <#is-on-digital-light-handler> ;
-    <#hasHandler> <#turn-on-digital-light-handler> ;
-    <#hasHandler> <#turn-off-digital-light-handler> .
+    <#hasHandler> <#is-on-digital-light-handler> , <#turn-on-digital-light-handler> , <#turn-off-digital-light-handler> .
 
 <#is-on-digital-light-handler>
     a <#IsOnDigitalLightHandler> ;
@@ -446,28 +453,28 @@ foaf:name a owl:DatatypeProperty .
 
 <#turn-off-digital-light-sx>
     td:hasForm [
-        hctl:forContentType "application/json" ;
+        a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-sx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
 <#turn-off-digital-light-dx>
     td:hasForm [
-        hctl:forContentType "application/json" ;
+        a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-dx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
 <#turn-on-digital-light-sx>
     td:hasForm [
-        hctl:forContentType "application/json" ;
+        a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-sx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
 <#turn-on-digital-light-dx>
     td:hasForm [
-        hctl:forContentType "application/json" ;
+        a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-dx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
@@ -475,14 +482,14 @@ foaf:name a owl:DatatypeProperty .
 <#is-on-digital-light-sx>
     a jsonschema:BooleanSchema ;
     td:hasForm [
-        hctl:forContentType "application/json";
+        a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/isOn?id=digital-light-sx"
     ] .
 
 <#is-on-digital-light-dx>
     a jsonschema:BooleanSchema ;
     td:hasForm [
-        hctl:forContentType "application/json";
+        a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/isOn?id=digital-light-dx"
     ] .
 
