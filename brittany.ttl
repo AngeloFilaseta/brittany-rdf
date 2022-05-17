@@ -11,6 +11,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix seas: <https://w3id.org/seas/> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix wot: <http://iot.linkeddata.es/def/wot#>.
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
@@ -245,6 +246,7 @@
 
 <#monitor>
     a owl:ObjectProperty ;
+    rdfs:subPropertyOf dco:isLocatedAt ;
     rdfs:domain <#Edge> ;
     rdfs:range <#Monitorable> ;
     rdfs:label "Monitor (Brittany)", "Monitor (Brittany)"@it ;
@@ -404,9 +406,20 @@
 
 # ========================== ADDITIONAL ONTOLOGY RULES ==========================
 
+td:Thing owl:equivalentClass wot:Thing .
+td:title owl:equivalentProperty wot:thingName .
+td:InteractionAffordance rdfs:subClassOf dco:InteractionAffordance .
+td:PropertyAffordance rdfs:subClassOf dco:PropertyAffordance .
+td:ActionAffordance rdfs:subClassOf dco:ActionAffordance .
+td:hasSecurityConfiguration owl:equivalentProperty td:hasSecurityConfiguration .
+
 dco:Device owl:equivalentClass m3:M2MDevice .
 
-foaf:name a owl:DatatypeProperty .
+hctl:hasTarget rdfs:subPropertyOf wot:href .
+
+foaf:name
+    a owl:DatatypeProperty ;
+    owl:equivalentProperty wot:name .
 
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
