@@ -70,7 +70,7 @@
         a owl:Restriction ;
         owl:onProperty <#hasThingDescriptor> ;
         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-        owl:onClass td:Thing
+        owl:onClass <#BrittanyThingDescriptor>
     ] ;
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it;
@@ -169,6 +169,20 @@
     rdfs:comment "A Hardware Component that can be turned on and off and emits light. It is not possible to regulate the intensity or the color of the light.", "Un Componente Hardware che può essere spento ed acceso ed emette luce. Non possono essere regolati i valori di intensità e colore della luce."@it ;
     owl:equivalentClass m3:Lamp, dco:LightSwitch .
 
+# ----- ThingDescriptor -----
+
+<#BrittanyThingDescriptor>
+    rdfs:subClassOf td:Thing , [
+        a owl:Restriction ;
+        owl:onProperty td:definesSecurityScheme ;
+        owl:hasValue <#nosec-schema>
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty td:hasSecurityConfiguration ;
+        owl:hasValue <#no-sec>
+    ] ;
+    rdfs:label "Brittany Thing Descriptor (Brittany)", "Descrittore di Oggetto (Brittany)"@it ;
+    rdfs:comment "A Thing Descriptor for the Brittany platform.", "Un Descrittore di Oggetto per la piattaforma Brittany."@it .
 
 # ========================== RELATIONSHIPS (PROPERTIES) ==========================
 # They define the existence of relationship between Concepts of the domain.
@@ -336,7 +350,7 @@
 <#hasThingDescriptor>
     a owl:ObjectProperty ;
     rdfs:domain <#Edge> ;
-    rdfs:range td:Thing ;
+    rdfs:range <#BrittanyThingDescriptor> ;
     rdfs:label "Edge has Thing Descriptor (Brittany)", "Edge ha un Thing Descriptor (Brittany)"@it ;
     rdfs:comment "Property used to link an Edge to its Thing Descriptor (W3).", "Proprietà utilizzata per collegare un Edge al suo Thing Descriptor (W3)."@it .
 
@@ -350,17 +364,6 @@
 dco:Device owl:equivalentClass m3:M2MDevice .
 
 foaf:name a owl:DatatypeProperty .
-
-td:Thing
-    rdfs:subClassOf [
-        a owl:Restriction ;
-        owl:onProperty td:definesSecurityScheme ;
-        owl:hasValue <#nosec-schema>
-    ] , [
-        a owl:Restriction ;
-        owl:onProperty td:hasSecurityConfiguration ;
-        owl:hasValue <#no-sec>
-    ] .
 
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
@@ -484,7 +487,7 @@ td:Thing
     ] .
 
 <#td-mock-ip>
-    a td:Thing ;
+    a <#BrittanyThingDescriptor> ;
     td:title "Angelo's ESP8266 TD" ;
     td:hasActionAffordance <#turn-off-digital-light-sx>, <#turn-off-digital-light-dx>, <#turn-on-digital-light-sx>, <#turn-on-digital-light-dx> ;
     td:hasPropertyAffordance <#is-on-digital-light-sx>, <#is-on-digital-light-dx> .
