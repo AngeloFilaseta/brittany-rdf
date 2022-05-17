@@ -209,6 +209,7 @@
 
 <#hasGreenhousePlant>
     rdfs:subPropertyOf <#hasPlant> ;
+    owl:propertyChainAxiom ( <#hasEnvironment> <#hasEnvironmentPlant> ) ;
     rdfs:domain <#Greenhouse> ;
     rdfs:label "Greenhouse contains Plant (Brittany)", "Serra contiene Pianta (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Greenhouse contains a Plant.", "Proprietà di composizione utilizzata per indicare che una Serra contiene una Pianta."@it .
