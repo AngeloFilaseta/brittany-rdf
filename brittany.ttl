@@ -169,6 +169,7 @@
     rdfs:comment "A Hardware Component that can be turned on and off and emits light. It is not possible to regulate the intensity or the color of the light.", "Un Componente Hardware che può essere spento ed acceso ed emette luce. Non possono essere regolati i valori di intensità e colore della luce."@it ;
     owl:equivalentClass m3:Lamp, dco:LightSwitch .
 
+
 # ========================== RELATIONSHIPS (PROPERTIES) ==========================
 # They define the existence of relationship between Concepts of the domain.
 
@@ -350,8 +351,23 @@ dco:Device owl:equivalentClass m3:M2MDevice .
 
 foaf:name a owl:DatatypeProperty .
 
+td:Thing
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty td:definesSecurityScheme ;
+        owl:hasValue <#nosec-schema>
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty td:hasSecurityConfiguration ;
+        owl:hasValue <#no-sec>
+    ] .
+
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
+
+<#nosec-schema>
+    a wotsec:NoSecurityScheme ;
+    td:hasConfigurationInstance <#no-sec> .
 
 <#angelo-filaseta>
     a foaf:Person ;
@@ -467,15 +483,9 @@ foaf:name a owl:DatatypeProperty .
         hctl:hasTarget "td-mock-ip/isOn?id=digital-light-dx"
     ] .
 
-<#nosec-configuration>
-    a wotsec:NoSecurityScheme ;
-    td:hasConfigurationInstance <#no-sec> .
-
 <#td-mock-ip>
     a td:Thing ;
     td:title "Angelo's ESP8266 TD" ;
-    td:definesSecurityScheme <nosec-schema> ;
-    td:hasSecurityConfiguration <#no-sec> ;
     td:hasActionAffordance <#turn-off-digital-light-sx>, <#turn-off-digital-light-dx>, <#turn-on-digital-light-sx>, <#turn-on-digital-light-dx> ;
     td:hasPropertyAffordance <#is-on-digital-light-sx>, <#is-on-digital-light-dx> .
 
