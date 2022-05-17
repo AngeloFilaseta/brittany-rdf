@@ -186,15 +186,37 @@
 
 <#hasPlant>
     a owl:ObjectProperty ;
-    rdfs:domain <#Environment> ;
+    rdfs:domain dco:Space ;
     rdfs:range <#Plant> ;
-    rdfs:label "Environment contains Plant (Brittany)", "Ambiente contiene Pianta (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that a Environment contains a Plant.", "Proprietà di composizione utilizzata per indicare che un Ambiente contiene una Pianta."@it .
+    rdfs:label "Space contains Plant (Brittany)", "Spazio contiene Pianta (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Space contains a Plant.", "Proprietà di composizione utilizzata per indicare che uno Spazio contiene una Pianta."@it .
 
 <#isPlantIn>
     owl:inverseOf <#hasPlant>;
     rdfs:label "Plant is in Environment (Brittany)", "Pianta è in Ambiente"@it ;
     rdfs:comment "Composition property used to indicate that a Plat is in an Environemnt.", "Proprietà di composizione utilizzata per indicare che una Pianta è in un Ambiente."@it .
+
+<#hasEnvironmentPlant>
+    rdfs:subPropertyOf <#hasPlant> ;
+    rdfs:domain <#Enviromnment> ;
+    rdfs:label "Environment contains Plant (Brittany)", "Ambiente contiene Pianta (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Environment contains a Plant.", "Proprietà di composizione utilizzata per indicare che un Ambiente contiene una Pianta."@it .
+
+<#isPlantInEnvironment>
+    owl:inverseOf <#hasEnvironmentPlant> ;
+    rdfs:label "Plant is in Environment (Brittany)", "Pianta è in Ambiente"@it ;
+    rdfs:comment "Composition property used to indicate that a Plant is in an Environemnt.", "Proprietà di composizione utilizzata per indicare che una Pianta è in un Ambiente."@it .
+
+<#hasGreenhousePlant>
+    rdfs:subPropertyOf <#hasPlant> ;
+    rdfs:domain <#Greenhouse> ;
+    rdfs:label "Greenhouse contains Plant (Brittany)", "Serra contiene Pianta (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Greenhouse contains a Plant.", "Proprietà di composizione utilizzata per indicare che una Serra contiene una Pianta."@it .
+
+<#isPlantInGreenhouse>
+    owl:inverseOf <#hasGreenhousePlant> ;
+    rdfs:label "Plant is in Greenhouse (Brittany)", "Pianta è in Serra (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Plant is in a Greenhouse.", "Proprietà di composizione utilizzata per indicare che una Pianta è in una Serra."@it .
 
 <#monitor>
     a owl:ObjectProperty ;
@@ -345,12 +367,12 @@ foaf:name a owl:DatatypeProperty .
 <#angelo-environment-one>
     a <#Environment> ;
     foaf:name "Angelo's Environment #1", "Ambiente di Angelo #1"@it ;
-    <#hasPlant> <#angelo-basil>, <#angelo-tomato>, <#angelo-parsley> .
+    <#hasEnvironmentPlant> <#angelo-basil>, <#angelo-tomato>, <#angelo-parsley> .
 
 <#angelo-environment-two>
     a <#Environment> ;
     foaf:name "Angelo's Environment #2", "Ambiente di Angelo #2"@it ;
-    <#hasPlant> <#angelo-onion>, <#angelo-lettuce> .
+    <#hasEnvironmentPlant> <#angelo-onion>, <#angelo-lettuce> .
 
 <#angelo-basil> a dbr:Basil .
 
@@ -471,7 +493,7 @@ foaf:name a owl:DatatypeProperty .
 <#giorgia-environment>
     a <#Environment> ;
     foaf:name "Giorgia's Environment", "Ambiente di Giorgia"@it ;
-    <#hasPlant> <#giorgia-cucumber>, <#giorgia-potato> .
+    <#hasEnvironmentPlant> <#giorgia-cucumber>, <#giorgia-potato> .
 
 <#giorgia-cucumber> a dbr:Cucumber .
 
