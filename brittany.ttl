@@ -326,37 +326,37 @@
     rdfs:label "Hardware Component is handled by Operation Handler (Brittany)", "Componente Hardware è gestito da Operation Handler (Brittany)"@it ;
     rdfs:comment "Property used to indicate that a Hardware Component is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che un Componente Hardware è gestito da un Operation Handler."@it .
 
-<#hasInteractionAffordanceOfHandler>
+<#hasHandlerInteractionAffordance>
     a owl:ObjectProperty ;
     rdfs:domain <#OperationHandler> ;
-    rdfs:range <#InteractionAffordance> ;
+    rdfs:range td:InteractionAffordance ;
     rdfs:label "Operation Handler has Interaction Affordance (Brittany)", "Operation Handler ha Interaction Affordance (Brittany)"@it ;
     rdfs:comment "Property used to indicate that an Operation Handler has an Interaction Affordance.", "Proprietà utilizzata per indicare che un Operation Handler ha un Interaction Affordance."@it .
 
-<#isHandlerOfInteractionAffordance>
-    owl:inverseOf <#hasInteractionAffordanceOfHandler> ;
+<#isInteractionAffordanceOfHandler>
+    owl:inverseOf <#hasHandlerInteractionAffordance> ;
     rdfs:label "Interaction Affordance is linked to an Operation Handler (Brittany)", "Interazione Affordance è collegata a un Operation Handler (Brittany)"@it ;
     rdfs:comment "Property used to indicate that an Interaction Affordance is linked to an Operation Handler.", "Proprietà utilizzata per indicare che un Interaction Affordance è collegata da un Operation Handler."@it .
 
-<#hasPropertyAffordanceOfHandler>
-    rdfs:subPropertyOf <#hasInteractionAffordanceOfHandler> ;
+<#hasHandlerPropertyAffordance>
+    rdfs:subPropertyOf <#hasHandlerInteractionAffordance> ;
     rdfs:range td:PropertyAffordance ;
     rdfs:label "Operation Handler has Property Affordance (Brittany)", "Operation Handler ha Property Affordance (Brittany)"@it ;
     rdfs:comment "Property used to indicate that an Operation Handler has an Property Affordance.", "Proprietà utilizzata per indicare che un Operation Handler ha un Property Affordance."@it .
 
-<#isHandlerOfPropertyAffordance>
-    owl:inverseOf <#hasPropertyAffordanceOfHandler> ;
+<#isPropertyAffordanceOfHandler>
+    owl:inverseOf <#hasHandlerPropertyAffordance> ;
     rdfs:label "Property Affordance is linked to an Operation Handler (Brittany)", "Property Affordance è collegata a un Operation Handler (Brittany)"@it ;
     rdfs:comment "Property used to indicate that an Property Affordance is linked to an Operation Handler.", "Proprietà utilizzata per indicare che un Property Affordance è collegata da un Operation Handler."@it .
 
-<#hasActionAffordanceOfHandler>
-    rdfs:subPropertyOf <#hasInteractionAffordanceOfHandler> ;
-    rdfs:rage td:ActionAffordance ;
+<#hasHandlerActionAffordance>
+    rdfs:subPropertyOf <#hasHandlerInteractionAffordance> ;
+    rdfs:range td:ActionAffordance ;
     rdfs:label "Operation Handler has Action Affordance (Brittany)", "Operation Handler ha Action Affordance (Brittany)"@it ;
     rdfs:comment "Property used to indicate that an Operation Handler has an Action Affordance.", "Proprietà utilizzata per indicare che un Operation Handler ha un Action Affordance."@it .
 
-<#isHandlerOfActionAffordance>
-    owl:inverseOf <#hasActionAffordanceOfHandler> ;
+<#isActionAffordanceOfHandler>
+    owl:inverseOf <#hasHandlerActionAffordance> ;
     rdfs:label "Action Affordance is linked to an Operation Handler (Brittany)", "Action Affordance è collegata a un Operation Handler (Brittany)"@it ;
     rdfs:comment "Property used to indicate that an Action Affordance is linked to an Operation Handler.", "Proprietà utilizzata per indicare che un Action Affordance è collegata da un Operation Handler."@it .
 
@@ -485,43 +485,49 @@ foaf:name a owl:DatatypeProperty .
     a <#DigitalLightHw> ;
     foaf:name "digital-light-sx" .
 
-<#turn-off-digital-light-sx>
+<#action-turn-off-digital-light-sx>
+    <#isActionAffordanceOfHandler> <#turn-off-digital-light-handler> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-sx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
-<#turn-off-digital-light-dx>
+<#action-turn-off-digital-light-dx>
+    <#isActionAffordanceOfHandler> <#turn-off-digital-light-handler> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-dx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
-<#turn-on-digital-light-sx>
+<#action-turn-on-digital-light-sx>
+    <#isActionAffordanceOfHandler> <#turn-on-digital-light-handler> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-sx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
-<#turn-on-digital-light-dx>
+<#action-turn-on-digital-light-dx>
+    <#isActionAffordanceOfHandler> <#turn-on-digital-light-handler> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-dx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
-<#is-on-digital-light-sx>
+<#property-is-on-digital-light-sx>
     a jsonschema:BooleanSchema ;
+    <#isPropertyAffordanceOfHandler> <#is-on-digital-light-handler> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/isOn?id=digital-light-sx"
     ] .
 
-<#is-on-digital-light-dx>
+<#property-is-on-digital-light-dx>
     a jsonschema:BooleanSchema ;
+    <#isPropertyAffordanceOfHandler> <#is-on-digital-light-handler> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "td-mock-ip/isOn?id=digital-light-dx"
@@ -530,8 +536,8 @@ foaf:name a owl:DatatypeProperty .
 <#td-mock-ip>
     a <#BrittanyThingDescriptor> ;
     td:title "Angelo's ESP8266 TD" ;
-    td:hasActionAffordance <#turn-off-digital-light-sx>, <#turn-off-digital-light-dx>, <#turn-on-digital-light-sx>, <#turn-on-digital-light-dx> ;
-    td:hasPropertyAffordance <#is-on-digital-light-sx>, <#is-on-digital-light-dx> .
+    td:hasActionAffordance <#action-turn-off-digital-light-sx>, <#action-turn-off-digital-light-dx>, <#action-turn-on-digital-light-sx>, <#action-turn-on-digital-light-dx> ;
+    td:hasPropertyAffordance <#property-is-on-digital-light-sx>, <#property-is-on-digital-light-dx> .
 
 <#giorgia-savo>
     a foaf:Person ;
