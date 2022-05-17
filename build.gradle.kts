@@ -8,3 +8,12 @@
 tasks.register<Exec>("test"){
     commandLine("turtle", "--validate", "brittany.ttl")
 }
+
+tasks.register<Exec>("query"){
+    val arg: String by project
+    if (project.hasProperty("arg")) {
+        commandLine("arq", "--data", "brittany.ttl", "--query", "query/" + arg + ".rq")
+    } else {
+        println("No query specified. Use the 'arg' property to specify a query.")
+    }
+}
