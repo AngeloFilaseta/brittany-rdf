@@ -3,7 +3,7 @@ PREFIX : <https://brittany-persistence-service.herokuapp.com/#>
 SELECT DISTINCT ?greenhouse ?environment ?plant
 
 WHERE {
-    ?greenhouse :hasEnvironment ?environment .
+    OPTIONAL { ?greenhouse :hasEnvironment ?environment .}
     ?environment :hasEnvironmentPlant ?plant .
 }
 
