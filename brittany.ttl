@@ -151,14 +151,13 @@
     rdfs:comment "An Operation Handler to turn off the Digital Light.", "Un Operation Handler utilizzato per spegnere la Luce Digitale."@it;
     dco:hasCommand dco:OffCommand .
 
-# ----- ComponentsHw -----
+# ----- ComponentHw -----
 
 <#ComponentHw>
     a owl:Class ;
     rdfs:subClassOf dco:Device , <#NameRestriction> ;
     rdfs:label "Hardware Component (Brittany)", "Componente Hardware (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it .
-
 
 <#SensorHw>
     rdfs:subClassOf <#ComponentHw> ;
@@ -203,7 +202,7 @@
 # ========================== RELATIONSHIPS (PROPERTIES) ==========================
 # They define the existence of relationship between Concepts of the domain.
 
-# ----- Environments and Plants -----
+# ----- Environments and Plants properties -----
 <#hasEnvironment>
     a owl:ObjectProperty ;
     rdfs:domain <#Greenhouse> ;
@@ -251,7 +250,7 @@
     rdfs:label "Plant is in Greenhouse (Brittany)", "Pianta è in Serra (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Plant is in a Greenhouse.", "Proprietà di composizione utilizzata per indicare che una Pianta è in una Serra."@it .
 
-# ----- Edge Monitoring -----
+# ----- Edge Monitoring Properties -----
 
 <#monitor>
     a owl:ObjectProperty ;
@@ -289,7 +288,7 @@
     rdfs:label "Environment monitored (Brittany)", "Ambiente monitorato (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Environment is monitored by an Edge device.", "Proprietà che indica che un Ambiente è monitorato da un Edge."@it .
 
-# ----- ComponentHw -----
+# ----- ComponentHw Properties -----
 
 <#hasComponentHw>
     a owl:ObjectProperty ;
@@ -335,7 +334,7 @@
     rdfs:label "Digital Light is in (Brittany)", "Luce Digitali è in (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Digital Light is in something.", "Proprietà che indica che una Luce Digitale è in qualcosa."@it .
 
-# ----- ComponentHw in Module -----
+# ----- ComponentHw in Module Properties -----
 
 <#hasModuleComponentHw>
     rdfs:subPropertyOf <#hasComponentHw> ;
@@ -409,10 +408,16 @@
     rdfs:label "Operation Handler is in Module (Brittany)", "Operation Handler è in Modulo (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that an Operation Handler is in a Module.", "Proprietà di composizione utilizzata per indicare che un Operation Handler è in un Modulo."@it .
 
-<#handleComponentHw>
+# ----- Component Handler has Components Properties -----
+
+<#handle>
     a owl:ObjectProperty ;
     rdfs:domain <#ComponentOperationHandler> ;
-    rdfs:range <#ComponentHw> ;
+    rdfs:label "Component Operation Handler handle (Brittany)", "Operation Handler Componente gestisce (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Component Operation Handler handles something.", "Proprietà che indica che un Operation Handler Componente gestisce qualcosa."@it .
+
+<#handleComponentHw>
+    rdfs:subPropertyOf <#handle>, <#hasComponentHw>;
     rdfs:label "Operation Handler handle Hardware Component (Brittany)", "Operation Handler gestisce Componente Hardware"@it ;
     rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Hardware Component.", "Proprietà utilizzata per indicare che un Operation Handler Componente agisce su uno specifico Componente Hardware" .
 
@@ -422,8 +427,7 @@
     rdfs:comment "Property used to indicate that a Hardware Component is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che un Componente Hardware è gestito da un Operation Handler."@it .
 
 <#handleSensorHw>
-    rdfs:subPropertyOf <#handleComponentHw> ;
-    rdfs:range <#SensorHw> ;
+    rdfs:subPropertyOf <#handleComponentHw>, <#hasSensorHw> ;
     rdfs:label "Operation Handler handle Sensor (Brittany)", "Operation Handler gestisce Sensore (Brittany)"@it ;
     rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Sensor.", "Proprietà utilizzata per indicare che un Operation Handler Componente agisce su uno specifico Sensore."@it .
 
@@ -433,8 +437,7 @@
     rdfs:comment "Property used to indicate that a Sensor is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che un Sensore è gestito da un Operation Handler."@it .
 
 <#handleActuatorHw>
-    rdfs:subPropertyOf <#handleComponentHw> ;
-    rdfs:range <#ActuatorHw> ;
+    rdfs:subPropertyOf <#handleComponentHw>, <#hasSensorHw> ;
     rdfs:label "Operation Handler handle Actuator (Brittany)", "Operation Handler gestisce Attuatore (Brittany)"@it ;
     rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Actuator.", "Proprietà utilizzata per indicare che un Operation Handler Componente agisce su uno specifico Attuatore."@it .
 
@@ -444,8 +447,7 @@
     rdfs:comment "Property used to indicate that an Actuator is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che un Attuatore è gestito da un Operation Handler."@it .
 
 <#handleDigitalLightHw>
-    rdfs:subPropertyOf <#handleActuatorHw> ;
-    rdfs:range <#DigitalLightHw> ;
+    rdfs:subPropertyOf <#handleActuatorHw>, <#hasDigitalLightHw> ;
     rdfs:label "Operation Handler handle Digital Light (Brittany)", "Operation Handler gestisce Luce Digitale (Brittany)"@it ;
     rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Digital Light.", "Proprietà utilizzata per indicare che un Operation Handler Componente agisce su uno specifico Luce Digitale."@it .
 
@@ -453,6 +455,8 @@
     owl:inverseOf <#handleDigitalLightHw> ;
     rdfs:label "Digital Light is handled by Operation Handler (Brittany)", "Luce Digitale è gestita da Operation Handler (Brittany)"@it ;
     rdfs:comment "Property used to indicate that a Digital Light is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che una Luce Digitale è gestita da un Operation Handler."@it .
+
+# ----- Thing Descriptor Properties -----
 
 <#hasHandlerInteractionAffordance>
     a owl:ObjectProperty ;
