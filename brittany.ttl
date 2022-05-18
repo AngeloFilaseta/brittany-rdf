@@ -301,6 +301,7 @@
 
 <#hasSensorHw>
     rdfs:subPropertyOf <#hasComponentHw> ;
+    owl:propertyChainAxiom (<#hasHandler> <#handleSensorHw>) ;
     rdfs:range <#SensorHw> ;
     rdfs:label "Component Module contains Sensor (Brittany)", "Modulo di Componenti contiene Sensore (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Sensor.", "Proprietà che indica che un Modulo agisce su un Sensore."@it .
@@ -312,6 +313,7 @@
 
 <#hasActuatorHw>
     rdfs:subPropertyOf <#hasComponentHw> ;
+    owl:propertyChainAxiom (<#hasHandler> <#handleActuatorHw>) ;
     rdfs:range <#ActuatorHw> ;
     rdfs:label "Component Module contains Actuator (Brittany)", "Modulo di Componenti contiene Attuatore (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on an Actuator.", "Proprietà che indica che un Modulo agisce su un Attuatore."@it .
@@ -323,6 +325,7 @@
 
 <#hasDigitalLightHw>
     rdfs:subPropertyOf <#hasActuatorHw> ;
+    owl:propertyChainAxiom (<#hasHandler> <#handleDigitalLightHw>) ;
     rdfs:range <#DigitalLightHw> ;
     rdfs:label "Component Module contains Digital Light (Brittany)", "Modulo di Componenti contiene Luce Digitale (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Digital Light.", "Proprietà che indica che un Modulo agisce su una Luce Digitale."@it .
@@ -538,19 +541,19 @@ foaf:name
     a <#IsOnDigitalLightHandler> ;
     foaf:name "isOn" ;
     <#hasHandlerOutputType> "boolean" ;
-    <#handleComponentHw> <#digital-light-sx>, <#digital-light-dx> .
+    <#handleDigitalLightHw> <#digital-light-sx>, <#digital-light-dx> .
 
 <#turn-off-digital-light-handler>
     a <#TurnOffDigitalLightHandler> ;
     foaf:name "turnOff" ;
     <#hasHandlerOutputType> "string" ;
-    <#handleComponentHw> <#digital-light-sx>, <#digital-light-dx> .
+    <#handleDigitalLightHw> <#digital-light-sx>, <#digital-light-dx> .
 
 <#turn-on-digital-light-handler>
     a <#TurnOnDigitalLightHandler> ;
     foaf:name "turnOn" ;
     <#hasHandlerOutputType> "string" ;
-    <#handleComponentHw> <#digital-light-sx>, <#digital-light-dx> .
+    <#handleDigitalLightHw> <#digital-light-sx>, <#digital-light-dx> .
 
 <#digital-light-dx>
     a <#DigitalLightHw> ;
