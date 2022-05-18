@@ -92,12 +92,7 @@
     owl:disjointWith <#OperationHandler>, <#ComponentHw> .
 
 <#ComponentModule>
-    rdfs:subClassOf <#Module> , [
-        a owl:Restriction ;
-        owl:onProperty <#hasComponentHw> ;
-        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-        owl:onClass <#ComponentHw>
-    ];
+    rdfs:subClassOf <#Module> ;
     rdfs:label "Component Module (Brittany)", "Modulo di Componenti (Brittany)"@it ;
     rdfs:comment "A Module that can interact with some Hardware Component.", "Un Modulo che può interagire con alcuni Componenti Hardware."@it .
 
@@ -282,6 +277,7 @@
 
 <#hasComponentHw>
     a owl:ObjectProperty ;
+    owl:propertyChainAxiom (<#hasHandler> <#handleComponentHw>) ;
     rdfs:domain <#ComponentModule> ;
     rdfs:range <#ComponentHw> ;
     rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
