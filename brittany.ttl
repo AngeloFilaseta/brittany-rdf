@@ -97,7 +97,11 @@
     rdfs:comment "A Module that can interact with some Hardware Component.", "Un Modulo che può interagire con alcuni Componenti Hardware."@it .
 
 <#DigitalLightModule>
-    rdfs:subClassOf <#ComponentModule> ;
+    rdfs:subClassOf <#ComponentModule> , [
+        a owl:Restriction ;
+        owl:onProperty foaf:name ;
+        owl:hasValue "digital-light"^^xsd:string
+    ];
     rdfs:label "Digital Light Module (Brittany)", "Modulo di Luce Digitale (Brittany)"@it ;
     rdfs:comment "A Module that can interact with some Digital Light Hardware.", "Un Modulo che può interagire con alcuni componenti di Luce Digitale."@it .
 
@@ -659,7 +663,6 @@ foaf:name
 
 <#digital-light-module>
     a <#DigitalLightModule> ;
-    foaf:name "digital-light" ;
     <#hasHandler> <#is-on-digital-light-handler> , <#turn-on-digital-light-handler> , <#turn-off-digital-light-handler> .
 
 <#is-on-digital-light-handler>
