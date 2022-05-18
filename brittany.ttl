@@ -162,12 +162,12 @@
 
 <#SensorHw>
     rdfs:subClassOf <#ComponentHw> ;
-    rdfs:label "Sensor Hardware Component (Brittany)", "Componente Hardware Sensore (Brittany)"@it ;
+    rdfs:label "Sensor (Brittany)", "Sensore (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be used to collect data.", "Un Componente Hardware che può essere utilizzato per collezionare dati."@it .
 
 <#ActuatorHw>
     rdfs:subClassOf <#ComponentHw> ;
-    rdfs:label "Actuator Hardware Component (Brittany)", "Componente Hardware Attuatore (Brittany)"@it ;
+    rdfs:label "Actuator (Brittany)", "Attuatore (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be used to execute an action.", "Un Componente Hardware che può essere utilizzato per eseguire un'azione."@it .
 
 <#DigitalLightHw>
@@ -298,6 +298,28 @@
     owl:inverseOf <#hasComponentHw> ;
     rdfs:label "Hardware Component is in Component Module (Brittany)", "Componente Hardware è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Hardware Component is in a Module.", "Proprietà che indica che un Componente Hardware è in un Modulo."@it .
+
+<#hasSensorHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:range <#SensorHw> ;
+    rdfs:label "Component Module contains Sensor (Brittany)", "Modulo di Componenti contiene Sensore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Module acts on a Sensor.", "Proprietà che indica che un Modulo agisce su un Sensore."@it .
+
+<#isSensorHwIn>
+    owl:inverseOf <#hasSensorHw> ;
+    rdfs:label "Sensor is in Component Module (Brittany)", "Sensore è in Modulo (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Sensor is in a Module.", "Proprietà che indica che un Sensore è in un Modulo."@it .
+
+<#hasActuatorHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:range <#ActuatorHw> ;
+    rdfs:label "Component Module contains Actuator (Brittany)", "Modulo di Componenti contiene Attuatore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Module acts on an Actuator.", "Proprietà che indica che un Modulo agisce su un Attuatore."@it .
+
+<#isActuatorIn>
+    owl:inverseOf <#hasActuatorHw> ;
+    rdfs:label "Actuator is in Component Module (Brittany)", "Attuatore è in Modulo (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Actuator is in a Module.", "Proprietà che indica che un Attuatore è in un Modulo."@it .
 
 <#hasModule>
     a owl:ObjectProperty ;
