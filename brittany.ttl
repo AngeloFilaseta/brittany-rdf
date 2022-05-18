@@ -419,6 +419,61 @@
 
 # ----- ComponentHw in Edge Properties -----
 
+<#collect>
+    a owl:ObjectProperty ;
+    rdfs:domain <#Edge> ;
+    rdfs:label "Edge Collects (Brittany)", "Edge Colleziona (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge collects something.", "Proprietà che indica che un Edge raccoglie qualcosa."@it .
+
+<#isCollected>
+    owl:inverseOf <#collect> ;
+    rdfs:label "Is collected by Edge (Brittany)", "È collezionato da Edge (Brittany)"@it ;
+    rdfs:comment "Property that indicates that something is collected by an Edge.", "Proprietà che indica che qualcosa è collezionato da un Edge."@it .
+
+<#collectComponentHw>
+    rdfs:subPropertyOf <#collect>, <#hasComponentHw> ;
+    owl:propertyChainAxiom (<#hasModule> <#ownsComponentHw>) ;
+    rdfs:label "Edge collects Hardware Component (Brittany)", "Edge colleziona Componente Hardware (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge collects a Hardware Component.", "Proprietà che indica che un Edge colleziona un Componente Hardware."@it .
+
+<#isCollectedComponentHw>
+    owl:inverseOf <#collectComponentHw> ;
+    rdfs:label "Hardware Component is collected by Edge (Brittany)", "Componente Hardware è collezionato da Edge (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Hardware Component is collected by an Edge.", "Proprietà che indica che un Componente Hardware è collezionato da un Edge."@it .
+
+<#collectSensorHw>
+    rdfs:subPropertyOf <#collectComponentHw>, <#hasSensorHw> ;
+    owl:propertyChainAxiom (<#hasModule> <#ownsSensorHw>) ;
+    rdfs:label "Edge collects Sensor (Brittany)", "Edge colleziona Sensore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge collects a Sensor.", "Proprietà che indica che un Edge colleziona un Sensore."@it .
+
+<#isCollectedSensorHw>
+    owl:inverseOf <#collectSensorHw> ;
+    rdfs:label "Sensor is collected by Edge (Brittany)", "Sensore è collezionato da Edge (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Sensor is collected by an Edge.", "Proprietà che indica che un Sensore è collezionato da un Edge."@it .
+
+<#collectActuatorHw>
+    rdfs:subPropertyOf <#collectComponentHw>, <#hasActuatorHw> ;
+    owl:propertyChainAxiom (<#hasModule> <#ownsActuatorHw>) ;
+    rdfs:label "Edge collects Actuator (Brittany)", "Edge colleziona Attuatore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge collects an Actuator.", "Proprietà che indica che un Edge colleziona un Attuatore."@it .
+
+<#isCollectedActuatorHw>
+    owl:inverseOf <#collectActuatorHw> ;
+    rdfs:label "Actuator is collected by Edge (Brittany)", "Attuatore è collezionato da Edge (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Actuator is collected by an Edge.", "Proprietà che indica che un Attuatore è collezionato da un Edge."@it .
+
+<#collectDigitalLightHw>
+    rdfs:subPropertyOf <#collectActuatorHw>, <#hasDigitalLightHw> ;
+    owl:propertyChainAxiom (<#hasModule> <#ownsDigitalLightHw>) ;
+    rdfs:label "Edge collects Digital Light (Brittany)", "Edge colleziona Luce Digitale (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge collects a Digital Light.", "Proprietà che indica che un Edge colleziona una Luce Digitale."@it .
+
+<#isCollectedDigitalLightHw>
+    owl:inverseOf <#collectDigitalLightHw> ;
+    rdfs:label "Digital Light is collected by Edge (Brittany)", "Luce Digitale è collezionato da Edge (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Digital Light is collected by an Edge.", "Proprietà che indica che una Luce Digitale è collezionata da un Edge."@it .
+
 # ----- Component Handler has Components Properties -----
 
 <#handle>
