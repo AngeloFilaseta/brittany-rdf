@@ -634,6 +634,11 @@ foaf:name
     foaf:name "Giorgia's Environment", "Ambiente di Giorgia"@it ;
     <#hasEnvironmentPlant> <#giorgia-cucumber>, <#giorgia-potato> .
 
+<#giorgia-edge>
+    a <#Edge> ;
+    foaf:name "Giorgia's ESP8266", "ESP8266 di Giorgia"@it ;
+    <#monitorEnvironment> <#giorgia-environment> .
+
 <#giorgia-cucumber> a dbr:Cucumber .
 
 <#giorgia-potato> a dbr:Potato .
