@@ -1,3 +1,5 @@
+# Show the plant count for each greenhouse.
+
 PREFIX : <https://brittany-persistence-service.herokuapp.com/#>
 
 SELECT DISTINCT ?greenhouse (COUNT(?plant) as ?plant_count)
@@ -7,3 +9,12 @@ WHERE {
 }
 
 GROUP BY ?greenhouse
+
+# OUTPUT EXAMPLE
+
+#-------------------------------------
+#| greenhouse          | plant_count |
+#=====================================
+#| :angelo-greenhouse  | 5           |
+#| :giorgia-greenhouse | 2           |
+#-------------------------------------

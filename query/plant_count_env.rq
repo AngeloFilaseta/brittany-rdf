@@ -1,3 +1,5 @@
+# Show the plant count for each environment and in which greenhouse they are situated.
+
 PREFIX : <https://brittany-persistence-service.herokuapp.com/#>
 
 SELECT DISTINCT ?greenhouse ?environment (COUNT(?plant) as ?plant_count)
@@ -8,3 +10,13 @@ WHERE {
 }
 
 GROUP BY ?greenhouse ?environment
+
+# OUTPUT EXAMPLE
+
+#---------------------------------------------------------------
+#| greenhouse          | environment             | plant_count |
+#===============================================================
+#| :giorgia-greenhouse | :giorgia-environment    | 2           |
+#| :angelo-greenhouse  | :angelo-environment-one | 3           |
+#| :angelo-greenhouse  | :angelo-environment-two | 2           |
+#---------------------------------------------------------------
