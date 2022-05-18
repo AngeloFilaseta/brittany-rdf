@@ -296,7 +296,7 @@
 
 <#isComponentHwIn>
     owl:inverseOf <#hasComponentHw> ;
-    rdfs:label "Hardware Component is in Component Module (Brittany)", "Componente Hardware è in Modulo (Brittany)"@it ;
+    rdfs:label "Hardware Component is in Module (Brittany)", "Componente Hardware è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Hardware Component is in a Module.", "Proprietà che indica che un Componente Hardware è in un Modulo."@it .
 
 <#hasSensorHw>
@@ -307,7 +307,7 @@
 
 <#isSensorHwIn>
     owl:inverseOf <#hasSensorHw> ;
-    rdfs:label "Sensor is in Component Module (Brittany)", "Sensore è in Modulo (Brittany)"@it ;
+    rdfs:label "Sensor is in Module (Brittany)", "Sensore è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Sensor is in a Module.", "Proprietà che indica che un Sensore è in un Modulo."@it .
 
 <#hasActuatorHw>
@@ -318,8 +318,19 @@
 
 <#isActuatorIn>
     owl:inverseOf <#hasActuatorHw> ;
-    rdfs:label "Actuator is in Component Module (Brittany)", "Attuatore è in Modulo (Brittany)"@it ;
+    rdfs:label "Actuator is in Module (Brittany)", "Attuatore è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Actuator is in a Module.", "Proprietà che indica che un Attuatore è in un Modulo."@it .
+
+<#hasDigitalLightHw>
+    rdfs:subPropertyOf <#hasActuatorHw> ;
+    rdfs:range <#DigitalLightHw> ;
+    rdfs:label "Component Module contains Digital Light (Brittany)", "Modulo di Componenti contiene Luce Digitale (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Module acts on a Digital Light.", "Proprietà che indica che un Modulo agisce su una Luce Digitale."@it .
+
+<#isDigitalLightHwIn>
+    owl:inverseOf <#hasDigitalLightHw> ;
+    rdfs:label "Digital Light is in Module (Brittany)", "Luce Digitale è in Modulo (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Digital Light is in a Module.", "Proprietà che indica che una Luce Digitale è in un Modulo."@it .
 
 <#hasModule>
     a owl:ObjectProperty ;
