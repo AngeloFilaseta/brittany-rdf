@@ -286,7 +286,7 @@
     rdfs:label "Environment monitored (Brittany)", "Ambiente monitorato (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Environment is monitored by an Edge device.", "Proprietà che indica che un Ambiente è monitorato da un Edge."@it .
 
-<#hasComponentHw>
+<#hasModuleComponentHw>
     a owl:ObjectProperty ;
     owl:propertyChainAxiom (<#hasHandler> <#handleComponentHw>) ;
     rdfs:domain <#ComponentModule> ;
@@ -294,13 +294,13 @@
     rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Hardware Component.", "Proprietà che indica che un Modulo agisce su un Componente Hardware."@it .
 
-<#isComponentHwIn>
-    owl:inverseOf <#hasComponentHw> ;
+<#isComponentHwInModule>
+    owl:inverseOf <#hasModuleComponentHw> ;
     rdfs:label "Hardware Component is in Module (Brittany)", "Componente Hardware è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Hardware Component is in a Module.", "Proprietà che indica che un Componente Hardware è in un Modulo."@it .
 
 <#hasSensorHw>
-    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:subPropertyOf <#hasModuleComponentHw> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleSensorHw>) ;
     rdfs:range <#SensorHw> ;
     rdfs:label "Component Module contains Sensor (Brittany)", "Modulo di Componenti contiene Sensore (Brittany)"@it ;
@@ -312,7 +312,7 @@
     rdfs:comment "Property that indicates that a Sensor is in a Module.", "Proprietà che indica che un Sensore è in un Modulo."@it .
 
 <#hasActuatorHw>
-    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:subPropertyOf <#hasModuleComponentHw> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleActuatorHw>) ;
     rdfs:range <#ActuatorHw> ;
     rdfs:label "Component Module contains Actuator (Brittany)", "Modulo di Componenti contiene Attuatore (Brittany)"@it ;
