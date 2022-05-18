@@ -297,6 +297,44 @@
     rdfs:label "Has Component Hardware (Brittany)", "Ha Componente Hardware (Brittany)"@it ;
     rdfs:comment "Property that indicates that something has a Hardware Component.", "Proprietà che indica che un qualcosa ha un Componente Hardware."@it .
 
+<#isComponentHwIn>
+    owl:inverseOf <#hasComponentHw> ;
+    rdfs:label "Component Hardware is in (Brittany)", "Componente Hardware è in (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Hardware Component is in something.", "Proprietà che indica che un Componente Hardware è in qualcosa."@it .
+
+<#hasSensorHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:range <#SensorHw> ;
+    rdfs:label "Has Sensor (Brittany)", "Ha Sensore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that something has a Sensor.", "Proprietà che indica che un qualcosa ha un Sensore."@it .
+
+<#isSensorHwIn>
+    owl:inverseOf <#hasSensorHw> ;
+    rdfs:label "Sensor is in (Brittany)", "Sensore è in (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Sensor is in something.", "Proprietà che indica che un Sensore è in qualcosa."@it .
+
+<#hasActuatorHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:range <#ActuatorHw> ;
+    rdfs:label "Has Actuator (Brittany)", "Ha Attuatore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that something has an Actuator.", "Proprietà che indica che un qualcosa ha un Attuatore."@it .
+
+<#isActuatorHwIn>
+    owl:inverseOf <#hasActuatorHw> ;
+    rdfs:label "Actuator is in (Brittany)", "Attuatore è in (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Actuator is in something.", "Proprietà che indica che un Attuatore è in qualcosa."@it .
+
+<#hasDigitalLightHw>
+    rdfs:subPropertyOf <#hasActuatorHw> ;
+    rdfs:range <#DigitalLightHw> ;
+    rdfs:label "Has Digital Light (Brittany)", "Ha Luce Digitali (Brittany)"@it ;
+    rdfs:comment "Property that indicates that something has a Digital Light.", "Proprietà che indica che un qualcosa ha una Luce Digitale."@it .
+
+<#isDigitalLightHwIn>
+    owl:inverseOf <#hasDigitalLightHw> ;
+    rdfs:label "Digital Light is in (Brittany)", "Luce Digitali è in (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Digital Light is in something.", "Proprietà che indica che una Luce Digitale è in qualcosa."@it .
+
 # ----- ComponentHw in Module -----
 
 <#hasModuleComponentHw>
