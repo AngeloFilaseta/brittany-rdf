@@ -159,8 +159,19 @@
     rdfs:label "Hardware Component (Brittany)", "Componente Hardware (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it .
 
-<#DigitalLightHw>
+
+<#SensorHw>
     rdfs:subClassOf <#ComponentHw> ;
+    rdfs:label "Sensor Hardware Component (Brittany)", "Componente Hardware Sensore (Brittany)"@it ;
+    rdfs:comment "A Hardware Component that can be used to collect data.", "Un Componente Hardware che può essere utilizzato per collezionare dati."@it .
+
+<#ActuatorHw>
+    rdfs:subClassOf <#ComponentHw> ;
+    rdfs:label "Actuator Hardware Component (Brittany)", "Componente Hardware Attuatore (Brittany)"@it ;
+    rdfs:comment "A Hardware Component that can be used to execute an action.", "Un Componente Hardware che può essere utilizzato per eseguire un'azione."@it .
+
+<#DigitalLightHw>
+    rdfs:subClassOf <#ActuatorHw> ;
     rdfs:label "Digital Light (Brittany)", "Luce Digitale (Brittany)"@it ;
     rdfs:comment "A Hardware Component that can be turned on and off and emits light. It is not possible to regulate the intensity or the color of the light.", "Un Componente Hardware che può essere spento ed acceso ed emette luce. Non possono essere regolati i valori di intensità e colore della luce."@it ;
     owl:equivalentClass m3:Lamp, dco:LightSwitch .
@@ -391,6 +402,8 @@
 
 td:Thing owl:equivalentClass wot:Thing .
 td:title owl:equivalentProperty wot:thingName .
+dco:PropertyAffordance rdfs:subClassOf dco:InteractionAffordance.
+dco:ActionAffordance rdfs:subClassOf dco:InteractionAffordance.
 td:InteractionAffordance rdfs:subClassOf dco:InteractionAffordance .
 td:PropertyAffordance rdfs:subClassOf dco:PropertyAffordance .
 td:ActionAffordance rdfs:subClassOf dco:ActionAffordance .
