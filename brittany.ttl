@@ -203,6 +203,7 @@
 # ========================== RELATIONSHIPS (PROPERTIES) ==========================
 # They define the existence of relationship between Concepts of the domain.
 
+# ----- Environments and Plants -----
 <#hasEnvironment>
     a owl:ObjectProperty ;
     rdfs:domain <#Greenhouse> ;
@@ -250,6 +251,8 @@
     rdfs:label "Plant is in Greenhouse (Brittany)", "Pianta è in Serra (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Plant is in a Greenhouse.", "Proprietà di composizione utilizzata per indicare che una Pianta è in una Serra."@it .
 
+# ----- Edge Monitoring -----
+
 <#monitor>
     a owl:ObjectProperty ;
     rdfs:subPropertyOf dco:isLocatedAt ;
@@ -286,11 +289,20 @@
     rdfs:label "Environment monitored (Brittany)", "Ambiente monitorato (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Environment is monitored by an Edge device.", "Proprietà che indica che un Ambiente è monitorato da un Edge."@it .
 
-<#hasModuleComponentHw>
+# ----- ComponentHw -----
+
+<#hasComponentHw>
     a owl:ObjectProperty ;
+    rdfs:range <#ComponentHw> ;
+    rdfs:label "Has Component Hardware (Brittany)", "Ha Componente Hardware (Brittany)"@it ;
+    rdfs:comment "Property that indicates that something has a Hardware Component.", "Proprietà che indica che un qualcosa ha un Componente Hardware."@it .
+
+# ----- ComponentHw in Module -----
+
+<#hasModuleComponentHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleComponentHw>) ;
     rdfs:domain <#ComponentModule> ;
-    rdfs:range <#ComponentHw> ;
     rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Hardware Component.", "Proprietà che indica che un Modulo agisce su un Componente Hardware."@it .
 
@@ -299,38 +311,38 @@
     rdfs:label "Hardware Component is in Module (Brittany)", "Componente Hardware è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Hardware Component is in a Module.", "Proprietà che indica che un Componente Hardware è in un Modulo."@it .
 
-<#hasSensorHw>
+<#hasModuleSensorHw>
     rdfs:subPropertyOf <#hasModuleComponentHw> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleSensorHw>) ;
     rdfs:range <#SensorHw> ;
     rdfs:label "Component Module contains Sensor (Brittany)", "Modulo di Componenti contiene Sensore (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Sensor.", "Proprietà che indica che un Modulo agisce su un Sensore."@it .
 
-<#isSensorHwIn>
-    owl:inverseOf <#hasSensorHw> ;
+<#isSensorHwInModule>
+    owl:inverseOf <#hasModuleSensorHw> ;
     rdfs:label "Sensor is in Module (Brittany)", "Sensore è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Sensor is in a Module.", "Proprietà che indica che un Sensore è in un Modulo."@it .
 
-<#hasActuatorHw>
+<#hasModuleActuatorHw>
     rdfs:subPropertyOf <#hasModuleComponentHw> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleActuatorHw>) ;
     rdfs:range <#ActuatorHw> ;
     rdfs:label "Component Module contains Actuator (Brittany)", "Modulo di Componenti contiene Attuatore (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on an Actuator.", "Proprietà che indica che un Modulo agisce su un Attuatore."@it .
 
-<#isActuatorIn>
+<#isActuatorInModule>
     owl:inverseOf <#hasActuatorHw> ;
     rdfs:label "Actuator is in Module (Brittany)", "Attuatore è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Actuator is in a Module.", "Proprietà che indica che un Attuatore è in un Modulo."@it .
 
-<#hasDigitalLightHw>
+<#hasModuleDigitalLightHw>
     rdfs:subPropertyOf <#hasActuatorHw> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleDigitalLightHw>) ;
     rdfs:range <#DigitalLightHw> ;
     rdfs:label "Component Module contains Digital Light (Brittany)", "Modulo di Componenti contiene Luce Digitale (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Digital Light.", "Proprietà che indica che un Modulo agisce su una Luce Digitale."@it .
 
-<#isDigitalLightHwIn>
+<#isDigitalLightHwInModule>
     owl:inverseOf <#hasDigitalLightHw> ;
     rdfs:label "Digital Light is in Module (Brittany)", "Luce Digitale è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Digital Light is in a Module.", "Proprietà che indica che una Luce Digitale è in un Modulo."@it .
