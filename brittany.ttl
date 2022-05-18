@@ -250,6 +250,32 @@
     rdfs:label "Plant is in Greenhouse (Brittany)", "Pianta è in Serra (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Plant is in a Greenhouse.", "Proprietà di composizione utilizzata per indicare che una Pianta è in una Serra."@it .
 
+# ----- Edge, Module, Handler Properties -----
+
+<#hasModule>
+    a owl:ObjectProperty ;
+    rdfs:domain <#Edge> ;
+    rdfs:range <#Module> ;
+    rdfs:label "Edge contains Module (Brittany)", "Edge contiene Modulo (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Edge contains a Module.", "Proprietà di composizione utilizzata per indicare che un Edge contiene un Modulo."@it .
+
+<#isModuleIn>
+    owl:inverseOf <#hasModule> ;
+    rdfs:label "Module is in Edge (Brittany)", "Modulo è in Edge (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Module is in an Edge.", "Proprietà di composizione utilizzata per indicare che un Modulo è in un Edge."@it .
+
+<#hasHandler>
+    a owl:ObjectProperty ;
+    rdfs:domain <#Module> ;
+    rdfs:range <#OperationHandler> ;
+    rdfs:label "Module contains Operation Handler (Brittany)", "Modulo contiene Operation Handler (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Module contains an Operation Handler.", "Proprietà di composizione utilizzata per indicare che un Modulo contiene un Operation Handler."@it .
+
+<#isHandlerIn>
+    owl:inverseOf <#hasHandler> ;
+    rdfs:label "Operation Handler is in Module (Brittany)", "Operation Handler è in Modulo (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Operation Handler is in a Module.", "Proprietà di composizione utilizzata per indicare che un Operation Handler è in un Modulo."@it .
+
 # ----- Edge Monitoring Properties -----
 
 <#monitor>
@@ -336,77 +362,62 @@
 
 # ----- ComponentHw in Module Properties -----
 
-<#hasModuleComponentHw>
-    rdfs:subPropertyOf <#hasComponentHw> ;
-    owl:propertyChainAxiom (<#hasHandler> <#handleComponentHw>) ;
+<#owns>
+    a owl:ObjectProperty ;
     rdfs:domain <#ComponentModule> ;
+    rdfs:label "ComponentModule Owns (Brittany)", "ComponentModule possiede (Brittany)"@it ;
+    rdfs:comment "Property that indicates that Component Module owns something.", "Proprietà che indica che un Modulo Componente possiede qualocosa."@it .
+
+<#isOwned>
+    owl:inverseOf <#owns> ;
+    rdfs:label "Is owned by ComponentModule (Brittany)", "È posseduto da ComponentModule (Brittany)"@it ;
+    rdfs:comment "Property that indicates that something is owned by a Component Module.", "Proprietà che indica che qualcosa è posseduto da un Modulo Componente."@it .
+
+<#ownsComponentHw>
+    rdfs:subPropertyOf <#owns>, <#hasComponentHw> ;
+    owl:propertyChainAxiom (<#hasHandler> <#handleComponentHw>) ;
     rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Hardware Component.", "Proprietà che indica che un Modulo agisce su un Componente Hardware."@it .
 
-<#isComponentHwInModule>
-    owl:inverseOf <#hasModuleComponentHw> ;
+<#isOwnedComponentHw>
+    owl:inverseOf <#ownsComponentHw> ;
     rdfs:label "Hardware Component is in Module (Brittany)", "Componente Hardware è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Hardware Component is in a Module.", "Proprietà che indica che un Componente Hardware è in un Modulo."@it .
 
-<#hasModuleSensorHw>
-    rdfs:subPropertyOf <#hasModuleComponentHw> ;
+<#ownsSensorHw>
+    rdfs:subPropertyOf <#ownsComponentHw>, <#hasSensorHw> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleSensorHw>) ;
-    rdfs:range <#SensorHw> ;
     rdfs:label "Component Module contains Sensor (Brittany)", "Modulo di Componenti contiene Sensore (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Sensor.", "Proprietà che indica che un Modulo agisce su un Sensore."@it .
 
-<#isSensorHwInModule>
-    owl:inverseOf <#hasModuleSensorHw> ;
+<#isOwnedSensorHw>
+    owl:inverseOf <#ownsSensorHw> ;
     rdfs:label "Sensor is in Module (Brittany)", "Sensore è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Sensor is in a Module.", "Proprietà che indica che un Sensore è in un Modulo."@it .
 
-<#hasModuleActuatorHw>
-    rdfs:subPropertyOf <#hasModuleComponentHw> ;
+<#ownsActuatorHw>
+    rdfs:subPropertyOf <#ownsComponentHw>, <#hasActuatorHw> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleActuatorHw>) ;
-    rdfs:range <#ActuatorHw> ;
     rdfs:label "Component Module contains Actuator (Brittany)", "Modulo di Componenti contiene Attuatore (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on an Actuator.", "Proprietà che indica che un Modulo agisce su un Attuatore."@it .
 
-<#isActuatorInModule>
+<#isOwnedActuatorHw>
     owl:inverseOf <#hasActuatorHw> ;
     rdfs:label "Actuator is in Module (Brittany)", "Attuatore è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Actuator is in a Module.", "Proprietà che indica che un Attuatore è in un Modulo."@it .
 
-<#hasModuleDigitalLightHw>
-    rdfs:subPropertyOf <#hasActuatorHw> ;
+<#ownsDigitalLightHw>
+    rdfs:subPropertyOf <#ownsActuatorHw>, <#hasDigitalLightHw> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleDigitalLightHw>) ;
-    rdfs:range <#DigitalLightHw> ;
     rdfs:label "Component Module contains Digital Light (Brittany)", "Modulo di Componenti contiene Luce Digitale (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Digital Light.", "Proprietà che indica che un Modulo agisce su una Luce Digitale."@it .
 
-<#isDigitalLightHwInModule>
-    owl:inverseOf <#hasDigitalLightHw> ;
+<#isOwnedDigitalLightHw>
+    owl:inverseOf <#ownsDigitalLightHw> ;
     rdfs:label "Digital Light is in Module (Brittany)", "Luce Digitale è in Modulo (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Digital Light is in a Module.", "Proprietà che indica che una Luce Digitale è in un Modulo."@it .
 
-<#hasModule>
-    a owl:ObjectProperty ;
-    rdfs:domain <#Edge> ;
-    rdfs:range <#Module> ;
-    rdfs:label "Edge contains Module (Brittany)", "Edge contiene Modulo (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that an Edge contains a Module.", "Proprietà di composizione utilizzata per indicare che un Edge contiene un Modulo."@it .
-
-<#isModuleIn>
-    owl:inverseOf <#hasModule> ;
-    rdfs:label "Module is in Edge (Brittany)", "Modulo è in Edge (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that a Module is in an Edge.", "Proprietà di composizione utilizzata per indicare che un Modulo è in un Edge."@it .
-
-<#hasHandler>
-    a owl:ObjectProperty ;
-    rdfs:domain <#Module> ;
-    rdfs:range <#OperationHandler> ;
-    rdfs:label "Module contains Operation Handler (Brittany)", "Modulo contiene Operation Handler (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that a Module contains an Operation Handler.", "Proprietà di composizione utilizzata per indicare che un Modulo contiene un Operation Handler."@it .
-
-<#isHandlerIn>
-    owl:inverseOf <#hasHandler> ;
-    rdfs:label "Operation Handler is in Module (Brittany)", "Operation Handler è in Modulo (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that an Operation Handler is in a Module.", "Proprietà di composizione utilizzata per indicare che un Operation Handler è in un Modulo."@it .
+# ----- ComponentHw in Edge Properties -----
 
 # ----- Component Handler has Components Properties -----
 
@@ -415,6 +426,11 @@
     rdfs:domain <#ComponentOperationHandler> ;
     rdfs:label "Component Operation Handler handle (Brittany)", "Operation Handler Componente gestisce (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Component Operation Handler handles something.", "Proprietà che indica che un Operation Handler Componente gestisce qualcosa."@it .
+
+<#isHandled>
+    owl:inverseOf <#handle> ;
+    rdfs:label "Is handled by Component Operation Handler (Brittany)", "È gestito da Operation Handler Componente (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a something is handled by a Component Operation Handler.", "Proprietà che indica che qualcosa è gestito da un Operation Handler Componente."@it .
 
 <#handleComponentHw>
     rdfs:subPropertyOf <#handle>, <#hasComponentHw>;
@@ -437,7 +453,7 @@
     rdfs:comment "Property used to indicate that a Sensor is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che un Sensore è gestito da un Operation Handler."@it .
 
 <#handleActuatorHw>
-    rdfs:subPropertyOf <#handleComponentHw>, <#hasSensorHw> ;
+    rdfs:subPropertyOf <#handleComponentHw>, <#hasActuatorHw> ;
     rdfs:label "Operation Handler handle Actuator (Brittany)", "Operation Handler gestisce Attuatore (Brittany)"@it ;
     rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Actuator.", "Proprietà utilizzata per indicare che un Operation Handler Componente agisce su uno specifico Attuatore."@it .
 
