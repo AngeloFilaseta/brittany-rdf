@@ -138,19 +138,43 @@
     rdfs:comment "An Operation Handler that acts on Digital Lights.", "Un Operation Handler che agisce su Luci Digitali."@it .
 
 <#IsOnDigitalLightHandler>
-    rdfs:subClassOf <#DigitalLightHandler>, <#PropertyOperationHandler> ;
+    rdfs:subClassOf <#DigitalLightHandler>, <#PropertyOperationHandler>, [
+        a owl:Restriction ;
+        owl:onProperty foaf:name ;
+        owl:hasValue "isOn"^^xsd:string
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty <#hasHandlerOutputType> ;
+        owl:hasValue "boolean"^^xsd:string
+    ] ;
     rdfs:label "IsOn Digital Light Handler (Brittany)" ;
     rdfs:comment "An Operation Handler to check if the Digital Light is On.", "Un Operation Handler utilizzato per controllare se la Luce Digitale è accesa."@it ;
     dco:hasCommand dco:GetCommand.
 
 <#TurnOnDigitalLightHandler>
-    rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> ;
+    rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> , [
+        a owl:Restriction ;
+        owl:onProperty foaf:name ;
+        owl:hasValue "turnOn"^^xsd:string
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty <#hasHandlerOutputType> ;
+        owl:hasValue "string"^^xsd:string
+    ];
     rdfs:label "TurnOn Digital Light Handler (Brittany)" ;
     rdfs:comment "An Operation Handler to turn on the Digital Light.", "Un Operation Handler utilizzato per accendere la Luce Digitale."@it ;
     dco:hasCommand dco:OnCommand .
 
 <#TurnOffDigitalLightHandler>
-    rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> ;
+    rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> , [
+        a owl:Restriction ;
+        owl:onProperty foaf:name ;
+        owl:hasValue "turnOff"^^xsd:string
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty <#hasHandlerOutputType> ;
+        owl:hasValue "string"^^xsd:string
+    ] ;
     rdfs:label "TurnOff Digital Light Handler (Brittany)" ;
     rdfs:comment "An Operation Handler to turn off the Digital Light.", "Un Operation Handler utilizzato per spegnere la Luce Digitale."@it;
     dco:hasCommand dco:OffCommand .
@@ -667,20 +691,14 @@ foaf:name
 
 <#is-on-digital-light-handler>
     a <#IsOnDigitalLightHandler> ;
-    foaf:name "isOn" ;
-    <#hasHandlerOutputType> "boolean" ;
     <#handleDigitalLightHw> <#digital-light-sx>, <#digital-light-dx> .
 
 <#turn-off-digital-light-handler>
     a <#TurnOffDigitalLightHandler> ;
-    foaf:name "turnOff" ;
-    <#hasHandlerOutputType> "string" ;
     <#handleDigitalLightHw> <#digital-light-sx>, <#digital-light-dx> .
 
 <#turn-on-digital-light-handler>
     a <#TurnOnDigitalLightHandler> ;
-    foaf:name "turnOn" ;
-    <#hasHandlerOutputType> "string" ;
     <#handleDigitalLightHw> <#digital-light-sx>, <#digital-light-dx> .
 
 <#digital-light-dx>
