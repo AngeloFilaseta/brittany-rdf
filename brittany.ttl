@@ -682,86 +682,86 @@ foaf:name
     a <#Edge> ;
     foaf:name "Angelo's ESP8266", "ESP8266 di Angelo"@it ;
     <#monitorPlant> <#angelo-basil> ;
-    <#hasModule> <#digital-light-module> ;
-    <#hasThingDescriptor> <#td-mock-ip> .
+    <#hasModule> <#angelo-edge-module-digital-light> ;
+    <#hasThingDescriptor> <#angelo-td-mock-ip> .
 
-<#digital-light-module>
+<#angelo-edge-module-digital-light>
     a <#DigitalLightModule> ;
-    <#hasHandler> <#is-on-digital-light-handler> , <#turn-on-digital-light-handler> , <#turn-off-digital-light-handler> .
+    <#hasHandler> <#angelo-handler-is-on-digital-light> , <#angelo-handler-turn-on-digital-light> , <#angelo-handler-turn-off-digital-light> .
 
-<#is-on-digital-light-handler>
+<#angelo-handler-is-on-digital-light>
     a <#IsOnDigitalLightHandler> ;
-    <#handleDigitalLightHw> <#digital-light-sx>, <#digital-light-dx> .
+    <#handleDigitalLightHw> <#angelo-digital-light-sx>, <#angelo-digital-light-dx> .
 
-<#turn-off-digital-light-handler>
+<#angelo-handler-turn-off-digital-light>
     a <#TurnOffDigitalLightHandler> ;
-    <#handleDigitalLightHw> <#digital-light-sx>, <#digital-light-dx> .
+    <#handleDigitalLightHw> <#angelo-digital-light-sx>, <#angelo-digital-light-dx> .
 
-<#turn-on-digital-light-handler>
+<#angelo-handler-turn-on-digital-light>
     a <#TurnOnDigitalLightHandler> ;
-    <#handleDigitalLightHw> <#digital-light-sx>, <#digital-light-dx> .
+    <#handleDigitalLightHw> <#angelo-digital-light-sx>, <#angelo-digital-light-dx> .
 
-<#digital-light-dx>
+<#angelo-digital-light-dx>
     a <#DigitalLightHw> ;
     foaf:name "digital-light-dx" .
 
-<#digital-light-sx>
+<#angelo-digital-light-sx>
     a <#DigitalLightHw> ;
     foaf:name "digital-light-sx" .
 
-<#action-turn-off-digital-light-sx>
-    <#isActionAffordanceOfHandler> <#turn-off-digital-light-handler> ;
+<#angelo-action-turn-off-digital-light-sx>
+    <#isActionAffordanceOfHandler> <#angelo-handler-turn-off-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
-        hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-sx"
+        hctl:hasTarget "angelo-td-mock-ip/turnOff?id=digital-light-sx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
-<#action-turn-off-digital-light-dx>
-    <#isActionAffordanceOfHandler> <#turn-off-digital-light-handler> ;
+<#angelo-action-turn-off-digital-light-dx>
+    <#isActionAffordanceOfHandler> <#angelo-handler-turn-off-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
-        hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-dx"
+        hctl:hasTarget "angelo-td-mock-ip/turnOff?id=digital-light-dx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
-<#action-turn-on-digital-light-sx>
-    <#isActionAffordanceOfHandler> <#turn-on-digital-light-handler> ;
+<#angelo-action-turn-on-digital-light-sx>
+    <#isActionAffordanceOfHandler> <#angelo-handler-turn-on-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
-        hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-sx"
+        hctl:hasTarget "angelo-td-mock-ip/turnOn?id=digital-light-sx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
-<#action-turn-on-digital-light-dx>
-    <#isActionAffordanceOfHandler> <#turn-on-digital-light-handler> ;
+<#angelo-action-turn-on-digital-light-dx>
+    <#isActionAffordanceOfHandler> <#angelo-handler-turn-on-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
-        hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-dx"
+        hctl:hasTarget "angelo-td-mock-ip/turnOn?id=digital-light-dx"
     ] ;
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
-<#property-is-on-digital-light-sx>
+<#angelo-property-is-on-digital-light-sx>
     a jsonschema:BooleanSchema ;
-    <#isPropertyAffordanceOfHandler> <#is-on-digital-light-handler> ;
+    <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
-        hctl:hasTarget "td-mock-ip/isOn?id=digital-light-sx"
+        hctl:hasTarget "angelo-td-mock-ip/isOn?id=digital-light-sx"
     ] .
 
-<#property-is-on-digital-light-dx>
+<#angelo-property-is-on-digital-light-dx>
     a jsonschema:BooleanSchema ;
-    <#isPropertyAffordanceOfHandler> <#is-on-digital-light-handler> ;
+    <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
-        hctl:hasTarget "td-mock-ip/isOn?id=digital-light-dx"
+        hctl:hasTarget "angelo-td-mock-ip/isOn?id=digital-light-dx"
     ] .
 
-<#td-mock-ip>
+<#angelo-td-mock-ip>
     a <#BrittanyThingDescriptor> ;
     td:title "Angelo's ESP8266 TD" ;
-    td:hasActionAffordance <#action-turn-off-digital-light-sx>, <#action-turn-off-digital-light-dx>, <#action-turn-on-digital-light-sx>, <#action-turn-on-digital-light-dx> ;
-    td:hasPropertyAffordance <#property-is-on-digital-light-sx>, <#property-is-on-digital-light-dx> .
+    td:hasActionAffordance <#angelo-action-turn-off-digital-light-sx>, <#angelo-action-turn-off-digital-light-dx>, <#angelo-action-turn-on-digital-light-sx>, <#angelo-action-turn-on-digital-light-dx> ;
+    td:hasPropertyAffordance <#angelo-property-is-on-digital-light-sx>, <#angelo-property-is-on-digital-light-dx> .
 
 <#giorgia-savo>
     a foaf:Person ;
@@ -780,11 +780,62 @@ foaf:name
     foaf:name "Giorgia's Environment", "Ambiente di Giorgia"@it ;
     <#hasEnvironmentPlant> <#giorgia-cucumber>, <#giorgia-potato> .
 
-<#giorgia-edge>
-    a <#Edge> ;
-    foaf:name "Giorgia's ESP8266", "ESP8266 di Giorgia"@it ;
-    <#monitorEnvironment> <#giorgia-environment> .
-
 <#giorgia-cucumber> a dbr:Cucumber .
 
 <#giorgia-potato> a dbr:Potato .
+
+<#giorgia-edge>
+    a <#Edge> ;
+    foaf:name "Giorgia's ESP8266", "ESP8266 di Giorgia"@it ;
+    <#monitorEnvironment> <#giorgia-environment> ;
+    <#hasThingDescriptor> <#giorgia-td-mock-ip> .
+
+<#giorgia-edge-module-digital-light>
+    a <#DigitalLightModule> ;
+    <#hasHandler> <#giorgia-handler-is-on-digital-light> , <#giorgia-handler-turn-off-digital-light> , <#giorgia-handler-turn-on-digital-light> .
+
+<#giorgia-handler-is-on-digital-light>
+    a <#IsOnDigitalLightHandler> ;
+    <#handleDigitalLightHw> <#giorgia-digital-light-center> .
+
+<#giorgia-handler-turn-off-digital-light>
+    a <#TurnOffDigitalLightHandler> ;
+    <#handleDigitalLightHw> <#giorgia-digital-light-center> .
+
+<#giorgia-handler-turn-on-digital-light>
+    a <#TurnOnDigitalLightHandler> ;
+    <#handleDigitalLightHw> <#giorgia-digital-light-center> .
+
+<#giorgia-digital-light-center>
+    a <#DigitalLightHw> ;
+    foaf:name "digital-light-center" .
+
+<#giorgia-action-turn-off-digital-light-center>
+    <#isActionAffordanceOfHandler> <#giorgia-handler-turn-off-digital-light> ;
+    td:hasForm [
+        a <#BrittanyForm> ;
+        hctl:hasTarget "giorgia-td-mock-ip/turnOff?id=digital-light-center"
+    ] ;
+    td:hasOutputSchema [ a jsonschema:StringSchema ] .
+
+<#giorgia-action-turn-on-digital-light-center>
+    <#isActionAffordanceOfHandler> <#giorgia-handler-turn-on-digital-light> ;
+    td:hasForm [
+        a <#BrittanyForm> ;
+        hctl:hasTarget "giorgia-td-mock-ip/turnOn?id=digital-light-center"
+    ] ;
+    td:hasOutputSchema [ a jsonschema:StringSchema ] .
+
+<#giorgia-property-is-on-digital-light-center>
+    a jsonschema:BooleanSchema ;
+    <#isPropertyAffordanceOfHandler> <#giorgia-handler-is-on-digital-light> ;
+    td:hasForm [
+        a <#BrittanyForm> ;
+        hctl:hasTarget "giorgia-td-mock-ip/isOn?id=digital-light-center"
+    ] .
+
+<#giorgia-td-mock-ip>
+    a <#BrittanyThingDescriptor> ;
+    td:title "Giorgia's ESP8266 TD" ;
+    td:hasActionAffordance <#giorgia-action-turn-off-digital-light-center>, <#giorgia-action-turn-on-digital-light-center> ;
+    td:hasPropertyAffordance <#giorgia-property-is-on-digital-light-center> .
