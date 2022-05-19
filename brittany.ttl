@@ -268,8 +268,8 @@
 
 <#hasGreenhousePlant>
     rdfs:subPropertyOf <#hasPlant> ;
-    owl:propertyChainAxiom ( <#hasEnvironment> <#hasEnvironmentPlant> ) ;
     rdfs:domain <#Greenhouse> ;
+    owl:propertyChainAxiom ( <#hasEnvironment> <#hasEnvironmentPlant> ) ;
     rdfs:label "Greenhouse contains Plant (Brittany)", "Serra contiene Pianta (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Greenhouse contains a Plant.", "Proprietà di composizione utilizzata per indicare che una Serra contiene una Pianta."@it .
 
@@ -277,6 +277,19 @@
     owl:inverseOf <#hasGreenhousePlant> ;
     rdfs:label "Plant is in Greenhouse (Brittany)", "Pianta è in Serra (Brittany)"@it ;
     rdfs:comment "Composition property used to indicate that a Plant is in a Greenhouse.", "Proprietà di composizione utilizzata per indicare che una Pianta è in una Serra."@it .
+
+<#hasGreenhouseEdge>
+    a owl:ObjectProperty ;
+    owl:propertyChainAxiom ( <#hasGreenhousePlant> <#isPlantMonitored> ) , ( <#hasEnvironment> <#isEnvironmentMonitored> ) ;
+    rdfs:domain <#Greenhouse> ;
+    rdfs:range <#Edge> ;
+    rdfs:label "Greenhouse contains Edge (Brittany)", "Serra contiene Edge (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Greenhouse contains an Edge.", "Proprietà di composizione utilizzata per indicare che una Serra contiene un Edge."@it .
+
+<#isEdgeInGreenhouse>
+    owl:inverseOf <#hasGreenhouseEdge> ;
+    rdfs:label "Edge is in Greenhouse (Brittany)", "Edge è in Serra (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Edge is in a Greenhouse.", "Proprietà di composizione utilizzata per indicare che un Edge è in una Serra."@it .
 
 # ----- Edge, Module, Handler Properties -----
 
@@ -788,6 +801,7 @@ foaf:name
     a <#Edge> ;
     foaf:name "Giorgia's ESP8266", "ESP8266 di Giorgia"@it ;
     <#monitorEnvironment> <#giorgia-environment> ;
+    <#hasModule> <#giorgia-edge-module-digital-light> ;
     <#hasThingDescriptor> <#giorgia-td-mock-ip> .
 
 <#giorgia-edge-module-digital-light>
