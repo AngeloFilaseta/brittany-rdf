@@ -1,0 +1,17 @@
+PREFIX : <https://brittany-persistence-service.herokuapp.com/#>
+
+SELECT DISTINCT ?greenhouse ?environment ?plant ?edge ?componentHw
+
+WHERE {
+    ?greenhouse :hasGreenhouseEdge ?edge .
+    ?edge :collectComponentHw ?componentHw .
+    OPTIONAL {
+        ?plant :isPlantInEnvironment ?environment .
+        ?edge :monitorPlant ?plant .
+    }
+    OPTIONAL {
+        ?edge :monitorEnvironment ?environment.
+    }
+}
+
+ORDER BY ?edge
