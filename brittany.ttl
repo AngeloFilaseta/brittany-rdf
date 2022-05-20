@@ -451,7 +451,8 @@
 # ----- ComponentHw in Edge Properties -----
 
 <#collectComponentHw>
-    rdfs:subPropertyOf <#collect>, <#hasComponentHw> ;
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:domain <#Edge> ;
     owl:propertyChainAxiom (<#hasModule> <#ownsComponentHw>) ;
     rdfs:label "Edge collects Hardware Component (Brittany)", "Edge colleziona Componente Hardware (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge collects a Hardware Component.", "Proprietà che indica che un Edge colleziona un Componente Hardware."@it .
