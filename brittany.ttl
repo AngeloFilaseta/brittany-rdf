@@ -404,7 +404,7 @@
 # ----- ComponentHw in Module Properties -----
 
 <#ownsComponentHw>
-    rdfs:subPropertyOf <#owns>, <#hasComponentHw> ;
+    rdfs:subPropertyOf <#hasComponentHw> ;
     rdfs:domain <#ComponentModule> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleComponentHw>) ;
     rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
