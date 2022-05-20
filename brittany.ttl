@@ -403,19 +403,9 @@
 
 # ----- ComponentHw in Module Properties -----
 
-<#owns>
-    a owl:ObjectProperty ;
-    rdfs:domain <#ComponentModule> ;
-    rdfs:label "ComponentModule Owns (Brittany)", "ComponentModule possiede (Brittany)"@it ;
-    rdfs:comment "Property that indicates that Component Module owns something.", "Proprietà che indica che un Modulo Componente possiede qualocosa."@it .
-
-<#isOwned>
-    owl:inverseOf <#owns> ;
-    rdfs:label "Is owned by ComponentModule (Brittany)", "È posseduto da ComponentModule (Brittany)"@it ;
-    rdfs:comment "Property that indicates that something is owned by a Component Module.", "Proprietà che indica che qualcosa è posseduto da un Modulo Componente."@it .
-
 <#ownsComponentHw>
     rdfs:subPropertyOf <#owns>, <#hasComponentHw> ;
+    rdfs:domain <#ComponentModule> ;
     owl:propertyChainAxiom (<#hasHandler> <#handleComponentHw>) ;
     rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
     rdfs:comment "Property that indicates that a Module acts on a Hardware Component.", "Proprietà che indica che un Modulo agisce su un Componente Hardware."@it .
