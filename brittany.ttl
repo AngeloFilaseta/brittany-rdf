@@ -497,19 +497,9 @@
 
 # ----- Component Handler has Components Properties -----
 
-<#handle>
-    a owl:ObjectProperty ;
-    rdfs:domain <#ComponentOperationHandler> ;
-    rdfs:label "Component Operation Handler handle (Brittany)", "Operation Handler Componente gestisce (Brittany)"@it ;
-    rdfs:comment "Property that indicates that a Component Operation Handler handles something.", "Proprietà che indica che un Operation Handler Componente gestisce qualcosa."@it .
-
-<#isHandled>
-    owl:inverseOf <#handle> ;
-    rdfs:label "Is handled by Component Operation Handler (Brittany)", "È gestito da Operation Handler Componente (Brittany)"@it ;
-    rdfs:comment "Property that indicates that a something is handled by a Component Operation Handler.", "Proprietà che indica che qualcosa è gestito da un Operation Handler Componente."@it .
-
 <#handleComponentHw>
-    rdfs:subPropertyOf <#handle>, <#hasComponentHw>;
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:domain <#ComponentOperationHandler> ;
     rdfs:label "Operation Handler handle Hardware Component (Brittany)", "Operation Handler gestisce Componente Hardware"@it ;
     rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Hardware Component.", "Proprietà utilizzata per indicare che un Operation Handler Componente agisce su uno specifico Componente Hardware" .
 
