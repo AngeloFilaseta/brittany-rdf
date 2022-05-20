@@ -450,17 +450,6 @@
 
 # ----- ComponentHw in Edge Properties -----
 
-<#collect>
-    a owl:ObjectProperty ;
-    rdfs:domain <#Edge> ;
-    rdfs:label "Edge Collects (Brittany)", "Edge Colleziona (Brittany)"@it ;
-    rdfs:comment "Property that indicates that an Edge collects something.", "Proprietà che indica che un Edge raccoglie qualcosa."@it .
-
-<#isCollected>
-    owl:inverseOf <#collect> ;
-    rdfs:label "Is collected by Edge (Brittany)", "È collezionato da Edge (Brittany)"@it ;
-    rdfs:comment "Property that indicates that something is collected by an Edge.", "Proprietà che indica che qualcosa è collezionato da un Edge."@it .
-
 <#collectComponentHw>
     rdfs:subPropertyOf <#collect>, <#hasComponentHw> ;
     owl:propertyChainAxiom (<#hasModule> <#ownsComponentHw>) ;
