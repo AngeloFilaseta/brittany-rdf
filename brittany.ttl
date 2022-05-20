@@ -618,6 +618,9 @@ dco:Device owl:equivalentClass m3:M2MDevice .
 
 hctl:hasTarget rdfs:subPropertyOf wot:href .
 
+hctl:forContentType
+    a owl:DatatypeProperty .
+
 foaf:name
     a owl:DatatypeProperty ;
     owl:equivalentProperty wot:name .
