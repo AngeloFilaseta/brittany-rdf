@@ -819,6 +819,35 @@ foaf:name
     )
 ] .
 
+# ----- NullSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-null" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:NullSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"null\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"null\") ->  ObjectSchema(?p)" ;
+    swrl:body (
+            [
+                a swrl:IndividualPropertyAtom ;
+                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+                swrl:argument1 <p> ;
+                swrl:argument2 <h>
+            ] [
+                a swrl:DatavaluedPropertyAtom ;
+                swrl:propertyPredicate <#hasHandlerOutputType> ;
+                swrl:argument1 <h> ;
+                swrl:argument2 "null"
+            ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:NullSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
 
