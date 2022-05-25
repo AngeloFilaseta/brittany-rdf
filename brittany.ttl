@@ -10,6 +10,8 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix seas: <https://w3id.org/seas/> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 @prefix wot: <http://iot.linkeddata.es/def/wot#>.
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
@@ -603,6 +605,14 @@
     rdfs:label "Thing Descriptor of Edge (Brittany)", "Thing Descriptor dell'Edge (Brittany)"@it ;
     rdfs:comment "Property used to link a Thing Descriptor to an Edge (W3).", "Proprietà utilizzata per collegare un Thing Descriptor ad un Edge (W3)."@it .
 
+# ----- SWRL Properties -----
+
+<#swrlRuleComment>
+    a owl:DatatypeProperty ;
+    rdfs:subPropertyOf rdfs:comment ;
+    rdfs:label "SWRL Rule in human readable format", "Regola SWRL in formato human readable"@it ;
+    rdfs:comment "An additional comment to store the SWRL rule in human readable format." , "Un commento aggiuntivo per memorizzare la regola SWRL in formato human readable."@it .
+
 # ========================== ADDITIONAL ONTOLOGY RULES ==========================
 
 td:Thing owl:equivalentClass wot:Thing .
@@ -624,6 +634,49 @@ hctl:forContentType
 foaf:name
     a owl:DatatypeProperty ;
     owl:equivalentProperty wot:name .
+
+
+# ========================== SWRL RULES ==========================
+
+<p> a swrl:Variable .
+
+<h> a swrl:Variable .
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-string" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:StringSchema to the PropertyAffordances if they are linked to an Handler wich has the property <#hasHandlerOutputType> \"string\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"string\") ->  StringSchema(?p)" ;
+    swrl:body [
+        a swrl:AtomList;
+        rdf:first [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h>
+        ] ;
+        rdf:rest [
+            a swrl:AtomList ;
+            rdf:first [
+                a swrl:DatavaluedPropertyAtom ;
+                        swrl:propertyPredicate <#hasHandlerOutputType> ;
+                        swrl:argument1 <h> ;
+                        swrl:argument2 "string"
+            ] ;
+            rdf:rest rdf:nil
+        ]
+    ] ;
+    swrl:head [
+        a swrl:AtomList ;
+        rdf:first [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:StringSchema ;
+            swrl:argument1 <p>
+        ] ;
+        rdf:rest rdf:nil
+    ]
+] .
 
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
