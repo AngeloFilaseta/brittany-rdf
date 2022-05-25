@@ -638,9 +638,43 @@ foaf:name
 
 # ========================== SWRL RULES ==========================
 
+# ----- SWRL Rules for Property Affordaces -----
+# One for each type: object, array, string, number, integer, boolean, or null.
+
 <p> a swrl:Variable .
 
 <h> a swrl:Variable .
+
+# ----- BooleanSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-boolean" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:BooleanSchema to the PropertyAffordances if they are linked to an Handler wich has the property <#hasHandlerOutputType> \"boolean\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"boolean\") ->  BooleanSchema(?p)" ;
+    swrl:body (
+            [
+                a swrl:IndividualPropertyAtom ;
+                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+                swrl:argument1 <p> ;
+                swrl:argument2 <h>
+            ] [
+                a swrl:DatavaluedPropertyAtom ;
+                swrl:propertyPredicate <#hasHandlerOutputType> ;
+                swrl:argument1 <h> ;
+                swrl:argument2 "boolean"
+            ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:BooleanSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
+# ----- StringSchema -----
 
 [
     a swrl:Imp ;
@@ -773,7 +807,6 @@ foaf:name
     td:hasOutputSchema [ a jsonschema:StringSchema ] .
 
 <#angelo-property-is-on-digital-light-sx>
-    a jsonschema:BooleanSchema ;
     <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
@@ -781,7 +814,6 @@ foaf:name
     ] .
 
 <#angelo-property-is-on-digital-light-dx>
-    a jsonschema:BooleanSchema ;
     <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
