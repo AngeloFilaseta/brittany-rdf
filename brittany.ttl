@@ -645,6 +645,64 @@ foaf:name
 
 <h> a swrl:Variable .
 
+# ----- ObjectSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-object" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:ObjectSchema to the PropertyAffordances if they are linked to an Handler wich has the property <#hasHandlerOutputType> \"object\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"object\") ->  ObjectSchema(?p)" ;
+    swrl:body (
+            [
+                a swrl:IndividualPropertyAtom ;
+                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+                swrl:argument1 <p> ;
+                swrl:argument2 <h>
+            ] [
+                a swrl:DatavaluedPropertyAtom ;
+                swrl:propertyPredicate <#hasHandlerOutputType> ;
+                swrl:argument1 <h> ;
+                swrl:argument2 "object"
+            ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:ObjectSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
+# ----- StringSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-string" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:StringSchema to the PropertyAffordances if they are linked to an Handler wich has the property <#hasHandlerOutputType> \"string\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"string\") ->  StringSchema(?p)" ;
+    swrl:body (
+            [
+                a swrl:IndividualPropertyAtom ;
+                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+                swrl:argument1 <p> ;
+                swrl:argument2 <h>
+            ] [
+                a swrl:DatavaluedPropertyAtom ;
+                swrl:propertyPredicate <#hasHandlerOutputType> ;
+                swrl:argument1 <h> ;
+                swrl:argument2 "string"
+            ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:StringSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
 # ----- BooleanSchema -----
 [
     a swrl:Imp ;
@@ -669,36 +727,6 @@ foaf:name
         [
             a swrl:ClassAtom ;
             swrl:classPredicate jsonschema:BooleanSchema ;
-            swrl:argument1 <p>
-        ]
-    )
-] .
-
-# ----- StringSchema -----
-
-[
-    a swrl:Imp ;
-    swrla:isRuleEnabled "true"^^xsd:boolean ;
-    rdfs:label "swrl-property-affordance-from-handler-string" ;
-    rdfs:comment "SWRL Rule that assign the type jsonSchema:StringSchema to the PropertyAffordances if they are linked to an Handler wich has the property <#hasHandlerOutputType> \"string\"." ;
-    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"string\") ->  StringSchema(?p)" ;
-    swrl:body (
-            [
-                a swrl:IndividualPropertyAtom ;
-                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
-                swrl:argument1 <p> ;
-                swrl:argument2 <h>
-            ] [
-                a swrl:DatavaluedPropertyAtom ;
-                swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h> ;
-                swrl:argument2 "string"
-            ]
-    ) ;
-    swrl:head (
-        [
-            a swrl:ClassAtom ;
-            swrl:classPredicate jsonschema:StringSchema ;
             swrl:argument1 <p>
         ]
     )
