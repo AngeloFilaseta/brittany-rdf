@@ -761,6 +761,35 @@ foaf:name
     )
 ] .
 
+# ----- IntegerSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-integer" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:IntegerSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"integer\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"integer\") ->  IntegerSchema(?p)" ;
+    swrl:body (
+            [
+                a swrl:IndividualPropertyAtom ;
+                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+                swrl:argument1 <p> ;
+                swrl:argument2 <h>
+            ] [
+                a swrl:DatavaluedPropertyAtom ;
+                swrl:propertyPredicate <#hasHandlerOutputType> ;
+                swrl:argument1 <h> ;
+                swrl:argument2 "integer"
+            ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:IntegerSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
 # ----- BooleanSchema -----
 [
     a swrl:Imp ;
