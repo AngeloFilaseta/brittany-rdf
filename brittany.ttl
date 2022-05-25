@@ -608,7 +608,6 @@
 # ----- SWRL Properties -----
 
 <#swrlRuleComment>
-    a owl:DatatypeProperty ;
     rdfs:subPropertyOf rdfs:comment ;
     rdfs:label "SWRL Rule in human readable format", "Regola SWRL in formato human readable"@it ;
     rdfs:comment "An additional comment to store the SWRL rule in human readable format." , "Un commento aggiuntivo per memorizzare la regola SWRL in formato human readable."@it .
