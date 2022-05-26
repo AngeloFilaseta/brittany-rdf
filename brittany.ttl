@@ -11,6 +11,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix seas: <https://w3id.org/seas/> .
 @prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
 @prefix swrlx: <http://swrl.stanford.edu/ontologies/built-ins/3.3/swrlx.owl#> .
 @prefix swrl: <http://www.w3.org/2003/11/swrl#> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
@@ -648,10 +649,13 @@ td:PropertyAffordance rdfs:subClassOf dco:PropertyAffordance .
 td:ActionAffordance rdfs:subClassOf dco:ActionAffordance .
 td:hasSecurityConfiguration owl:equivalentProperty td:hasSecurityConfiguration .
 td:hasOutputSchema a owl:ObjectProperty .
+td:hasForm a owl:ObjectProperty .
 
 dco:Device owl:equivalentClass m3:M2MDevice .
 
-hctl:hasTarget rdfs:subPropertyOf wot:href .
+hctl:hasTarget
+    a owl:DatatypeProperty ;
+    rdfs:subPropertyOf wot:href .
 
 hctl:forContentType
     a owl:DatatypeProperty .
@@ -892,28 +896,28 @@ foaf:name
     <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"object\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:ObjectSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
         swrl:body (
         [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
             swrl:argument1 <a> ;
             swrl:argument2 <h2>
         ] [
-            rdf:type swrl:DatavaluedPropertyAtom ;
+            a swrl:DatavaluedPropertyAtom ;
             swrl:propertyPredicate <#hasHandlerOutputType> ;
             swrl:argument1 <h2> ;
             swrl:argument2 "object"^^xsd:string
         ] [
-            rdf:type swrl:BuiltinAtom ;
+            a swrl:BuiltinAtom ;
             swrl:builtin swrlx:makeOWLThing ;
             swrl:arguments ( <i> <a> )
         ]
     );
    swrl:head (
         [
-            rdf:type swrl:ClassAtom ;
+            a swrl:ClassAtom ;
             swrl:classPredicate jsonschema:ObjectSchema ;
             swrl:argument1 <i>
         ] [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate td:hasOutputSchema ;
             swrl:argument1 <a> ;
             swrl:argument2 <i>
@@ -931,28 +935,28 @@ foaf:name
     <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"array\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:ArraySchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
         swrl:body (
         [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
             swrl:argument1 <a> ;
             swrl:argument2 <h2>
         ] [
-            rdf:type swrl:DatavaluedPropertyAtom ;
+            a swrl:DatavaluedPropertyAtom ;
             swrl:propertyPredicate <#hasHandlerOutputType> ;
             swrl:argument1 <h2> ;
             swrl:argument2 "array"^^xsd:string
         ] [
-            rdf:type swrl:BuiltinAtom ;
+            a swrl:BuiltinAtom ;
             swrl:builtin swrlx:makeOWLThing ;
             swrl:arguments ( <i> <a> )
         ]
     );
    swrl:head (
         [
-            rdf:type swrl:ClassAtom ;
+            a swrl:ClassAtom ;
             swrl:classPredicate jsonschema:ArraySchema ;
             swrl:argument1 <i>
         ] [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate td:hasOutputSchema ;
             swrl:argument1 <a> ;
             swrl:argument2 <i>
@@ -970,28 +974,28 @@ foaf:name
     <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"string\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:StringSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
     swrl:body (
         [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
             swrl:argument1 <a> ;
             swrl:argument2 <h2>
         ] [
-            rdf:type swrl:DatavaluedPropertyAtom ;
+            a swrl:DatavaluedPropertyAtom ;
             swrl:propertyPredicate <#hasHandlerOutputType> ;
             swrl:argument1 <h2> ;
             swrl:argument2 "string"^^xsd:string
         ] [
-            rdf:type swrl:BuiltinAtom ;
+            a swrl:BuiltinAtom ;
             swrl:builtin swrlx:makeOWLThing ;
             swrl:arguments ( <i> <a> )
         ]
     );
    swrl:head (
         [
-            rdf:type swrl:ClassAtom ;
+            a swrl:ClassAtom ;
             swrl:classPredicate jsonschema:StringSchema ;
             swrl:argument1 <i>
         ] [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate td:hasOutputSchema ;
             swrl:argument1 <a> ;
             swrl:argument2 <i>
@@ -1009,28 +1013,28 @@ foaf:name
     <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"number\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:NumberSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
     swrl:body (
         [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
             swrl:argument1 <a> ;
             swrl:argument2 <h2>
         ] [
-            rdf:type swrl:DatavaluedPropertyAtom ;
+            a swrl:DatavaluedPropertyAtom ;
             swrl:propertyPredicate <#hasHandlerOutputType> ;
             swrl:argument1 <h2> ;
             swrl:argument2 "number"^^xsd:string
         ] [
-            rdf:type swrl:BuiltinAtom ;
+            a swrl:BuiltinAtom ;
             swrl:builtin swrlx:makeOWLThing ;
             swrl:arguments ( <i> <a> )
         ]
     );
         swrl:head (
         [
-            rdf:type swrl:ClassAtom ;
+            a swrl:ClassAtom ;
             swrl:classPredicate jsonschema:NumberSchema ;
             swrl:argument1 <i>
         ] [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate td:hasOutputSchema ;
             swrl:argument1 <a> ;
             swrl:argument2 <i>
@@ -1048,28 +1052,28 @@ foaf:name
     <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"integer\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:IntegerSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
     swrl:body (
         [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
             swrl:argument1 <a> ;
             swrl:argument2 <h2>
         ] [
-            rdf:type swrl:DatavaluedPropertyAtom ;
+            a swrl:DatavaluedPropertyAtom ;
             swrl:propertyPredicate <#hasHandlerOutputType> ;
             swrl:argument1 <h2> ;
             swrl:argument2 "integer"^^xsd:string
         ] [
-            rdf:type swrl:BuiltinAtom ;
+            a swrl:BuiltinAtom ;
             swrl:builtin swrlx:makeOWLThing ;
             swrl:arguments ( <i> <a> )
         ]
     );
         swrl:head (
         [
-            rdf:type swrl:ClassAtom ;
+            a swrl:ClassAtom ;
             swrl:classPredicate jsonschema:IntegerSchema ;
             swrl:argument1 <i>
         ] [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate td:hasOutputSchema ;
             swrl:argument1 <a> ;
             swrl:argument2 <i>
@@ -1087,28 +1091,28 @@ foaf:name
     <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"boolean\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:BooleanSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
     swrl:body (
         [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
             swrl:argument1 <a> ;
             swrl:argument2 <h2>
         ] [
-            rdf:type swrl:DatavaluedPropertyAtom ;
+            a swrl:DatavaluedPropertyAtom ;
             swrl:propertyPredicate <#hasHandlerOutputType> ;
             swrl:argument1 <h2> ;
             swrl:argument2 "boolean"^^xsd:string
         ] [
-            rdf:type swrl:BuiltinAtom ;
+            a swrl:BuiltinAtom ;
             swrl:builtin swrlx:makeOWLThing ;
             swrl:arguments ( <i> <a> )
         ]
     );
         swrl:head (
         [
-            rdf:type swrl:ClassAtom ;
+            a swrl:ClassAtom ;
             swrl:classPredicate jsonschema:BooleanSchema ;
             swrl:argument1 <i>
         ] [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate td:hasOutputSchema ;
             swrl:argument1 <a> ;
             swrl:argument2 <i>
@@ -1126,34 +1130,121 @@ foaf:name
     <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"null\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:NullSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
     swrl:body (
         [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
             swrl:argument1 <a> ;
             swrl:argument2 <h2>
         ] [
-            rdf:type swrl:DatavaluedPropertyAtom ;
+            a swrl:DatavaluedPropertyAtom ;
             swrl:propertyPredicate <#hasHandlerOutputType> ;
             swrl:argument1 <h2> ;
             swrl:argument2 "null"^^xsd:string
         ] [
-            rdf:type swrl:BuiltinAtom ;
+            a swrl:BuiltinAtom ;
             swrl:builtin swrlx:makeOWLThing ;
             swrl:arguments ( <i> <a> )
         ]
     );
         swrl:head (
         [
-            rdf:type swrl:ClassAtom ;
+            a swrl:ClassAtom ;
             swrl:classPredicate jsonschema:NullSchema ;
             swrl:argument1 <i>
         ] [
-            rdf:type swrl:IndividualPropertyAtom ;
+            a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate td:hasOutputSchema ;
             swrl:argument1 <a> ;
             swrl:argument2 <i>
         ]
     )
 ] .
+
+# ----- SWRL Rule for TD Form Generation -----
+
+<ia> a swrl:Variable .
+
+<td> a swrl:Variable .
+
+<ip> a swrl:Variable .
+
+<h3> a swrl:Variable .
+
+<hn> a swrl:Variable .
+
+<c> a swrl:Variable .
+
+<cn> a swrl:Variable .
+
+<fullText> a swrl:Variable .
+
+<form> a swrl:Variable .
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-td-form-generation" ;
+    rdfs:comment "SWRL Rule that generates the form for each Interaction Affordance." ;
+    <#swrlRuleComment> "isInteractionAffordanceOf(?ia, ?td) ^ foaf:name(?td, ?ip) isInteractionAffordanceOfHandler(?ia, ?h3) ^ foaf:name(?h3, ?hn) ^ interactsWithComponentHw(?ia, ?c) ^ foaf:name(?c, ?cn) ^ swrlb:stringConcat(?fullText, ?ip, \"/\", ?hn, \"?id=\", ?cn) ^ swrlx:makeOWLThing(?form, ?ia)-> BrittanyForm(?form) ^ hctl:hasTarget(?form, ?fullText) ^ td:hasForm(?td, ?form)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isInteractionAffordanceOf> ;
+            swrl:argument1 <ia> ;
+            swrl:argument2 <td>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate foaf:name ;
+            swrl:argument1 <td> ;
+            swrl:argument2 <ip>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isInteractionAffordanceOfHandler> ;
+            swrl:argument1 <ia> ;
+            swrl:argument2 <h3>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate foaf:name ;
+            swrl:argument1 <h3> ;
+            swrl:argument2 <hn>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#interactsWithComponentHw> ;
+            swrl:argument1 <ia> ;
+            swrl:argument2 <c>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate foaf:name ;
+            swrl:argument1 <c> ;
+            swrl:argument2 <cn>
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlb:stringConcat ;
+            swrl:arguments ( <fullText> <ip> "/"^^xsd:string  <hn> "?id="^^xsd:string  <cn> )
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <form> <ia> )
+        ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate <#BrittanyForm> ;
+            swrl:argument1 <form>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate hctl:hasTarget ;
+            swrl:argument1 <form> ;
+            swrl:argument2 <fullText>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasForm ;
+            swrl:argument1 <td> ;
+            swrl:argument2 <form>
+        ]
+    )
+ ] .
+
 
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
@@ -1229,51 +1320,27 @@ foaf:name
 
 <#angelo-action-turn-off-digital-light-sx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-off-digital-light> ;
-    <#interactsWithComponentHw> <#angelo-digital-light-sx> ;
-    td:hasForm [
-        a <#BrittanyForm> ;
-        hctl:hasTarget "angelo-td-mock-ip/turnOff?id=digital-light-sx"
-    ] .
+    <#interactsWithComponentHw> <#angelo-digital-light-sx> .
 
 <#angelo-action-turn-off-digital-light-dx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-off-digital-light> ;
-    <#interactsWithComponentHw> <#angelo-digital-light-dx> ;
-    td:hasForm [
-        a <#BrittanyForm> ;
-        hctl:hasTarget "angelo-td-mock-ip/turnOff?id=digital-light-dx"
-    ] .
+    <#interactsWithComponentHw> <#angelo-digital-light-dx> .
 
 <#angelo-action-turn-on-digital-light-sx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-on-digital-light> ;
-    <#interactsWithComponentHw> <#angelo-digital-light-sx> ;
-    td:hasForm [
-        a <#BrittanyForm> ;
-        hctl:hasTarget "angelo-td-mock-ip/turnOn?id=digital-light-sx"
-    ] .
+    <#interactsWithComponentHw> <#angelo-digital-light-sx> .
 
 <#angelo-action-turn-on-digital-light-dx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-on-digital-light> ;
-    <#interactsWithComponentHw> <#angelo-digital-light-dx> ;
-    td:hasForm [
-        a <#BrittanyForm> ;
-        hctl:hasTarget "angelo-td-mock-ip/turnOn?id=digital-light-dx"
-    ] .
+    <#interactsWithComponentHw> <#angelo-digital-light-dx> .
 
 <#angelo-property-is-on-digital-light-sx>
     <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
-    <#interactsWithComponentHw> <#angelo-digital-light-sx> ;
-    td:hasForm [
-        a <#BrittanyForm> ;
-        hctl:hasTarget "angelo-td-mock-ip/isOn?id=digital-light-sx"
-    ] .
+    <#interactsWithComponentHw> <#angelo-digital-light-sx> .
 
 <#angelo-property-is-on-digital-light-dx>
     <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
-    <#interactsWithComponentHw> <#angelo-digital-light-dx> ;
-    td:hasForm [
-        a <#BrittanyForm> ;
-        hctl:hasTarget "angelo-td-mock-ip/isOn?id=digital-light-dx"
-    ] .
+    <#interactsWithComponentHw> <#angelo-digital-light-dx> .
 
 <#angelo-td-mock-ip>
     a <#BrittanyThingDescriptor> ;
@@ -1334,28 +1401,16 @@ foaf:name
 
 <#giorgia-action-turn-off-digital-light-center>
     <#isActionAffordanceOfHandler> <#giorgia-handler-turn-off-digital-light> ;
-    <#interactsWithComponentHw> <#giorgia-digital-light-center> ;
-    td:hasForm [
-        a <#BrittanyForm> ;
-        hctl:hasTarget "giorgia-td-mock-ip/turnOff?id=digital-light-center"
-    ] .
+    <#interactsWithComponentHw> <#giorgia-digital-light-center> .
 
 <#giorgia-action-turn-on-digital-light-center>
     <#isActionAffordanceOfHandler> <#giorgia-handler-turn-on-digital-light> ;
-    <#interactsWithComponentHw> <#giorgia-digital-light-center> ;
-    td:hasForm [
-        a <#BrittanyForm> ;
-        hctl:hasTarget "giorgia-td-mock-ip/turnOn?id=digital-light-center"
-    ] .
+    <#interactsWithComponentHw> <#giorgia-digital-light-center> .
 
 <#giorgia-property-is-on-digital-light-center>
     a jsonschema:BooleanSchema ;
     <#isPropertyAffordanceOfHandler> <#giorgia-handler-is-on-digital-light> ;
-    <#interactsWithComponentHw> <#giorgia-digital-light-center> ;
-    td:hasForm [
-        a <#BrittanyForm> ;
-        hctl:hasTarget "giorgia-td-mock-ip/isOn?id=digital-light-center"
-    ] .
+    <#interactsWithComponentHw> <#giorgia-digital-light-center> .
 
 <#giorgia-td-mock-ip>
     a <#BrittanyThingDescriptor> ;
