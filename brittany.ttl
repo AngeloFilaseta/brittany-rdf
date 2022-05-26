@@ -1245,7 +1245,6 @@ foaf:name
     )
  ] .
 
-
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
 
@@ -1302,12 +1301,10 @@ foaf:name
 
 <#angelo-handler-turn-off-digital-light>
     a <#TurnOffDigitalLightHandler> ;
-    <#hasHandlerOutputType> "string" ;
     <#handleDigitalLightHw> <#angelo-digital-light-sx>, <#angelo-digital-light-dx> .
 
 <#angelo-handler-turn-on-digital-light>
     a <#TurnOnDigitalLightHandler> ;
-    <#hasHandlerOutputType> "string" ;
     <#handleDigitalLightHw> <#angelo-digital-light-sx>, <#angelo-digital-light-dx> .
 
 <#angelo-digital-light-dx>
@@ -1387,12 +1384,11 @@ foaf:name
 
 <#giorgia-handler-turn-off-digital-light>
     a <#TurnOffDigitalLightHandler> ;
-    <#hasHandlerOutputType> "string" ;
+
     <#handleDigitalLightHw> <#giorgia-digital-light-center> .
 
 <#giorgia-handler-turn-on-digital-light>
     a <#TurnOnDigitalLightHandler> ;
-    <#hasHandlerOutputType> "string" ;
     <#handleDigitalLightHw> <#giorgia-digital-light-center> .
 
 <#giorgia-digital-light-center>
@@ -1408,7 +1404,6 @@ foaf:name
     <#interactsWithComponentHw> <#giorgia-digital-light-center> .
 
 <#giorgia-property-is-on-digital-light-center>
-    a jsonschema:BooleanSchema ;
     <#isPropertyAffordanceOfHandler> <#giorgia-handler-is-on-digital-light> ;
     <#interactsWithComponentHw> <#giorgia-digital-light-center> .
 
