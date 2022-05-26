@@ -194,12 +194,14 @@
 <#SensorHw>
     rdfs:subClassOf <#ComponentHw> ;
     rdfs:label "Sensor (Brittany)", "Sensore (Brittany)"@it ;
-    rdfs:comment "A Hardware Component that can be used to collect data.", "Un Componente Hardware che può essere utilizzato per collezionare dati."@it .
+    rdfs:comment "A Hardware Component that can be used to collect data.", "Un Componente Hardware che può essere utilizzato per collezionare dati."@it ;
+    owl:equivalentClass dco:Sensor, m3:Sensor .
 
 <#ActuatorHw>
     rdfs:subClassOf <#ComponentHw> ;
     rdfs:label "Actuator (Brittany)", "Attuatore (Brittany)"@it ;
-    rdfs:comment "A Hardware Component that can be used to execute an action.", "Un Componente Hardware che può essere utilizzato per eseguire un'azione."@it .
+    rdfs:comment "A Hardware Component that can be used to execute an action.", "Un Componente Hardware che può essere utilizzato per eseguire un'azione."@it ;
+    owl:equivalentClass dco:Actuator, m3:Actuator .
 
 <#DigitalLightHw>
     rdfs:subClassOf <#ActuatorHw> ;
@@ -651,7 +653,8 @@ td:hasSecurityConfiguration owl:equivalentProperty td:hasSecurityConfiguration .
 td:hasOutputSchema a owl:ObjectProperty .
 td:hasForm a owl:ObjectProperty .
 
-dco:Device owl:equivalentClass m3:M2MDevice .
+m3:Building owl:equivalentClass dbo:Building .
+m3:M2MDevice owl:equivalentClass dco:Device .
 
 hctl:hasTarget
     a owl:DatatypeProperty ;
