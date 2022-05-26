@@ -619,6 +619,17 @@
     rdfs:label "Thing Descriptor of Edge (Brittany)", "Thing Descriptor dell'Edge (Brittany)"@it ;
     rdfs:comment "Property used to link a Thing Descriptor to an Edge (W3).", "Proprietà utilizzata per collegare un Thing Descriptor ad un Edge (W3)."@it .
 
+<#isInteractionAffordanceOf>
+    owl:inverseOf td:hasInteractionAffordance .
+
+<#isPropertyAffordanceOf>
+    rdfs:subPropertyOf <#isInteractionAffordanceOf> ;
+    owl:inverseOf td:hasPropertyAffordance .
+
+<#isActionAffordanceOf>
+    rdfs:subPropertyOf <#isInteractionAffordanceOf> ;
+    owl:inverseOf td:hasActionAffordance .
+
 # ----- SWRL Properties -----
 
 <#swrlRuleComment>
@@ -1266,6 +1277,7 @@ foaf:name
 
 <#angelo-td-mock-ip>
     a <#BrittanyThingDescriptor> ;
+    foaf:name "angelo-td-mock-ip" ;
     td:title "Angelo's ESP8266 TD" ;
     td:hasActionAffordance <#angelo-action-turn-off-digital-light-sx>, <#angelo-action-turn-off-digital-light-dx>, <#angelo-action-turn-on-digital-light-sx>, <#angelo-action-turn-on-digital-light-dx> ;
     td:hasPropertyAffordance <#angelo-property-is-on-digital-light-sx>, <#angelo-property-is-on-digital-light-dx> .
@@ -1347,6 +1359,7 @@ foaf:name
 
 <#giorgia-td-mock-ip>
     a <#BrittanyThingDescriptor> ;
+    foaf:name "giorgia-td-mock-ip" ;
     td:title "Giorgia's ESP8266 TD" ;
     td:hasActionAffordance <#giorgia-action-turn-off-digital-light-center>, <#giorgia-action-turn-on-digital-light-center> ;
     td:hasPropertyAffordance <#giorgia-property-is-on-digital-light-center> .
