@@ -541,6 +541,19 @@
     rdfs:label "Digital Light is handled by Operation Handler (Brittany)", "Luce Digitale è gestita da Operation Handler (Brittany)"@it ;
     rdfs:comment "Property used to indicate that a Digital Light is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che una Luce Digitale è gestita da un Operation Handler."@it .
 
+# ----- InteractionAffordances has Components Properties -----
+
+<#interactsWithComponentHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:domain td:InteractionAffordance ;
+    rdfs:label "Interaction Affordarce interacts with Hardware Component (Brittany)", "Interaction Affordance interagisce con Componente Hardware"@it ;
+    rdfs:comment "Property used to indicate that an Interaction Affordance interact on a certain Hardware Component.", "Proprietà utilizzata per indicare che un Interaction Affordance interagisce con uno specifico Componente Hardware" .
+
+<#isInteractedComponentHw>
+    owl:inverseOf <#interactsWithComponentHw> ;
+    rdfs:label "Hardware Component is interacted by Interaction Affordance (Brittany)", "Componente Hardware è interagito da Interaction Affordance (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that a Hardware Component is interacted by an Interaction Affordance.", "Proprietà utilizzata per indicare che un Componente Hardware è interagito da un Interaction Affordance."@it .
+
 # ----- Thing Descriptor Properties -----
 
 <#hasHandlerInteractionAffordance>
