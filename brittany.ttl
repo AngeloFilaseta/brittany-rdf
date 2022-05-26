@@ -644,7 +644,7 @@ foaf:name
 
 <p> a swrl:Variable .
 
-<h> a swrl:Variable .
+<h1> a swrl:Variable .
 
 # ----- ObjectSchema -----
 [
@@ -658,11 +658,11 @@ foaf:name
                 a swrl:IndividualPropertyAtom ;
                 swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
                 swrl:argument1 <p> ;
-                swrl:argument2 <h>
+                swrl:argument2 <h1>
             ] [
                 a swrl:DatavaluedPropertyAtom ;
                 swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h> ;
+                swrl:argument1 <h1> ;
                 swrl:argument2 "object"
             ]
     ) ;
@@ -687,11 +687,11 @@ foaf:name
                 a swrl:IndividualPropertyAtom ;
                 swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
                 swrl:argument1 <p> ;
-                swrl:argument2 <h>
+                swrl:argument2 <h1>
             ] [
                 a swrl:DatavaluedPropertyAtom ;
                 swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h> ;
+                swrl:argument1 <h1> ;
                 swrl:argument2 "array"
             ]
     ) ;
@@ -716,11 +716,11 @@ foaf:name
                 a swrl:IndividualPropertyAtom ;
                 swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
                 swrl:argument1 <p> ;
-                swrl:argument2 <h>
+                swrl:argument2 <h1>
             ] [
                 a swrl:DatavaluedPropertyAtom ;
                 swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h> ;
+                swrl:argument1 <h1> ;
                 swrl:argument2 "string"
             ]
     ) ;
@@ -745,11 +745,11 @@ foaf:name
                 a swrl:IndividualPropertyAtom ;
                 swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
                 swrl:argument1 <p> ;
-                swrl:argument2 <h>
+                swrl:argument2 <h1>
             ] [
                 a swrl:DatavaluedPropertyAtom ;
                 swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h> ;
+                swrl:argument1 <h1> ;
                 swrl:argument2 "number"
             ]
     ) ;
@@ -774,11 +774,11 @@ foaf:name
                 a swrl:IndividualPropertyAtom ;
                 swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
                 swrl:argument1 <p> ;
-                swrl:argument2 <h>
+                swrl:argument2 <h1>
             ] [
                 a swrl:DatavaluedPropertyAtom ;
                 swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h> ;
+                swrl:argument1 <h1> ;
                 swrl:argument2 "integer"
             ]
     ) ;
@@ -803,11 +803,11 @@ foaf:name
                 a swrl:IndividualPropertyAtom ;
                 swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
                 swrl:argument1 <p> ;
-                swrl:argument2 <h>
+                swrl:argument2 <h1>
             ] [
                 a swrl:DatavaluedPropertyAtom ;
                 swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h> ;
+                swrl:argument1 <h1> ;
                 swrl:argument2 "boolean"
             ]
     ) ;
@@ -832,11 +832,11 @@ foaf:name
                 a swrl:IndividualPropertyAtom ;
                 swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
                 swrl:argument1 <p> ;
-                swrl:argument2 <h>
+                swrl:argument2 <h1>
             ] [
                 a swrl:DatavaluedPropertyAtom ;
                 swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h> ;
+                swrl:argument1 <h1> ;
                 swrl:argument2 "null"
             ]
     ) ;
@@ -863,8 +863,9 @@ foaf:name
 [
     a swrl:Imp ;
     swrla:isRuleEnabled "true"^^xsd:boolean ;
-    rdfs:label "test"^^xsd:string ;
-    rdfs:comment ""^^xsd:string ;
+    rdfs:label "swrl-action-affordance-from-handler-string" ;
+    rdfs:comment "SWRL Rule that creates a new jsonschema:StringSchema individual and link it to the corresponding ActionAffordance using the property td:hasOutputSchema if it is linked to an Handler which has the property <#hasHandlerOutputType> \"string\"." ;
+    <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ autogen0:hasHandlerOutputType(?h2, \"string\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:StringSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
     swrl:body (
         [
             rdf:type swrl:IndividualPropertyAtom ;
