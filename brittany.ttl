@@ -11,6 +11,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix seas: <https://w3id.org/seas/> .
 @prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix swrlx: <http://swrl.stanford.edu/ontologies/built-ins/3.3/swrlx.owl#> .
 @prefix swrl: <http://www.w3.org/2003/11/swrl#> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
 @prefix wot: <http://iot.linkeddata.es/def/wot#>.
@@ -622,6 +623,7 @@ td:InteractionAffordance rdfs:subClassOf dco:InteractionAffordance .
 td:PropertyAffordance rdfs:subClassOf dco:PropertyAffordance .
 td:ActionAffordance rdfs:subClassOf dco:ActionAffordance .
 td:hasSecurityConfiguration owl:equivalentProperty td:hasSecurityConfiguration .
+td:hasOutputSchema a owl:ObjectProperty .
 
 dco:Device owl:equivalentClass m3:M2MDevice .
 
@@ -847,6 +849,53 @@ foaf:name
     )
 ] .
 
+# ----- SWRL Rules for Property Affordaces -----
+# One for each type: object, array, string, number, integer, boolean, or null.
+
+<a> a swrl:Variable .
+
+<h2> a swrl:Variable .
+
+<i> a swrl:Variable .
+
+# ----- StringSchema -----
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "test"^^xsd:string ;
+    rdfs:comment ""^^xsd:string ;
+    swrl:body (
+        [
+            rdf:type swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <h2>
+        ] [
+            rdf:type swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h2> ;
+            swrl:argument2 "string"^^xsd:string
+        ] [
+            rdf:type swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <i> <a> )
+        ]
+    );
+   swrl:head (
+        [
+            rdf:type swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:StringSchema ;
+            swrl:argument1 <i>
+        ] [
+            rdf:type swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasOutputSchema ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <i>
+        ]
+    )
+ ] .
+
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
 
@@ -903,10 +952,12 @@ foaf:name
 
 <#angelo-handler-turn-off-digital-light>
     a <#TurnOffDigitalLightHandler> ;
+    <#hasHandlerOutputType> "string" ;
     <#handleDigitalLightHw> <#angelo-digital-light-sx>, <#angelo-digital-light-dx> .
 
 <#angelo-handler-turn-on-digital-light>
     a <#TurnOnDigitalLightHandler> ;
+    <#hasHandlerOutputType> "string" ;
     <#handleDigitalLightHw> <#angelo-digital-light-sx>, <#angelo-digital-light-dx> .
 
 <#angelo-digital-light-dx>
@@ -922,32 +973,28 @@ foaf:name
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "angelo-td-mock-ip/turnOff?id=digital-light-sx"
-    ] ;
-    td:hasOutputSchema [ a jsonschema:StringSchema ] .
+    ] .
 
 <#angelo-action-turn-off-digital-light-dx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-off-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "angelo-td-mock-ip/turnOff?id=digital-light-dx"
-    ] ;
-    td:hasOutputSchema [ a jsonschema:StringSchema ] .
+    ] .
 
 <#angelo-action-turn-on-digital-light-sx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-on-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "angelo-td-mock-ip/turnOn?id=digital-light-sx"
-    ] ;
-    td:hasOutputSchema [ a jsonschema:StringSchema ] .
+    ] .
 
 <#angelo-action-turn-on-digital-light-dx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-on-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "angelo-td-mock-ip/turnOn?id=digital-light-dx"
-    ] ;
-    td:hasOutputSchema [ a jsonschema:StringSchema ] .
+    ] .
 
 <#angelo-property-is-on-digital-light-sx>
     <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
@@ -1007,10 +1054,12 @@ foaf:name
 
 <#giorgia-handler-turn-off-digital-light>
     a <#TurnOffDigitalLightHandler> ;
+    <#hasHandlerOutputType> "string" ;
     <#handleDigitalLightHw> <#giorgia-digital-light-center> .
 
 <#giorgia-handler-turn-on-digital-light>
     a <#TurnOnDigitalLightHandler> ;
+    <#hasHandlerOutputType> "string" ;
     <#handleDigitalLightHw> <#giorgia-digital-light-center> .
 
 <#giorgia-digital-light-center>
@@ -1022,16 +1071,14 @@ foaf:name
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "giorgia-td-mock-ip/turnOff?id=digital-light-center"
-    ] ;
-    td:hasOutputSchema [ a jsonschema:StringSchema ] .
+    ] .
 
 <#giorgia-action-turn-on-digital-light-center>
     <#isActionAffordanceOfHandler> <#giorgia-handler-turn-on-digital-light> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "giorgia-td-mock-ip/turnOn?id=digital-light-center"
-    ] ;
-    td:hasOutputSchema [ a jsonschema:StringSchema ] .
+    ] .
 
 <#giorgia-property-is-on-digital-light-center>
     a jsonschema:BooleanSchema ;
