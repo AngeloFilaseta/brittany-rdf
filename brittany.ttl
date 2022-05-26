@@ -682,17 +682,17 @@ foaf:name
     rdfs:comment "SWRL Rule that assign the type jsonSchema:ObjectSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"object\"." ;
     <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"object\") ->  ObjectSchema(?p)" ;
     swrl:body (
-            [
-                a swrl:IndividualPropertyAtom ;
-                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
-                swrl:argument1 <p> ;
-                swrl:argument2 <h1>
-            ] [
-                a swrl:DatavaluedPropertyAtom ;
-                swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h1> ;
-                swrl:argument2 "object"
-            ]
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "object"
+        ]
     ) ;
     swrl:head (
         [
@@ -711,17 +711,17 @@ foaf:name
     rdfs:comment "SWRL Rule that assign the type jsonSchema:ArraySchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"array\"." ;
     <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"array\") ->  ArraySchema(?p)" ;
     swrl:body (
-            [
-                a swrl:IndividualPropertyAtom ;
-                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
-                swrl:argument1 <p> ;
-                swrl:argument2 <h1>
-            ] [
-                a swrl:DatavaluedPropertyAtom ;
-                swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h1> ;
-                swrl:argument2 "array"
-            ]
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "array"
+        ]
     ) ;
     swrl:head (
         [
@@ -740,17 +740,17 @@ foaf:name
     rdfs:comment "SWRL Rule that assign the type jsonSchema:StringSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"string\"." ;
     <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"string\") ->  StringSchema(?p)" ;
     swrl:body (
-            [
-                a swrl:IndividualPropertyAtom ;
-                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
-                swrl:argument1 <p> ;
-                swrl:argument2 <h1>
-            ] [
-                a swrl:DatavaluedPropertyAtom ;
-                swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h1> ;
-                swrl:argument2 "string"
-            ]
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "string"
+        ]
     ) ;
     swrl:head (
         [
@@ -769,17 +769,17 @@ foaf:name
     rdfs:comment "SWRL Rule that assign the type jsonSchema:NumberSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"number\"." ;
     <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"number\") ->  NumberSchema(?p)" ;
     swrl:body (
-            [
-                a swrl:IndividualPropertyAtom ;
-                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
-                swrl:argument1 <p> ;
-                swrl:argument2 <h1>
-            ] [
-                a swrl:DatavaluedPropertyAtom ;
-                swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h1> ;
-                swrl:argument2 "number"
-            ]
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "number"
+        ]
     ) ;
     swrl:head (
         [
@@ -798,17 +798,17 @@ foaf:name
     rdfs:comment "SWRL Rule that assign the type jsonSchema:IntegerSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"integer\"." ;
     <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"integer\") ->  IntegerSchema(?p)" ;
     swrl:body (
-            [
-                a swrl:IndividualPropertyAtom ;
-                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
-                swrl:argument1 <p> ;
-                swrl:argument2 <h1>
-            ] [
-                a swrl:DatavaluedPropertyAtom ;
-                swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h1> ;
-                swrl:argument2 "integer"
-            ]
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "integer"
+        ]
     ) ;
     swrl:head (
         [
@@ -827,17 +827,17 @@ foaf:name
     rdfs:comment "SWRL Rule that assign the type jsonSchema:BooleanSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"boolean\"." ;
     <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"boolean\") ->  BooleanSchema(?p)" ;
     swrl:body (
-            [
-                a swrl:IndividualPropertyAtom ;
-                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
-                swrl:argument1 <p> ;
-                swrl:argument2 <h1>
-            ] [
-                a swrl:DatavaluedPropertyAtom ;
-                swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h1> ;
-                swrl:argument2 "boolean"
-            ]
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "boolean"
+        ]
     ) ;
     swrl:head (
         [
@@ -856,17 +856,17 @@ foaf:name
     rdfs:comment "SWRL Rule that assign the type jsonSchema:NullSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"null\"." ;
     <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"null\") ->  ObjectSchema(?p)" ;
     swrl:body (
-            [
-                a swrl:IndividualPropertyAtom ;
-                swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
-                swrl:argument1 <p> ;
-                swrl:argument2 <h1>
-            ] [
-                a swrl:DatavaluedPropertyAtom ;
-                swrl:propertyPredicate <#hasHandlerOutputType> ;
-                swrl:argument1 <h1> ;
-                swrl:argument2 "null"
-            ]
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "null"
+        ]
     ) ;
     swrl:head (
         [
@@ -894,7 +894,7 @@ foaf:name
     rdfs:label "swrl-action-affordance-from-handler-object" ;
     rdfs:comment "SWRL Rule that creates a new jsonschema:ObjectSchema individual and link it to the corresponding ActionAffordance using the \"td:hasOutputSchema\" property  if it is linked to a Handler which has the property <#hasHandlerOutputType> \"object\"." ;
     <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"object\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:ObjectSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
-        swrl:body (
+    swrl:body (
         [
             a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
@@ -933,7 +933,7 @@ foaf:name
     rdfs:label "swrl-action-affordance-from-handler-array" ;
     rdfs:comment "SWRL Rule that creates a new jsonschema:ArraySchema individual and link it to the corresponding ActionAffordance using the \"td:hasOutputSchema\" property  if it is linked to a Handler which has the property <#hasHandlerOutputType> \"array\"." ;
     <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"array\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:ArraySchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
-        swrl:body (
+    swrl:body (
         [
             a swrl:IndividualPropertyAtom ;
             swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
