@@ -1218,6 +1218,7 @@ foaf:name
 
 <#angelo-action-turn-off-digital-light-sx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-off-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-sx> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "angelo-td-mock-ip/turnOff?id=digital-light-sx"
@@ -1225,6 +1226,7 @@ foaf:name
 
 <#angelo-action-turn-off-digital-light-dx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-off-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-dx> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "angelo-td-mock-ip/turnOff?id=digital-light-dx"
@@ -1232,6 +1234,7 @@ foaf:name
 
 <#angelo-action-turn-on-digital-light-sx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-on-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-sx> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "angelo-td-mock-ip/turnOn?id=digital-light-sx"
@@ -1239,6 +1242,7 @@ foaf:name
 
 <#angelo-action-turn-on-digital-light-dx>
     <#isActionAffordanceOfHandler> <#angelo-handler-turn-on-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-dx> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "angelo-td-mock-ip/turnOn?id=digital-light-dx"
@@ -1246,6 +1250,7 @@ foaf:name
 
 <#angelo-property-is-on-digital-light-sx>
     <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-sx> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "angelo-td-mock-ip/isOn?id=digital-light-sx"
@@ -1253,6 +1258,7 @@ foaf:name
 
 <#angelo-property-is-on-digital-light-dx>
     <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-dx> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "angelo-td-mock-ip/isOn?id=digital-light-dx"
@@ -1316,6 +1322,7 @@ foaf:name
 
 <#giorgia-action-turn-off-digital-light-center>
     <#isActionAffordanceOfHandler> <#giorgia-handler-turn-off-digital-light> ;
+    <#interactsWithComponentHw> <#giorgia-digital-light-center> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "giorgia-td-mock-ip/turnOff?id=digital-light-center"
@@ -1323,6 +1330,7 @@ foaf:name
 
 <#giorgia-action-turn-on-digital-light-center>
     <#isActionAffordanceOfHandler> <#giorgia-handler-turn-on-digital-light> ;
+    <#interactsWithComponentHw> <#giorgia-digital-light-center> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "giorgia-td-mock-ip/turnOn?id=digital-light-center"
@@ -1331,6 +1339,7 @@ foaf:name
 <#giorgia-property-is-on-digital-light-center>
     a jsonschema:BooleanSchema ;
     <#isPropertyAffordanceOfHandler> <#giorgia-handler-is-on-digital-light> ;
+    <#interactsWithComponentHw> <#giorgia-digital-light-center> ;
     td:hasForm [
         a <#BrittanyForm> ;
         hctl:hasTarget "giorgia-td-mock-ip/isOn?id=digital-light-center"
