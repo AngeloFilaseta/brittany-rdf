@@ -897,6 +897,45 @@ foaf:name
     )
  ] .
 
+# ----- ArraySchema -----
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-action-affordance-from-handler-array" ;
+    rdfs:comment "SWRL Rule that creates a new jsonschema:ArraySchema individual and link it to the corresponding ActionAffordance using the \"td:hasOutputSchema\" property  if it is linked to a Handler which has the property <#hasHandlerOutputType> \"array\"." ;
+    <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"array\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:ArraySchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
+        swrl:body (
+        [
+            rdf:type swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <h2>
+        ] [
+            rdf:type swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h2> ;
+            swrl:argument2 "array"^^xsd:string
+        ] [
+            rdf:type swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <i> <a> )
+        ]
+    );
+   swrl:head (
+        [
+            rdf:type swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:ArraySchema ;
+            swrl:argument1 <i>
+        ] [
+            rdf:type swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasOutputSchema ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <i>
+        ]
+    )
+ ] .
+
 # ----- StringSchema -----
 
 [
