@@ -1,3 +1,4 @@
+@base <https://brittany-persistence-service.herokuapp.com/> .
 @prefix dbo: <http://dbpedia.org/ontology/> .
 @prefix dbr: <http://dbpedia.org/resource/> .
 @prefix dco: <https://w3id.org/dco#> .
@@ -9,23 +10,48 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix seas: <https://w3id.org/seas/> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+@prefix swrlb: <http://www.w3.org/2003/11/swrlb#> .
+@prefix swrlx: <http://swrl.stanford.edu/ontologies/built-ins/3.3/swrlx.owl#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
 @prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix wot: <http://iot.linkeddata.es/def/wot#>.
 @prefix wotsec: <https://www.w3.org/2019/wot/security#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<#BrittanyRDF>
+    a owl:Ontology ;
+    rdfs:label "Brittany RDF";
+    rdfs:comment "An ontology used by Brittany, a software used to simplify and automatize the management of greenhouses.", "Un'ontologia utilizzata da Brittany, un software per semplificare ed automatizzare la gestione di un sistema di serre."@it ;
+    rdfs:seeAlso "https://github.com/Tale152/brittany" .
 
 # ========================== CONCEPTS (CLASSES) ==========================
 # They are abstractions of the domain.
 
+<#NameRestriction>
+    a owl:Restriction ;
+    owl:onProperty foaf:name ;
+    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+    owl:onDataRange xsd:string .
+
 <#Greenhouse>
-    a rdfs:Class ;
+    a owl:Class ;
+    rdfs:subClassOf dbo:Building, <#NameRestriction>, [
+        a owl:Restriction ;
+        owl:onProperty <#hasEnvironment> ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass <#Environment>
+    ] ;
     rdfs:label "Greenhouse (Brittany)", "Serra (Brittany)"@it ;
     rdfs:comment "A greenhouse in which the \"Brittany\" software is used.", "Una serra in cui viene utilizzato il software \"Brittany\"."@it ;
-    owl:equivalentClass seas:Greenhouse .
+    owl:equivalentClass seas:Greenhouse ;
+    owl:disjointWith <#Monitorable>, <#Edge>, <#Module>, <#OperationHandler>, <#ComponentHw> .
 
 <#Monitorable>
-    a rdfs:Class ;
+    a owl:Class ;
     rdfs:label "Monitorable (Brittany)", "Monitorabile (Brittany)"@it ;
-    rdfs:comment "A space or area that can be monitored by an Edge device.", "Uno spazio o un'area che può essere monitorata da un dispositivo Edge"@it .
+    rdfs:comment "A space or area that can be monitored by an Edge device.", "Uno spazio o un'area che può essere monitorata da un dispositivo Edge"@it ;
+    owl:disjointWith <#Edge>, <#Module>, <#OperationHandler>, <#ComponentHw> .
 
 <#Environment>
     rdfs:subClassOf <#Monitorable> , dco:Space, seas:Room ;
@@ -39,19 +65,35 @@
     owl:equivalentClass dbo:Plant .
 
 <#Edge>
-    a rdfs:Class ;
+    a owl:Class ;
+    rdfs:subClassOf dco:Device , [
+        a owl:Restriction ;
+        owl:onProperty <#hasModule> ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass <#Module>
+    ], [
+        a owl:Restriction ;
+        owl:onProperty <#hasThingDescriptor> ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass <#BrittanyThingDescriptor>
+    ] ;
     rdfs:label "Edge (Brittany)", "Edge (Brittany)"@it ;
     rdfs:comment "A digital electronic machine that collect data from Sensor and can manipulate Actuators. An Edge in composed by Modules. An Edge can be placed in an Ambient or on a Plant.", "Una macchina elettronica che colleziona dati dai Sensori e che può manipolare degli Attuatori. Un Edge è composto da Moduli. Un Edge può essere posizionato in un Ambiente o su una Pianta."@it;
-    owl:equivalentClass dco:Device .
+    owl:disjointWith <#Module>, <#OperationHandler>, <#ComponentHw> .
 
 # ----- Modules -----
 
-# TODO Add constraint:
-# - Module MUST have a <#moduleName>
 <#Module>
-    a rdfs:Class ;
+    a owl:Class ;
+    rdfs:subClassOf <#NameRestriction>, [
+        a owl:Restriction ;
+        owl:onProperty <#hasHandler> ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onClass <#OperationHandler>
+    ] ;
     rdfs:label "Module (Brittany)", "Modulo (Brittany)"@it ;
-    rdfs:comment "A logical component that can be added to an Edge and is made of OperationHandlers.", "Un componente logico che può essere aggiunto ad un Edge ed è composto da OperationHandlers."@it .
+    rdfs:comment "A logical component that can be added to an Edge and is made of OperationHandlers.", "Un componente logico che può essere aggiunto ad un Edge ed è composto da OperationHandlers."@it ;
+    owl:disjointWith <#OperationHandler>, <#ComponentHw> .
 
 <#ComponentModule>
     rdfs:subClassOf <#Module> ;
@@ -59,33 +101,40 @@
     rdfs:comment "A Module that can interact with some Hardware Component.", "Un Modulo che può interagire con alcuni Componenti Hardware."@it .
 
 <#DigitalLightModule>
-    rdfs:subClassOf <#ComponentModule> ;
+    rdfs:subClassOf <#ComponentModule> , [
+        a owl:Restriction ;
+        owl:onProperty foaf:name ;
+        owl:hasValue "digital-light"^^xsd:string
+    ];
     rdfs:label "Digital Light Module (Brittany)", "Modulo di Luce Digitale (Brittany)"@it ;
     rdfs:comment "A Module that can interact with some Digital Light Hardware.", "Un Modulo che può interagire con alcuni componenti di Luce Digitale."@it .
 
 # ----- Handlers -----
 
-# TODO Add constraint:
-# - OperationHandler MUST have a <#handlerName>
 <#OperationHandler>
-    rdfs:subClassOf dco:Function ;
+    a owl:Class ;
+    rdfs:subClassOf <#NameRestriction> ;
     rdfs:label "Operation Handler (Brittany)", "Operation Handler (Brittany)"@it ;
-    rdfs:comment "An operation that uses some arguments for a computation and returns an result.", "Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato."@it .
+    rdfs:comment "An operation that uses some arguments for a computation and returns an result.", "Un'operazione che utilizza degli argomenti per della computazione e ritorna un risultato."@it ;
+    owl:equivalentClass dco:Function ;
+    owl:disjointWith <#ComponentHw> .
 
 <#ComponentOperationHandler>
     rdfs:subClassOf <#OperationHandler> ;
-    rdfs:label "Operation Handler (Brittany)", "Operation Handler (Brittany)"@it ;
+    rdfs:label "Component Operation Handler (Brittany)", "Operation Handler Componente (Brittany)"@it ;
     rdfs:comment "An Operation Handler that acts on certain Hardware Components.", "Un Operation Handler che agisce su Componenti Hardware."@it .
 
 <#ActionOperationHandler>
     rdfs:subClassOf <#OperationHandler>, dco:ActuatingFunction ;
     rdfs:label "Action Operation Handler (Brittany)", "Action Operation Handler (Brittany)"@it ;
-    rdfs:comment "An Operation Handler specifically used to execute an Action.", "Un Operation Handler specificatamente utilizzato per eseguire un Azione."@it .
+    rdfs:comment "An Operation Handler specifically used to execute an Action.", "Un Operation Handler specificatamente utilizzato per eseguire un Azione."@it ;
+    owl:equivalentClass dco:ActuatingFunction .
 
 <#PropertyOperationHandler>
     rdfs:subClassOf <#OperationHandler>, dco:SensingFunction ;
     rdfs:label "Property Operation Handler (Brittany)", "Property Operation Handler (Brittany)"@it ;
-    rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it .
+    rdfs:comment "An Operation Handler specifically used to retrieve a Property.", "Un Operation Handler specificatamente utilizzato per recuperare una Properietà."@it ;
+    owl:equivalentClass dco:SensingFunction .
 
 <#DigitalLightHandler>
     rdfs:subClassOf <#ComponentOperationHandler> ;
@@ -93,42 +142,66 @@
     rdfs:comment "An Operation Handler that acts on Digital Lights.", "Un Operation Handler che agisce su Luci Digitali."@it .
 
 <#IsOnDigitalLightHandler>
-    rdfs:subClassOf <#DigitalLightHandler>, <#PropertyOperationHandler> ;
+    rdfs:subClassOf <#DigitalLightHandler>, <#PropertyOperationHandler>, [
+        a owl:Restriction ;
+        owl:onProperty foaf:name ;
+        owl:hasValue "isOn"^^xsd:string
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty <#hasHandlerOutputType> ;
+        owl:hasValue "boolean"^^xsd:string
+    ] ;
     rdfs:label "IsOn Digital Light Handler (Brittany)" ;
     rdfs:comment "An Operation Handler to check if the Digital Light is On.", "Un Operation Handler utilizzato per controllare se la Luce Digitale è accesa."@it ;
     dco:hasCommand dco:GetCommand.
 
 <#TurnOnDigitalLightHandler>
-    rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> ;
+    rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> , [
+        a owl:Restriction ;
+        owl:onProperty foaf:name ;
+        owl:hasValue "turnOn"^^xsd:string
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty <#hasHandlerOutputType> ;
+        owl:hasValue "string"^^xsd:string
+    ];
     rdfs:label "TurnOn Digital Light Handler (Brittany)" ;
     rdfs:comment "An Operation Handler to turn on the Digital Light.", "Un Operation Handler utilizzato per accendere la Luce Digitale."@it ;
     dco:hasCommand dco:OnCommand .
 
 <#TurnOffDigitalLightHandler>
-    rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> ;
+    rdfs:subClassOf <#DigitalLightHandler>, <#ActionOperationHandler> , [
+        a owl:Restriction ;
+        owl:onProperty foaf:name ;
+        owl:hasValue "turnOff"^^xsd:string
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty <#hasHandlerOutputType> ;
+        owl:hasValue "string"^^xsd:string
+    ] ;
     rdfs:label "TurnOff Digital Light Handler (Brittany)" ;
     rdfs:comment "An Operation Handler to turn off the Digital Light.", "Un Operation Handler utilizzato per spegnere la Luce Digitale."@it;
     dco:hasCommand dco:OffCommand .
 
-# ----- ComponentsHw -----
+# ----- ComponentHw -----
 
 <#ComponentHw>
-    a rdfs:Class ;
+    a owl:Class ;
+    rdfs:subClassOf dco:Device , <#NameRestriction> ;
     rdfs:label "Hardware Component (Brittany)", "Componente Hardware (Brittany)"@it ;
-    rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it ;
-    owl:equivalentClass m3:M2MDevice .
+    rdfs:comment "A Hardware Component that can be used by an Operation Handler.", "Un Componente Hardware che può essere utilizzato da un Operation Handler."@it .
 
 <#SensorHw>
     rdfs:subClassOf <#ComponentHw> ;
     rdfs:label "Sensor (Brittany)", "Sensore (Brittany)"@it ;
-    rdfs:comment "A Hardware Component that collects data from the surrounding.", "Un Componente Hardware che può colleziona dati dall'area circostante."@it ;
-    owl:equivalentClass m3:Sensor, dco:Sensor .
+    rdfs:comment "A Hardware Component that can be used to collect data.", "Un Componente Hardware che può essere utilizzato per collezionare dati."@it ;
+    owl:equivalentClass dco:Sensor, m3:Sensor .
 
 <#ActuatorHw>
     rdfs:subClassOf <#ComponentHw> ;
     rdfs:label "Actuator (Brittany)", "Attuatore (Brittany)"@it ;
-    rdfs:comment "A Hardware Component that acts on the surrounding.", "Un Componente Hardware che agisce sull'area circostante."@it ;
-    owl:equivalentClass m3:Actuator, dco:Actuator .
+    rdfs:comment "A Hardware Component that can be used to execute an action.", "Un Componente Hardware che può essere utilizzato per eseguire un'azione."@it ;
+    owl:equivalentClass dco:Actuator, m3:Actuator .
 
 <#DigitalLightHw>
     rdfs:subClassOf <#ActuatorHw> ;
@@ -136,236 +209,1210 @@
     rdfs:comment "A Hardware Component that can be turned on and off and emits light. It is not possible to regulate the intensity or the color of the light.", "Un Componente Hardware che può essere spento ed acceso ed emette luce. Non possono essere regolati i valori di intensità e colore della luce."@it ;
     owl:equivalentClass m3:Lamp, dco:LightSwitch .
 
+# ----- ThingDescriptor -----
+
+<#BrittanyThingDescriptor>
+    rdfs:subClassOf td:Thing , [
+        a owl:Restriction ;
+        owl:onProperty td:definesSecurityScheme ;
+        owl:hasValue <#nosec-schema>
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty td:hasSecurityConfiguration ;
+        owl:hasValue <#no-sec>
+    ] ;
+    rdfs:label "Brittany Thing Descriptor (Brittany)", "Descrittore di Oggetto (Brittany)"@it ;
+    rdfs:comment "A Thing Descriptor for the Brittany platform.", "Un Descrittore di Oggetto per la piattaforma Brittany."@it .
+
+<#BrittanyForm>
+    rdfs:subClassOf td:Form , [
+        a owl:Restriction ;
+        owl:onProperty hctl:forContentType ;
+        owl:hasValue "application/json"
+    ] ;
+    rdfs:label "Brittany Form (Brittany)", "Form (Brittany)"@it ;
+    rdfs:comment "A Form for the Brittany platform.", "Un Form per la piattaforma Brittany."@it .
+
 # ========================== RELATIONSHIPS (PROPERTIES) ==========================
 # They define the existence of relationship between Concepts of the domain.
 
-# TODO Add constraint:
-# - only <#Environment> instances are allowed in rdf:range.
-# - at least one environment is needed.
-<#hasEnvironments>
-    a rdf:Property ;
-    rdf:domain <#Greenhouse> ;
-    rdf:range rdf:Bag ;
-    rdfs:label "Greenhouse contains Environments (Brittany)", "Serra contiene Ambienti (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that a Greenhouse is composed by one or more Environment.", "Proprietà di composizione utilizzata per indicare che una Serra è composta da uno o più Ambienti."@it .
+# ----- Environments and Plants properties -----
+<#hasEnvironment>
+    a owl:ObjectProperty ;
+    rdfs:domain <#Greenhouse> ;
+    rdfs:range <#Environment> ;
+    rdfs:label "Greenhouse contains Environment (Brittany)", "Serra contiene Ambiente (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Greenhouse contains an Enviromnment.", "Proprietà di composizione utilizzata per indicare che una Serra contiene un Ambiente."@it .
 
-# TODO Add constraint:
-# - only <#BrittanyPlant> instances are allowed in rdf:range.
-<#hasPlants>
-    rdfs:subClassOf dco:hasPlace ;
-    rdf:domain <#Environment> ;
-    rdf:range rdf:Bag ;
-    rdfs:label "Environment contains Plants (Brittany)", "Ambiente contiene Piante (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that a Environments may contains Plants.", "Proprietà di composizione utilizzata per indicare che un Ambiente può contenere Piante."@it .
+<#isEnvironmentOf>
+    owl:inverseOf <#hasEnvironment> ;
+    rdfs:label "Environment is in Greenhouse (Brittany)", "Ambiente è in Serra (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Environment is in a Greenhouse.", "Proprietà di composizione utilizzata per indicare che un Ambiente è in una Serra."@it .
+
+<#hasPlant>
+    a owl:ObjectProperty ;
+    rdfs:domain dco:Space ;
+    rdfs:range <#Plant> ;
+    rdfs:label "Space contains Plant (Brittany)", "Spazio contiene Pianta (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Space contains a Plant.", "Proprietà di composizione utilizzata per indicare che uno Spazio contiene una Pianta."@it .
+
+<#isPlantIn>
+    owl:inverseOf <#hasPlant>;
+    rdfs:label "Plant is in Environment (Brittany)", "Pianta è in Ambiente"@it ;
+    rdfs:comment "Composition property used to indicate that a Plat is in an Environemnt.", "Proprietà di composizione utilizzata per indicare che una Pianta è in un Ambiente."@it .
+
+<#hasEnvironmentPlant>
+    rdfs:subPropertyOf <#hasPlant> ;
+    rdfs:domain <#Enviromnment> ;
+    rdfs:label "Environment contains Plant (Brittany)", "Ambiente contiene Pianta (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Environment contains a Plant.", "Proprietà di composizione utilizzata per indicare che un Ambiente contiene una Pianta."@it .
+
+<#isPlantInEnvironment>
+    owl:inverseOf <#hasEnvironmentPlant> ;
+    rdfs:label "Plant is in Environment (Brittany)", "Pianta è in Ambiente"@it ;
+    rdfs:comment "Composition property used to indicate that a Plant is in an Environemnt.", "Proprietà di composizione utilizzata per indicare che una Pianta è in un Ambiente."@it .
+
+<#hasGreenhousePlant>
+    rdfs:subPropertyOf <#hasPlant> ;
+    rdfs:domain <#Greenhouse> ;
+    owl:propertyChainAxiom ( <#hasEnvironment> <#hasEnvironmentPlant> ) ;
+    rdfs:label "Greenhouse contains Plant (Brittany)", "Serra contiene Pianta (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Greenhouse contains a Plant.", "Proprietà di composizione utilizzata per indicare che una Serra contiene una Pianta."@it .
+
+<#isPlantInGreenhouse>
+    owl:inverseOf <#hasGreenhousePlant> ;
+    rdfs:label "Plant is in Greenhouse (Brittany)", "Pianta è in Serra (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Plant is in a Greenhouse.", "Proprietà di composizione utilizzata per indicare che una Pianta è in una Serra."@it .
+
+<#hasGreenhouseEdge>
+    a owl:ObjectProperty ;
+    owl:propertyChainAxiom ( <#hasGreenhousePlant> <#isPlantMonitored> ) , ( <#hasEnvironment> <#isEnvironmentMonitored> ) ;
+    rdfs:domain <#Greenhouse> ;
+    rdfs:range <#Edge> ;
+    rdfs:label "Greenhouse contains Edge (Brittany)", "Serra contiene Edge (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Greenhouse contains an Edge.", "Proprietà di composizione utilizzata per indicare che una Serra contiene un Edge."@it .
+
+<#isEdgeInGreenhouse>
+    owl:inverseOf <#hasGreenhouseEdge> ;
+    rdfs:label "Edge is in Greenhouse (Brittany)", "Edge è in Serra (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Edge is in a Greenhouse.", "Proprietà di composizione utilizzata per indicare che un Edge è in una Serra."@it .
+
+# ----- Edge, Module, Handler Properties -----
+
+<#hasModule>
+    a owl:ObjectProperty ;
+    rdfs:domain <#Edge> ;
+    rdfs:range <#Module> ;
+    rdfs:label "Edge contains Module (Brittany)", "Edge contiene Modulo (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Edge contains a Module.", "Proprietà di composizione utilizzata per indicare che un Edge contiene un Modulo."@it .
+
+<#isModuleIn>
+    owl:inverseOf <#hasModule> ;
+    rdfs:label "Module is in Edge (Brittany)", "Modulo è in Edge (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Module is in an Edge.", "Proprietà di composizione utilizzata per indicare che un Modulo è in un Edge."@it .
+
+<#hasHandler>
+    a owl:ObjectProperty ;
+    rdfs:domain <#Module> ;
+    rdfs:range <#OperationHandler> ;
+    rdfs:label "Module contains Operation Handler (Brittany)", "Modulo contiene Operation Handler (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that a Module contains an Operation Handler.", "Proprietà di composizione utilizzata per indicare che un Modulo contiene un Operation Handler."@it .
+
+<#isHandlerIn>
+    owl:inverseOf <#hasHandler> ;
+    rdfs:label "Operation Handler is in Module (Brittany)", "Operation Handler è in Modulo (Brittany)"@it ;
+    rdfs:comment "Composition property used to indicate that an Operation Handler is in a Module.", "Proprietà di composizione utilizzata per indicare che un Operation Handler è in un Modulo."@it .
+
+# ----- Edge Monitoring Properties -----
 
 <#monitor>
-    rdfs:subClassOf dco:hasDevice ;
-    rdf:domain <#Edge> ;
-    rdf:range <#Monitorable> ;
+    a owl:ObjectProperty ;
+    rdfs:subPropertyOf dco:isLocatedAt ;
+    rdfs:domain <#Edge> ;
+    rdfs:range <#Monitorable> ;
     rdfs:label "Monitor (Brittany)", "Monitor (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed in a Monitorable area.", "Proprietà che indica che un Edge è posizionato in un area Monitorabile."@it .
 
+<#isMonitored>
+    rdfs:subPropertyOf dco:hasDevice ;
+    owl:inverseOf <#monitor> ;
+    rdfs:label "Is monitored (Brittany)", "È monitorato (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Monitorable area is monitored by an Edge device.", "Proprietà che indica che un area Monitorabile è monitorata da un Edge."@it .
+
 <#monitorPlant>
     rdfs:subPropertyOf <#monitor> ;
-    rdf:range <#Plant> ;
+    rdfs:range <#Plant> ;
     rdfs:label "Monitor Plant (Brittany)", "Monitor Pianta (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed on a Plant.", "Proprietà che indica che un Edge è posizionato su una Pianta."@it .
 
+<#isPlantMonitored>
+    owl:inverseOf <#monitorPlant> ;
+    rdfs:label "Plant monitored (Brittany)", "Pianta monitorata (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Plant is monitored by an Edge device.", "Proprietà che indica che una Pianta è monitorata da un Edge."@it .
+
 <#monitorEnvironment>
     rdfs:subPropertyOf <#monitor> ;
-    rdf:range <#Environment> ;
+    rdfs:range <#Environment> ;
     rdfs:label "Monitor Environment (Brittany)", "Monitor Ambiente (Brittany)"@it ;
     rdfs:comment "Property that indicates that an Edge device is placed in an Environment.", "Proprietà che indica che un Edge è posizionato in un Ambiente."@it .
 
-# TODO Add constraint:
-# - only <#ComponentHw> instances are allowed in rdf:range.
-# - at least one hwcomponent is needed.
-<#hasComponents>
-    a rdf:Property ;
-    rdf:domain <#ComponentModule> ;
-    rdf:range rdf:Bag ;
-    rdfs:label "Components in Module (Brittany)", "Componenti in Modulo (Brittany)"@it ;
-    rdfs:comment "Property that indicates that a Module acts on certain Hardware Components.", "Proprietà che indica che un Modulo agisce su certi Componenti Hardware."@it .
+<#isEnvironmentMonitored>
+    owl:inverseOf <#monitorEnvironment> ;
+    rdfs:label "Environment monitored (Brittany)", "Ambiente monitorato (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Environment is monitored by an Edge device.", "Proprietà che indica che un Ambiente è monitorato da un Edge."@it .
 
-# TODO Add constraint:
-# - only <#Module> instances are allowed in rdf:range.
-# - at least one module is needed.
-<#hasModules>
-    a rdf:Property ;
-    rdf:domain <#Edge> ;
-    rdf:range rdf:Bag ;
-    rdfs:label "Module in Edge (Brittany)", "Moduli in Edge (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that an Edge is composed by one or more Modules.", "Proprietà di composizione utilizzata per indicare che un Edge è composto da uno o più Moduli."@it .
+# ----- ComponentHw Properties -----
 
-<#edgeName>
-    rdfs:subPropertyOf foaf:name ;
-    rdf:domain <#Edge> ;
-    rdfs:label "Edge Name (Brittany)", "Nome dell'Edge (Brittany)"@it .
+<#hasComponentHw>
+    a owl:ObjectProperty ;
+    rdfs:range <#ComponentHw> ;
+    rdfs:label "Has Component Hardware (Brittany)", "Ha Componente Hardware (Brittany)"@it ;
+    rdfs:comment "Property that indicates that something has a Hardware Component.", "Proprietà che indica che un qualcosa ha un Componente Hardware."@it .
 
-<#moduleName>
-    rdfs:subPropertyOf foaf:name ;
-    rdf:domain <#Module> ;
-    rdf:range <#ModuleName> ;
-    rdfs:label "Module Name (Brittany)", "Nome del Modulo (Brittany)"@it .
+<#isComponentHwIn>
+    owl:inverseOf <#hasComponentHw> ;
+    rdfs:label "Component Hardware is in (Brittany)", "Componente Hardware è in (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Hardware Component is in something.", "Proprietà che indica che un Componente Hardware è in qualcosa."@it .
 
-<#handlerName>
-    rdfs:subPropertyOf foaf:name ;
-    rdf:domain <#OperationHandler> ;
-    rdfs:label "Operation Handler Name (Brittany)", "Nome dell'Operation Handler (Brittany)"@it .
+<#hasSensorHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:range <#SensorHw> ;
+    rdfs:label "Has Sensor (Brittany)", "Ha Sensore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that something has a Sensor.", "Proprietà che indica che un qualcosa ha un Sensore."@it .
 
-<#componentName>
-    rdfs:subPropertyOf foaf:name;
-    rdf:domain <#ComponentHw> ;
-    rdfs:label "Component Name (Brittany)", "Nome del Componente (Brittany)"@it .
+<#isSensorHwIn>
+    owl:inverseOf <#hasSensorHw> ;
+    rdfs:label "Sensor is in (Brittany)", "Sensore è in (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Sensor is in something.", "Proprietà che indica che un Sensore è in qualcosa."@it .
 
-# TODO Add constraint:
-# - only <#OperationHandler> instances are allowed in rdf:range.
-# - at least one operation handler is needed.
-<#hasHandlers>
-    a rdf:Property ;
-    rdf:domain <#Module> ;
-    rdf:range rdf:Bag ;
-    rdfs:label "Operation Handlers in Module (Brittany)", "Operation Handlers in Modulo (Brittany)"@it ;
-    rdfs:comment "Composition property used to indicate that a Module is composed by one or more Operation Handlers.", "Proprietà di composizione utilizzata per indicare che un Modulo è composto da uno o più Operation Handler."@it .
+<#hasActuatorHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:range <#ActuatorHw> ;
+    rdfs:label "Has Actuator (Brittany)", "Ha Attuatore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that something has an Actuator.", "Proprietà che indica che un qualcosa ha un Attuatore."@it .
+
+<#isActuatorHwIn>
+    owl:inverseOf <#hasActuatorHw> ;
+    rdfs:label "Actuator is in (Brittany)", "Attuatore è in (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Actuator is in something.", "Proprietà che indica che un Attuatore è in qualcosa."@it .
+
+<#hasDigitalLightHw>
+    rdfs:subPropertyOf <#hasActuatorHw> ;
+    rdfs:range <#DigitalLightHw> ;
+    rdfs:label "Has Digital Light (Brittany)", "Ha Luce Digitali (Brittany)"@it ;
+    rdfs:comment "Property that indicates that something has a Digital Light.", "Proprietà che indica che un qualcosa ha una Luce Digitale."@it .
+
+<#isDigitalLightHwIn>
+    owl:inverseOf <#hasDigitalLightHw> ;
+    rdfs:label "Digital Light is in (Brittany)", "Luce Digitali è in (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Digital Light is in something.", "Proprietà che indica che una Luce Digitale è in qualcosa."@it .
+
+# ----- ComponentHw in Module Properties -----
+
+<#ownsComponentHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:domain <#ComponentModule> ;
+    owl:propertyChainAxiom (<#hasHandler> <#handleComponentHw>) ;
+    rdfs:label "Component Module contains Hardware Component (Brittany)", "Modulo di Componenti contiene Componente Hardware (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Module acts on a Hardware Component.", "Proprietà che indica che un Modulo agisce su un Componente Hardware."@it .
+
+<#isOwnedComponentHw>
+    owl:inverseOf <#ownsComponentHw> ;
+    rdfs:label "Hardware Component is in Module (Brittany)", "Componente Hardware è in Modulo (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Hardware Component is in a Module.", "Proprietà che indica che un Componente Hardware è in un Modulo."@it .
+
+<#ownsSensorHw>
+    rdfs:subPropertyOf <#ownsComponentHw>, <#hasSensorHw> ;
+    owl:propertyChainAxiom (<#hasHandler> <#handleSensorHw>) ;
+    rdfs:label "Component Module contains Sensor (Brittany)", "Modulo di Componenti contiene Sensore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Module acts on a Sensor.", "Proprietà che indica che un Modulo agisce su un Sensore."@it .
+
+<#isOwnedSensorHw>
+    owl:inverseOf <#ownsSensorHw> ;
+    rdfs:label "Sensor is in Module (Brittany)", "Sensore è in Modulo (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Sensor is in a Module.", "Proprietà che indica che un Sensore è in un Modulo."@it .
+
+<#ownsActuatorHw>
+    rdfs:subPropertyOf <#ownsComponentHw>, <#hasActuatorHw> ;
+    owl:propertyChainAxiom (<#hasHandler> <#handleActuatorHw>) ;
+    rdfs:label "Component Module contains Actuator (Brittany)", "Modulo di Componenti contiene Attuatore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Module acts on an Actuator.", "Proprietà che indica che un Modulo agisce su un Attuatore."@it .
+
+<#isOwnedActuatorHw>
+    owl:inverseOf <#hasActuatorHw> ;
+    rdfs:label "Actuator is in Module (Brittany)", "Attuatore è in Modulo (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Actuator is in a Module.", "Proprietà che indica che un Attuatore è in un Modulo."@it .
+
+<#ownsDigitalLightHw>
+    rdfs:subPropertyOf <#ownsActuatorHw>, <#hasDigitalLightHw> ;
+    owl:propertyChainAxiom (<#hasHandler> <#handleDigitalLightHw>) ;
+    rdfs:label "Component Module contains Digital Light (Brittany)", "Modulo di Componenti contiene Luce Digitale (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Module acts on a Digital Light.", "Proprietà che indica che un Modulo agisce su una Luce Digitale."@it .
+
+<#isOwnedDigitalLightHw>
+    owl:inverseOf <#ownsDigitalLightHw> ;
+    rdfs:label "Digital Light is in Module (Brittany)", "Luce Digitale è in Modulo (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Digital Light is in a Module.", "Proprietà che indica che una Luce Digitale è in un Modulo."@it .
+
+# ----- ComponentHw in Edge Properties -----
+
+<#collectComponentHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:domain <#Edge> ;
+    owl:propertyChainAxiom (<#hasModule> <#ownsComponentHw>) ;
+    rdfs:label "Edge collects Hardware Component (Brittany)", "Edge colleziona Componente Hardware (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge collects a Hardware Component.", "Proprietà che indica che un Edge colleziona un Componente Hardware."@it .
+
+<#isCollectedComponentHw>
+    owl:inverseOf <#collectComponentHw> ;
+    rdfs:label "Hardware Component is collected by Edge (Brittany)", "Componente Hardware è collezionato da Edge (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Hardware Component is collected by an Edge.", "Proprietà che indica che un Componente Hardware è collezionato da un Edge."@it .
+
+<#collectSensorHw>
+    rdfs:subPropertyOf <#collectComponentHw>, <#hasSensorHw> ;
+    owl:propertyChainAxiom (<#hasModule> <#ownsSensorHw>) ;
+    rdfs:label "Edge collects Sensor (Brittany)", "Edge colleziona Sensore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge collects a Sensor.", "Proprietà che indica che un Edge colleziona un Sensore."@it .
+
+<#isCollectedSensorHw>
+    owl:inverseOf <#collectSensorHw> ;
+    rdfs:label "Sensor is collected by Edge (Brittany)", "Sensore è collezionato da Edge (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Sensor is collected by an Edge.", "Proprietà che indica che un Sensore è collezionato da un Edge."@it .
+
+<#collectActuatorHw>
+    rdfs:subPropertyOf <#collectComponentHw>, <#hasActuatorHw> ;
+    owl:propertyChainAxiom (<#hasModule> <#ownsActuatorHw>) ;
+    rdfs:label "Edge collects Actuator (Brittany)", "Edge colleziona Attuatore (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge collects an Actuator.", "Proprietà che indica che un Edge colleziona un Attuatore."@it .
+
+<#isCollectedActuatorHw>
+    owl:inverseOf <#collectActuatorHw> ;
+    rdfs:label "Actuator is collected by Edge (Brittany)", "Attuatore è collezionato da Edge (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Actuator is collected by an Edge.", "Proprietà che indica che un Attuatore è collezionato da un Edge."@it .
+
+<#collectDigitalLightHw>
+    rdfs:subPropertyOf <#collectActuatorHw>, <#hasDigitalLightHw> ;
+    owl:propertyChainAxiom (<#hasModule> <#ownsDigitalLightHw>) ;
+    rdfs:label "Edge collects Digital Light (Brittany)", "Edge colleziona Luce Digitale (Brittany)"@it ;
+    rdfs:comment "Property that indicates that an Edge collects a Digital Light.", "Proprietà che indica che un Edge colleziona una Luce Digitale."@it .
+
+<#isCollectedDigitalLightHw>
+    owl:inverseOf <#collectDigitalLightHw> ;
+    rdfs:label "Digital Light is collected by Edge (Brittany)", "Luce Digitale è collezionato da Edge (Brittany)"@it ;
+    rdfs:comment "Property that indicates that a Digital Light is collected by an Edge.", "Proprietà che indica che una Luce Digitale è collezionata da un Edge."@it .
+
+# ----- Component Handler has Components Properties -----
+
+<#handleComponentHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:domain <#ComponentOperationHandler> ;
+    rdfs:label "Operation Handler handle Hardware Component (Brittany)", "Operation Handler gestisce Componente Hardware"@it ;
+    rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Hardware Component.", "Proprietà utilizzata per indicare che un Operation Handler Componente agisce su uno specifico Componente Hardware" .
+
+<#isHandledComponentHw>
+    owl:inverseOf <#handleComponentHw> ;
+    rdfs:label "Hardware Component is handled by Operation Handler (Brittany)", "Componente Hardware è gestito da Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that a Hardware Component is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che un Componente Hardware è gestito da un Operation Handler."@it .
+
+<#handleSensorHw>
+    rdfs:subPropertyOf <#handleComponentHw>, <#hasSensorHw> ;
+    rdfs:label "Operation Handler handle Sensor (Brittany)", "Operation Handler gestisce Sensore (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Sensor.", "Proprietà utilizzata per indicare che un Operation Handler Componente agisce su uno specifico Sensore."@it .
+
+<#isHandledSensorHw>
+    owl:inverseOf <#handleSensorHw> ;
+    rdfs:label "Sensor is handled by Operation Handler (Brittany)", "Sensore è gestito da Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that a Sensor is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che un Sensore è gestito da un Operation Handler."@it .
+
+<#handleActuatorHw>
+    rdfs:subPropertyOf <#handleComponentHw>, <#hasActuatorHw> ;
+    rdfs:label "Operation Handler handle Actuator (Brittany)", "Operation Handler gestisce Attuatore (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Actuator.", "Proprietà utilizzata per indicare che un Operation Handler Componente agisce su uno specifico Attuatore."@it .
+
+<#isHandledActuatorHw>
+    owl:inverseOf <#handleActuatorHw> ;
+    rdfs:label "Actuator is handled by Operation Handler (Brittany)", "Attuatore è gestito da Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Actuator is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che un Attuatore è gestito da un Operation Handler."@it .
+
+<#handleDigitalLightHw>
+    rdfs:subPropertyOf <#handleActuatorHw>, <#hasDigitalLightHw> ;
+    rdfs:label "Operation Handler handle Digital Light (Brittany)", "Operation Handler gestisce Luce Digitale (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Component Operation Handler acts on a certain Digital Light.", "Proprietà utilizzata per indicare che un Operation Handler Componente agisce su uno specifico Luce Digitale."@it .
+
+<#isHandledDigitalLightHw>
+    owl:inverseOf <#handleDigitalLightHw> ;
+    rdfs:label "Digital Light is handled by Operation Handler (Brittany)", "Luce Digitale è gestita da Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that a Digital Light is handled by an Component Operation Handler.", "Proprietà utilizzata per indicare che una Luce Digitale è gestita da un Operation Handler."@it .
+
+# ----- InteractionAffordances has Components Properties -----
+
+<#interactsWithComponentHw>
+    rdfs:subPropertyOf <#hasComponentHw> ;
+    rdfs:domain td:InteractionAffordance ;
+    rdfs:label "Interaction Affordarce interacts with Hardware Component (Brittany)", "Interaction Affordance interagisce con Componente Hardware"@it ;
+    rdfs:comment "Property used to indicate that an Interaction Affordance interact on a certain Hardware Component.", "Proprietà utilizzata per indicare che un Interaction Affordance interagisce con uno specifico Componente Hardware" .
+
+<#isInteractedComponentHw>
+    owl:inverseOf <#interactsWithComponentHw> ;
+    rdfs:label "Hardware Component is interacted by Interaction Affordance (Brittany)", "Componente Hardware è interagito da Interaction Affordance (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that a Hardware Component is interacted by an Interaction Affordance.", "Proprietà utilizzata per indicare che un Componente Hardware è interagito da un Interaction Affordance."@it .
+
+# ----- Thing Descriptor Properties -----
+
+<#hasHandlerInteractionAffordance>
+    a owl:ObjectProperty ;
+    rdfs:domain <#OperationHandler> ;
+    rdfs:range td:InteractionAffordance ;
+    rdfs:label "Operation Handler has Interaction Affordance (Brittany)", "Operation Handler ha Interaction Affordance (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Operation Handler has an Interaction Affordance.", "Proprietà utilizzata per indicare che un Operation Handler ha un Interaction Affordance."@it .
+
+<#isInteractionAffordanceOfHandler>
+    owl:inverseOf <#hasHandlerInteractionAffordance> ;
+    rdfs:label "Interaction Affordance is linked to an Operation Handler (Brittany)", "Interazione Affordance è collegata a un Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Interaction Affordance is linked to an Operation Handler.", "Proprietà utilizzata per indicare che un Interaction Affordance è collegata da un Operation Handler."@it .
+
+<#hasHandlerPropertyAffordance>
+    rdfs:subPropertyOf <#hasHandlerInteractionAffordance> ;
+    rdfs:range td:PropertyAffordance ;
+    rdfs:label "Operation Handler has Property Affordance (Brittany)", "Operation Handler ha Property Affordance (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Operation Handler has an Property Affordance.", "Proprietà utilizzata per indicare che un Operation Handler ha un Property Affordance."@it .
+
+<#isPropertyAffordanceOfHandler>
+    owl:inverseOf <#hasHandlerPropertyAffordance> ;
+    rdfs:label "Property Affordance is linked to an Operation Handler (Brittany)", "Property Affordance è collegata a un Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Property Affordance is linked to an Operation Handler.", "Proprietà utilizzata per indicare che un Property Affordance è collegata da un Operation Handler."@it .
+
+<#hasHandlerActionAffordance>
+    rdfs:subPropertyOf <#hasHandlerInteractionAffordance> ;
+    rdfs:range td:ActionAffordance ;
+    rdfs:label "Operation Handler has Action Affordance (Brittany)", "Operation Handler ha Action Affordance (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Operation Handler has an Action Affordance.", "Proprietà utilizzata per indicare che un Operation Handler ha un Action Affordance."@it .
+
+<#isActionAffordanceOfHandler>
+    owl:inverseOf <#hasHandlerActionAffordance> ;
+    rdfs:label "Action Affordance is linked to an Operation Handler (Brittany)", "Action Affordance è collegata a un Operation Handler (Brittany)"@it ;
+    rdfs:comment "Property used to indicate that an Action Affordance is linked to an Operation Handler.", "Proprietà utilizzata per indicare che un Action Affordance è collegata da un Operation Handler."@it .
 
 <#hasHandlerOutputType>
-    a rdf:Property ;
-    rdf:domain <#OperationHandler> ;
-    rdf:range xsd:string ; # One of ["boolean", "integer", "number", "string", "object", "array", "null"]
-    rdfs:label "Operation Handler Output Type (Brittany)", "Output Type dell'Operation Handler (Brittany)"@it .
+    a owl:DatatypeProperty ;
+    rdfs:domain <#OperationHandler> ;
+    rdfs:range xsd:string ;
+    rdfs:label "Operation Handler has Output Type (Brittany)", "Operation Handler ha Tipo di Output (Brittany)"@it .
 
 <#hasHandlerInputSchema>
-    a rdf:Property ;
-    rdf:domain <#OperationHandler> ;
-    rdf:range jsonschema:DataSchema ;
-    rdfs:label "Operation Handler Input Schema (Brittany)", "Input Schema dell'Operation Handler (Brittany)"@it ;
+    a owl:ObjectProperty ;
+    rdfs:domain <#OperationHandler> ;
+    rdfs:range jsonschema:DataSchema ;
+    rdfs:label "Operation Handler has Input Schema (Brittany)", "Operation Handler ha Input Schema(Brittany)"@it ;
     rdfs:seeAlso <https://www.w3.org/TR/wot-thing-description/#dataschema>.
 
-# TODO Add constraint:
-# - only one TD allowed.
+<#isInputSchemaOfHandler>
+    owl:inverseOf <#hasHandlerInputSchema> ;
+    rdfs:label "Input Schema of Operation Handler (Brittany)", "Input Schema dell'Operation Handler (Brittany)"@it .
+
 <#hasThingDescriptor>
-    a rdf:Property ;
-    rdf:domain <#Edge> ;
-    rdf:range td:Thing ;
+    a owl:ObjectProperty ;
+    rdfs:domain <#Edge> ;
+    rdfs:range <#BrittanyThingDescriptor> ;
     rdfs:label "Edge has Thing Descriptor (Brittany)", "Edge ha un Thing Descriptor (Brittany)"@it ;
     rdfs:comment "Property used to link an Edge to its Thing Descriptor (W3).", "Proprietà utilizzata per collegare un Edge al suo Thing Descriptor (W3)."@it .
+
+<#isThingDescriptorOf>
+    owl:inverseOf <#hasThingDescriptor> ;
+    rdfs:label "Thing Descriptor of Edge (Brittany)", "Thing Descriptor dell'Edge (Brittany)"@it ;
+    rdfs:comment "Property used to link a Thing Descriptor to an Edge (W3).", "Proprietà utilizzata per collegare un Thing Descriptor ad un Edge (W3)."@it .
+
+<#isInteractionAffordanceOf>
+    owl:inverseOf td:hasInteractionAffordance .
+
+<#isPropertyAffordanceOf>
+    rdfs:subPropertyOf <#isInteractionAffordanceOf> ;
+    owl:inverseOf td:hasPropertyAffordance .
+
+<#isActionAffordanceOf>
+    rdfs:subPropertyOf <#isInteractionAffordanceOf> ;
+    owl:inverseOf td:hasActionAffordance .
+
+# ----- SWRL Properties -----
+
+<#swrlRuleComment>
+    rdfs:subPropertyOf rdfs:comment ;
+    rdfs:label "SWRL Rule in human readable format", "Regola SWRL in formato human readable"@it ;
+    rdfs:comment "An additional comment to store the SWRL rule in human readable format." , "Un commento aggiuntivo per memorizzare la regola SWRL in formato human readable."@it .
+
+# ========================== ADDITIONAL ONTOLOGY RULES ==========================
+
+td:Thing owl:equivalentClass wot:Thing .
+td:title owl:equivalentProperty wot:thingName .
+dco:PropertyAffordance rdfs:subClassOf dco:InteractionAffordance.
+dco:ActionAffordance rdfs:subClassOf dco:InteractionAffordance.
+td:InteractionAffordance rdfs:subClassOf dco:InteractionAffordance .
+td:PropertyAffordance rdfs:subClassOf dco:PropertyAffordance .
+td:ActionAffordance rdfs:subClassOf dco:ActionAffordance .
+td:hasSecurityConfiguration owl:equivalentProperty td:hasSecurityConfiguration .
+td:hasOutputSchema a owl:ObjectProperty .
+td:hasForm a owl:ObjectProperty .
+
+m3:Building owl:equivalentClass dbo:Building .
+m3:M2MDevice owl:equivalentClass dco:Device .
+
+hctl:hasTarget
+    a owl:DatatypeProperty ;
+    rdfs:subPropertyOf wot:href .
+
+hctl:forContentType
+    a owl:DatatypeProperty .
+
+foaf:name
+    a owl:DatatypeProperty ;
+    owl:equivalentProperty wot:name .
+
+
+# ========================== SWRL RULES ==========================
+
+# ----- SWRL Rules for Property Affordaces -----
+# One for each type: object, array, string, number, integer, boolean, or null.
+
+<p> a swrl:Variable .
+
+<h1> a swrl:Variable .
+
+# ----- ObjectSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-object" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:ObjectSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"object\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"object\") ->  ObjectSchema(?p)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "object"
+        ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:ObjectSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
+# ----- ArraySchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-array" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:ArraySchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"array\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"array\") ->  ArraySchema(?p)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "array"
+        ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:ArraySchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
+# ----- StringSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-string" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:StringSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"string\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"string\") ->  StringSchema(?p)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "string"
+        ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:StringSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
+# ----- NumberSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-number" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:NumberSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"number\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"number\") ->  NumberSchema(?p)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "number"
+        ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:NumberSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
+# ----- IntegerSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-integer" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:IntegerSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"integer\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"integer\") ->  IntegerSchema(?p)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "integer"
+        ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:IntegerSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
+# ----- BooleanSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-boolean" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:BooleanSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"boolean\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"boolean\") ->  BooleanSchema(?p)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "boolean"
+        ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:BooleanSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
+# ----- NullSchema -----
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-property-affordance-from-handler-null" ;
+    rdfs:comment "SWRL Rule that assign the type jsonSchema:NullSchema to the PropertyAffordance if it is linked to an Handler which has the property <#hasHandlerOutputType> \"null\"." ;
+    <#swrlRuleComment> "isPropertyAffordanceOfHandler(?p, ?h) ^ hasHandlerOutputType(?h, \"null\") ->  ObjectSchema(?p)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isPropertyAffordanceOfHandler> ;
+            swrl:argument1 <p> ;
+            swrl:argument2 <h1>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h1> ;
+            swrl:argument2 "null"
+        ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:NullSchema ;
+            swrl:argument1 <p>
+        ]
+    )
+] .
+
+# ----- SWRL Rules for Property Affordaces -----
+# One for each type: object, array, string, number, integer, boolean, or null.
+
+<a> a swrl:Variable .
+
+<h2> a swrl:Variable .
+
+<i> a swrl:Variable .
+
+# ----- ObjectSchema -----
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-action-affordance-from-handler-object" ;
+    rdfs:comment "SWRL Rule that creates a new jsonschema:ObjectSchema individual and link it to the corresponding ActionAffordance using the \"td:hasOutputSchema\" property  if it is linked to a Handler which has the property <#hasHandlerOutputType> \"object\"." ;
+    <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"object\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:ObjectSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <h2>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h2> ;
+            swrl:argument2 "object"^^xsd:string
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <i> <a> )
+        ]
+    );
+   swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:ObjectSchema ;
+            swrl:argument1 <i>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasOutputSchema ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <i>
+        ]
+    )
+ ] .
+
+# ----- ArraySchema -----
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-action-affordance-from-handler-array" ;
+    rdfs:comment "SWRL Rule that creates a new jsonschema:ArraySchema individual and link it to the corresponding ActionAffordance using the \"td:hasOutputSchema\" property  if it is linked to a Handler which has the property <#hasHandlerOutputType> \"array\"." ;
+    <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"array\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:ArraySchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <h2>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h2> ;
+            swrl:argument2 "array"^^xsd:string
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <i> <a> )
+        ]
+    );
+   swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:ArraySchema ;
+            swrl:argument1 <i>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasOutputSchema ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <i>
+        ]
+    )
+ ] .
+
+# ----- StringSchema -----
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-action-affordance-from-handler-string" ;
+    rdfs:comment "SWRL Rule that creates a new jsonschema:StringSchema individual and link it to the corresponding ActionAffordance using the \"td:hasOutputSchema\" property if it is linked to a Handler which has the property <#hasHandlerOutputType> \"string\"." ;
+    <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"string\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:StringSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <h2>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h2> ;
+            swrl:argument2 "string"^^xsd:string
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <i> <a> )
+        ]
+    );
+   swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:StringSchema ;
+            swrl:argument1 <i>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasOutputSchema ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <i>
+        ]
+    )
+ ] .
+
+#----- NumberSchema -----
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-action-affordance-from-handler-number" ;
+    rdfs:comment "SWRL Rule that creates a new jsonschema:NumberSchema individual and link it to the corresponding ActionAffordance using the \"td:hasOutputSchema\" property if it is linked to a Handler which has the property <#hasHandlerOutputType> \"number\"." ;
+    <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"number\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:NumberSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <h2>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h2> ;
+            swrl:argument2 "number"^^xsd:string
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <i> <a> )
+        ]
+    );
+        swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:NumberSchema ;
+            swrl:argument1 <i>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasOutputSchema ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <i>
+        ]
+    )
+] .
+
+#----- IntegerSchema -----
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-action-affordance-from-handler-integer" ;
+    rdfs:comment "SWRL Rule that creates a new jsonschema:IntegerSchema individual and link it to the corresponding ActionAffordance using the \"td:hasOutputSchema\" property if it is linked to a Handler which has the property <#hasHandlerOutputType> \"integer\"." ;
+    <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"integer\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:IntegerSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <h2>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h2> ;
+            swrl:argument2 "integer"^^xsd:string
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <i> <a> )
+        ]
+    );
+        swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:IntegerSchema ;
+            swrl:argument1 <i>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasOutputSchema ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <i>
+        ]
+    )
+] .
+
+#----- BooleanSchema -----
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-action-affordance-from-handler-boolean" ;
+    rdfs:comment "SWRL Rule that creates a new jsonschema:BooleanSchema individual and link it to the corresponding ActionAffordance using the \"td:hasOutputSchema\" property if it is linked to a Handler which has the property <#hasHandlerOutputType> \"boolean\"." ;
+    <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"boolean\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:BooleanSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <h2>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h2> ;
+            swrl:argument2 "boolean"^^xsd:string
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <i> <a> )
+        ]
+    );
+        swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:BooleanSchema ;
+            swrl:argument1 <i>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasOutputSchema ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <i>
+        ]
+    )
+] .
+
+#----- NullSchema -----
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-action-affordance-from-handler-null" ;
+    rdfs:comment "SWRL Rule that creates a new jsonschema:NullSchema individual and link it to the corresponding ActionAffordance using the \"td:hasOutputSchema\" property if it is linked to a Handler which has the property <#hasHandlerOutputType> \"null\"." ;
+    <#swrlRuleComment> "isActionAffordanceOfHandler(?a, ?h2) ^ hasHandlerOutputType(?h2, \"null\") ^ swrlx:makeOWLThing(?i, ?a) -> jsonschema:NullSchema(?i) ^ td:hasOutputSchema(?a, ?i)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isActionAffordanceOfHandler> ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <h2>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate <#hasHandlerOutputType> ;
+            swrl:argument1 <h2> ;
+            swrl:argument2 "null"^^xsd:string
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <i> <a> )
+        ]
+    );
+        swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate jsonschema:NullSchema ;
+            swrl:argument1 <i>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasOutputSchema ;
+            swrl:argument1 <a> ;
+            swrl:argument2 <i>
+        ]
+    )
+] .
+
+# ----- SWRL Rule for TD Form Generation -----
+
+<ia> a swrl:Variable .
+
+<td> a swrl:Variable .
+
+<ip> a swrl:Variable .
+
+<h3> a swrl:Variable .
+
+<hn> a swrl:Variable .
+
+<c> a swrl:Variable .
+
+<cn> a swrl:Variable .
+
+<fullText> a swrl:Variable .
+
+<form> a swrl:Variable .
+
+[
+    a swrl:Imp ;
+    swrla:isRuleEnabled "true"^^xsd:boolean ;
+    rdfs:label "swrl-td-form-generation" ;
+    rdfs:comment "SWRL Rule that generates the form for each Interaction Affordance." ;
+    <#swrlRuleComment> "isInteractionAffordanceOf(?ia, ?td) ^ foaf:name(?td, ?ip) isInteractionAffordanceOfHandler(?ia, ?h3) ^ foaf:name(?h3, ?hn) ^ interactsWithComponentHw(?ia, ?c) ^ foaf:name(?c, ?cn) ^ swrlb:stringConcat(?fullText, ?ip, \"/\", ?hn, \"?id=\", ?cn) ^ swrlx:makeOWLThing(?form, ?ia)-> BrittanyForm(?form) ^ hctl:hasTarget(?form, ?fullText) ^ td:hasForm(?td, ?form)" ;
+    swrl:body (
+        [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isInteractionAffordanceOf> ;
+            swrl:argument1 <ia> ;
+            swrl:argument2 <td>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate foaf:name ;
+            swrl:argument1 <td> ;
+            swrl:argument2 <ip>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#isInteractionAffordanceOfHandler> ;
+            swrl:argument1 <ia> ;
+            swrl:argument2 <h3>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate foaf:name ;
+            swrl:argument1 <h3> ;
+            swrl:argument2 <hn>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate <#interactsWithComponentHw> ;
+            swrl:argument1 <ia> ;
+            swrl:argument2 <c>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate foaf:name ;
+            swrl:argument1 <c> ;
+            swrl:argument2 <cn>
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlb:stringConcat ;
+            swrl:arguments ( <fullText> <ip> "/"^^xsd:string  <hn> "?id="^^xsd:string  <cn> )
+        ] [
+            a swrl:BuiltinAtom ;
+            swrl:builtin swrlx:makeOWLThing ;
+            swrl:arguments ( <form> <ia> )
+        ]
+    ) ;
+    swrl:head (
+        [
+            a swrl:ClassAtom ;
+            swrl:classPredicate <#BrittanyForm> ;
+            swrl:argument1 <form>
+        ] [
+            a swrl:DatavaluedPropertyAtom ;
+            swrl:propertyPredicate hctl:hasTarget ;
+            swrl:argument1 <form> ;
+            swrl:argument2 <fullText>
+        ] [
+            a swrl:IndividualPropertyAtom ;
+            swrl:propertyPredicate td:hasForm ;
+            swrl:argument1 <td> ;
+            swrl:argument2 <form>
+        ]
+    )
+ ] .
 
 # ========================== INDIVIDUALS & FACTS ==========================
 # Elements of the set defined by Concepts.
 
-<#angelo-greenhouse>
-    a <#Greenhouse> ;
-    foaf:name "Angelo's Greenhouse", "La serra di Angelo"@it ;
-    <#hasEnvironments> [
-        a rdf:Bag ;
-        rdf:_1 <#angelo-environment>
-    ].
-
-<#angelo-environment>
-    a <#Environment> ;
-    foaf:name "Angelo's Environment #1", "Ambiente di Angelo #1"@it ;
-    <#hasPlants> [
-        a rdf:Bag ;
-        rdf:_1 <#angelo-basil>
-    ].
-
-<#angelo-basil>
-    a dbr:Basil ;
-    foaf:name "Angelo's Basil", "Basilico di Angelo"@it .
-
-<#angelo-edge>
-    a <#Edge> ;
-    <#monitorPlant> <#angelo-basil> ;
-    <#hasModules> [
-        a rdf:Bag ;
-        rdf:_1 <#digital-light-module>
-    ] ;
-    <#edgeName> "Angelo's ESP8266", "ESP8266 di Angelo"@it ;
-    <#hasThingDescriptor> <#td-mock-ip>.
-
-<#digital-light-module>
-    a <#DigitalLightModule> ;
-    <#moduleName> "digital-light" ;
-    <#hasHandlers> [
-        a rdf:Bag ;
-        rdf:_1 [
-            a <#IsOnDigitalLightHandler> ;
-            <#handlerName> "isOn" ;
-            <#hasHandlerOutputType> "boolean"
-        ] ;
-        rdf:_2 [
-            a <#TurnOnDigitalLightHandler> ;
-            <#handlerName> "turnOn" ;
-            <#hasHandlerOutputType> "string"
-        ] ;
-        rdf:_3 [
-            a <#TurnOffDigitalLightHandler> ;
-            <#handlerName> "turnOff" ;
-            <#hasHandlerOutputType> "string"
-        ]
-    ] ;
-    <#hasComponents> [
-        a rdf:Bag ;
-        rdf:_1 [
-            a <#DigitalLightHw> ;
-            <#componentName> "digital-light-sx"
-        ] ;
-        rdf:_2 [
-            a <#DigitalLightHw> ;
-            <#componentName> "digital-light-dx"
-        ]
-    ] .
-
-<#turn-off-digital-light-sx>
-    td:hasForm [
-        hctl:forContentType "application/json" ;
-        hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-sx"
-    ] ;
-    td:hasOutputSchema [ a jsonschema:StringSchema ] .
-
-<#turn-off-digital-light-dx>
-    td:hasForm [
-        hctl:forContentType "application/json" ;
-        hctl:hasTarget "td-mock-ip/turnOff?id=digital-light-dx"
-    ] ;
-    td:hasOutputSchema [ a jsonschema:StringSchema ] .
-
-<#turn-on-digital-light-sx>
-    td:hasForm [
-        hctl:forContentType "application/json" ;
-        hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-sx"
-    ] ;
-    td:hasOutputSchema [ a jsonschema:StringSchema ] .
-
-<#turn-on-digital-light-dx>
-    td:hasForm [
-        hctl:forContentType "application/json" ;
-        hctl:hasTarget "td-mock-ip/turnOn?id=digital-light-dx"
-    ] ;
-    td:hasOutputSchema [ a jsonschema:StringSchema ] .
-
-<#is-on-digital-light-sx>
-    a jsonschema:BooleanSchema ;
-    td:hasForm [
-        hctl:forContentType "application/json";
-        hctl:hasTarget "td-mock-ip/isOn?id=digital-light-sx"
-    ] .
-
-<#is-on-digital-light-dx>
-    a jsonschema:BooleanSchema ;
-    td:hasForm [
-        hctl:forContentType "application/json";
-        hctl:hasTarget "td-mock-ip/isOn?id=digital-light-dx"
-    ] .
-
-<#nosec-configuration>
+<#nosec-schema>
     a wotsec:NoSecurityScheme ;
     td:hasConfigurationInstance <#no-sec> .
 
-<#td-mock-ip>
-    a td:Thing ;
+<#angelo-filaseta>
+    a foaf:Person ;
+    foaf:firstName "Angelo" ;
+    foaf:lastName "Filaseta" ;
+    foaf:knows <#giorgia-savo> .
+
+<#angelo-greenhouse>
+    a <#Greenhouse> ;
+    foaf:name "Angelo's Greenhouse", "La serra di Angelo"@it ;
+    dbo:owner <#angelo-filaseta> ;
+    <#hasEnvironment> <#angelo-environment-one>, <#angelo-environment-two> .
+
+<#angelo-environment-one>
+    a <#Environment> ;
+    foaf:name "Angelo's Environment #1", "Ambiente di Angelo #1"@it ;
+    <#hasEnvironmentPlant> <#angelo-basil>, <#angelo-tomato>, <#angelo-parsley> .
+
+<#angelo-environment-two>
+    a <#Environment> ;
+    foaf:name "Angelo's Environment #2", "Ambiente di Angelo #2"@it ;
+    <#hasEnvironmentPlant> <#angelo-onion>, <#angelo-lettuce> .
+
+<#angelo-basil> a dbr:Basil .
+
+<#angelo-tomato> a dbr:Tomato .
+
+<#angelo-parsley> a dbr:Parsley .
+
+<#angelo-onion> a dbr:Onion .
+
+<#angelo-lettuce> a dbr:Lettuce .
+
+<#angelo-edge>
+    a <#Edge> ;
+    foaf:name "Angelo's ESP8266", "ESP8266 di Angelo"@it ;
+    <#monitorPlant> <#angelo-basil> ;
+    <#hasModule> <#angelo-edge-module-digital-light> ;
+    <#hasThingDescriptor> <#angelo-td-mock-ip> .
+
+<#angelo-edge-module-digital-light>
+    a <#DigitalLightModule> ;
+    <#hasHandler> <#angelo-handler-is-on-digital-light> , <#angelo-handler-turn-on-digital-light> , <#angelo-handler-turn-off-digital-light> .
+
+<#angelo-handler-is-on-digital-light>
+    a <#IsOnDigitalLightHandler> ;
+    <#handleDigitalLightHw> <#angelo-digital-light-sx>, <#angelo-digital-light-dx> .
+
+<#angelo-handler-turn-off-digital-light>
+    a <#TurnOffDigitalLightHandler> ;
+    <#handleDigitalLightHw> <#angelo-digital-light-sx>, <#angelo-digital-light-dx> .
+
+<#angelo-handler-turn-on-digital-light>
+    a <#TurnOnDigitalLightHandler> ;
+    <#handleDigitalLightHw> <#angelo-digital-light-sx>, <#angelo-digital-light-dx> .
+
+<#angelo-digital-light-dx>
+    a <#DigitalLightHw> ;
+    foaf:name "digital-light-dx" .
+
+<#angelo-digital-light-sx>
+    a <#DigitalLightHw> ;
+    foaf:name "digital-light-sx" .
+
+<#angelo-action-turn-off-digital-light-sx>
+    <#isActionAffordanceOfHandler> <#angelo-handler-turn-off-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-sx> .
+
+<#angelo-action-turn-off-digital-light-dx>
+    <#isActionAffordanceOfHandler> <#angelo-handler-turn-off-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-dx> .
+
+<#angelo-action-turn-on-digital-light-sx>
+    <#isActionAffordanceOfHandler> <#angelo-handler-turn-on-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-sx> .
+
+<#angelo-action-turn-on-digital-light-dx>
+    <#isActionAffordanceOfHandler> <#angelo-handler-turn-on-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-dx> .
+
+<#angelo-property-is-on-digital-light-sx>
+    <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-sx> .
+
+<#angelo-property-is-on-digital-light-dx>
+    <#isPropertyAffordanceOfHandler> <#angelo-handler-is-on-digital-light> ;
+    <#interactsWithComponentHw> <#angelo-digital-light-dx> .
+
+<#angelo-td-mock-ip>
+    a <#BrittanyThingDescriptor> ;
+    foaf:name "angelo-td-mock-ip" ;
     td:title "Angelo's ESP8266 TD" ;
-    td:definesSecurityScheme <nosec-schema> ;
-    td:hasSecurityConfiguration <#no-sec> ;
-    td:hasActionAffordance <#turn-off-digital-light-sx>, <#turn-off-digital-light-dx>, <#turn-on-digital-light-sx>, <#turn-on-digital-light-dx> ;
-    td:hasPropertyAffordance <#is-on-digital-light-sx>, <#is-on-digital-light-dx> .
+    td:hasActionAffordance <#angelo-action-turn-off-digital-light-sx>, <#angelo-action-turn-off-digital-light-dx>, <#angelo-action-turn-on-digital-light-sx>, <#angelo-action-turn-on-digital-light-dx> ;
+    td:hasPropertyAffordance <#angelo-property-is-on-digital-light-sx>, <#angelo-property-is-on-digital-light-dx> .
+
+<#giorgia-savo>
+    a foaf:Person ;
+    foaf:firstName "Giorgia" ;
+    foaf:lastName "Savo" ;
+    foaf:knows <#angelo-filaseta> .
+
+<#giorgia-greenhouse>
+    a <#Greenhouse> ;
+    foaf:name "Giorgia's Greenhouse", "La serra di Giorgia"@it ;
+    dbo:owner <#giorgia-savo> ;
+    <#hasEnvironment> <#giorgia-environment> .
+
+<#giorgia-environment>
+    a <#Environment> ;
+    foaf:name "Giorgia's Environment", "Ambiente di Giorgia"@it ;
+    <#hasEnvironmentPlant> <#giorgia-cucumber>, <#giorgia-potato> .
+
+<#giorgia-cucumber> a dbr:Cucumber .
+
+<#giorgia-potato> a dbr:Potato .
+
+<#giorgia-edge>
+    a <#Edge> ;
+    foaf:name "Giorgia's ESP8266", "ESP8266 di Giorgia"@it ;
+    <#monitorEnvironment> <#giorgia-environment> ;
+    <#hasModule> <#giorgia-edge-module-digital-light> ;
+    <#hasThingDescriptor> <#giorgia-td-mock-ip> .
+
+<#giorgia-edge-module-digital-light>
+    a <#DigitalLightModule> ;
+    <#hasHandler> <#giorgia-handler-is-on-digital-light> , <#giorgia-handler-turn-off-digital-light> , <#giorgia-handler-turn-on-digital-light> .
+
+<#giorgia-handler-is-on-digital-light>
+    a <#IsOnDigitalLightHandler> ;
+    <#handleDigitalLightHw> <#giorgia-digital-light-center> .
+
+<#giorgia-handler-turn-off-digital-light>
+    a <#TurnOffDigitalLightHandler> ;
+
+    <#handleDigitalLightHw> <#giorgia-digital-light-center> .
+
+<#giorgia-handler-turn-on-digital-light>
+    a <#TurnOnDigitalLightHandler> ;
+    <#handleDigitalLightHw> <#giorgia-digital-light-center> .
+
+<#giorgia-digital-light-center>
+    a <#DigitalLightHw> ;
+    foaf:name "digital-light-center" .
+
+<#giorgia-action-turn-off-digital-light-center>
+    <#isActionAffordanceOfHandler> <#giorgia-handler-turn-off-digital-light> ;
+    <#interactsWithComponentHw> <#giorgia-digital-light-center> .
+
+<#giorgia-action-turn-on-digital-light-center>
+    <#isActionAffordanceOfHandler> <#giorgia-handler-turn-on-digital-light> ;
+    <#interactsWithComponentHw> <#giorgia-digital-light-center> .
+
+<#giorgia-property-is-on-digital-light-center>
+    <#isPropertyAffordanceOfHandler> <#giorgia-handler-is-on-digital-light> ;
+    <#interactsWithComponentHw> <#giorgia-digital-light-center> .
+
+<#giorgia-td-mock-ip>
+    a <#BrittanyThingDescriptor> ;
+    foaf:name "giorgia-td-mock-ip" ;
+    td:title "Giorgia's ESP8266 TD" ;
+    td:hasActionAffordance <#giorgia-action-turn-off-digital-light-center>, <#giorgia-action-turn-on-digital-light-center> ;
+    td:hasPropertyAffordance <#giorgia-property-is-on-digital-light-center> .

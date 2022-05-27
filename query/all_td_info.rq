@@ -1,0 +1,35 @@
+# Return all the interaction affordance for each Edge device.
+# Also returns the supertype of the interaction affordance and the Operation Handler linked to it.
+
+PREFIX : <https://brittany-persistence-service.herokuapp.com/#>
+PREFIX td: <https://www.w3.org/2019/wot/td#>
+
+SELECT DISTINCT ?td ?interaction ?type ?linkedHandler
+
+WHERE {
+
+    ?td a :BrittanyThingDescriptor .
+    ?interaction :isInteractionAffordanceOf ?td .
+    ?interaction :isInteractionAffordanceOfHandler ?linkedHandler .
+    ?interaction a ?type .
+
+    FILTER(?type = td:ActionAffordance || ?type = td:PropertyAffordance )
+}
+
+ORDER BY ?td ?interaction
+
+# OUTPUT EXAMPLE
+
+#-----------------------------------------------------------------------------------------------------------------------------------------
+#| td                  | interaction                                   | type                  | linkedHandler                           |
+#=========================================================================================================================================
+#| :angelo-td-mock-ip  | :angelo-action-turn-off-digital-light-dx      | td:ActionAffordance   | :angelo-handler-turn-off-digital-light  |
+#| :angelo-td-mock-ip  | :angelo-action-turn-off-digital-light-sx      | td:ActionAffordance   | :angelo-handler-turn-off-digital-light  |
+#| :angelo-td-mock-ip  | :angelo-action-turn-on-digital-light-dx       | td:ActionAffordance   | :angelo-handler-turn-on-digital-light   |
+#| :angelo-td-mock-ip  | :angelo-action-turn-on-digital-light-sx       | td:ActionAffordance   | :angelo-handler-turn-on-digital-light   |
+#| :angelo-td-mock-ip  | :angelo-property-is-on-digital-light-dx       | td:PropertyAffordance | :angelo-handler-is-on-digital-light     |
+#| :angelo-td-mock-ip  | :angelo-property-is-on-digital-light-sx       | td:PropertyAffordance | :angelo-handler-is-on-digital-light     |
+#| :giorgia-td-mock-ip | :giorgia-action-turn-off-digital-light-center | td:ActionAffordance   | :giorgia-handler-turn-off-digital-light |
+#| :giorgia-td-mock-ip | :giorgia-action-turn-on-digital-light-center  | td:ActionAffordance   | :giorgia-handler-turn-on-digital-light  |
+#| :giorgia-td-mock-ip | :giorgia-property-is-on-digital-light-center  | td:PropertyAffordance | :giorgia-handler-is-on-digital-light    |
+#-----------------------------------------------------------------------------------------------------------------------------------------

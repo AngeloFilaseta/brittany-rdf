@@ -1,0 +1,26 @@
+# List all the plants for each environment for each greenhouse.
+
+PREFIX : <https://brittany-persistence-service.herokuapp.com/#>
+
+SELECT DISTINCT ?greenhouse ?environment ?plant
+
+WHERE {
+    OPTIONAL { ?greenhouse :hasEnvironment ?environment .}
+    ?environment :hasEnvironmentPlant ?plant .
+}
+
+ORDER BY ?greenhouse ?environment ?plant
+
+# OUTPUT EXAMPLE
+
+#---------------------------------------------------------------------
+#| greenhouse          | environment             | plant             |
+#=====================================================================
+#| :angelo-greenhouse  | :angelo-environment-one | :angelo-basil     |
+#| :angelo-greenhouse  | :angelo-environment-one | :angelo-parsley   |
+#| :angelo-greenhouse  | :angelo-environment-one | :angelo-tomato    |
+#| :angelo-greenhouse  | :angelo-environment-two | :angelo-lettuce   |
+#| :angelo-greenhouse  | :angelo-environment-two | :angelo-onion     |
+#| :giorgia-greenhouse | :giorgia-environment    | :giorgia-cucumber |
+#| :giorgia-greenhouse | :giorgia-environment    | :giorgia-potato   |
+#---------------------------------------------------------------------

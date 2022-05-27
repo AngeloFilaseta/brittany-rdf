@@ -1,0 +1,22 @@
+# Return a list of edges and the environment or plants that they monitor.
+
+PREFIX : <https://brittany-persistence-service.herokuapp.com/#>
+
+SELECT DISTINCT ?edge ?environment ?plant
+
+WHERE {
+    ?edge a :Edge .
+    OPTIONAL { ?edge :monitorPlant ?plant . }
+    OPTIONAL { ?edge :monitorEnvironment ?environment . }
+}
+
+ORDER BY ?edge
+
+# OUTPUT EXAMPLE
+
+#--------------------------------------------------------
+#| edge          | environment          | plant         |
+#========================================================
+#| :angelo-edge  |                      | :angelo-basil |
+#| :giorgia-edge | :giorgia-environment |               |
+#--------------------------------------------------------
