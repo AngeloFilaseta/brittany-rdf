@@ -1,3 +1,5 @@
+# Return the location of all the Hardware Component, following the chain [edge -> optional(plant) -> environment -> greenhouse].
+
 PREFIX : <https://brittany-persistence-service.herokuapp.com/#>
 
 SELECT DISTINCT ?greenhouse ?environment ?plant ?edge ?componentHw
@@ -15,3 +17,13 @@ WHERE {
 }
 
 ORDER BY ?edge
+
+# OUTPUT EXAMPLE
+
+#-----------------------------------------------------------------------------------------------------------------
+#| greenhouse          | environment             | plant         | edge          | componentHw                   |
+#=================================================================================================================
+#| :angelo-greenhouse  | :angelo-environment-one | :angelo-basil | :angelo-edge  | :angelo-digital-light-dx      |
+#| :angelo-greenhouse  | :angelo-environment-one | :angelo-basil | :angelo-edge  | :angelo-digital-light-sx      |
+#| :giorgia-greenhouse | :giorgia-environment    |               | :giorgia-edge | :giorgia-digital-light-center |
+#-----------------------------------------------------------------------------------------------------------------
